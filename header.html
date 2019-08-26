@@ -14,31 +14,45 @@
 <header>
     <div id="header">
         <nav class="navbar  " style="background:#29323F;">
-            <div>
-                <span>Sicurezza</span>
+
+
+            <div class="col-sm-11">
+            </div>
+            <div class="col-sm">
                 <button @click="minimizarVentana()">M</button>
                 <button @click="cerrarVentana()">C</button>
                 <button @click="maximizarVentana()">+</button>
             </div>
+
+
         </nav>
     </div>
     <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="menuPrincipal.html">Sicurezza</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+                <!--<li class="nav-item active">
                     <a class="nav-link" href="menuPrincipal.html">Home <span class="sr-only">(current)</span></a>
+                </li>-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Càmaras
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="verCamara.html">Ver càmaras</a>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown link
+                        Visitas
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="Visistas">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="registrarVisita.html">Registrar Visita</a>
                         <a class="dropdown-item" href="buscarVisita.html">Buscar Visita</a>
                     </div>
@@ -46,12 +60,55 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown link
+                        Residentes
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="registrarResidente.html">Registrar Residente</a>
                         <a class="dropdown-item" href="buscarResidente.html">Buscar Residente</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Usuarios
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="registrarUsuario.html">Registrar Usuario</a>
+                        <a class="dropdown-item" href="editarUsuario.html">Editar Usuario</a>
+                        <a class="dropdown-item" href="buscarUsuario.html">Buscar Usuario</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Vehìculos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="registrarUsuario.html">Registrar Usuario</a>
+                        <a class="dropdown-item" href="editarUsuario.html">Editar Usuario</a>
+                        <a class="dropdown-item" href="buscarUsuario.html">Buscar Usuario</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Estacionamientos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="registrarUsuario.html">Registrar Usuario</a>
+                        <a class="dropdown-item" href="editarUsuario.html">Editar Usuario</a>
+                        <a class="dropdown-item" href="menuPrincipal.html">Ver en vivo</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Administracion
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="registrarUsuario.html">Registrar Usuario</a>
+                        <a class="dropdown-item" href="editarUsuario.html">Editar Usuario</a>
+                        <a class="dropdown-item" href="buscarUsuario.html">Buscar Usuario</a>
                     </div>
                 </li>
             </ul>

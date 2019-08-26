@@ -6,9 +6,9 @@ var residente3 = new Vue({
     el: "#residente3",
     data: {
         window: remote.getCurrentWindow(),
-        x:"",
-        est:"",
-        tip:"",
+        x: "",
+        est: "",
+        tip: "",
         con: mysql.createConnection({
             user: "root",
             password: "",
@@ -16,7 +16,7 @@ var residente3 = new Vue({
             database: "sic"
         }),
     },
-    mounted:function(){
+    mounted: function () {
 
     },
     methods: {
@@ -30,8 +30,8 @@ var residente3 = new Vue({
                         alert("error, residente no encontrado")
                     } else {
                         result.forEach(function (element) {
-                            residente3.x=result[0]
-                            
+                            residente3.x = result[0]
+
                         })
 
                     }
