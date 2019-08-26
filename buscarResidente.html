@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body>
+    <div id="residente3">
+        <br>
+        <div class="container-fluid col-md-8"
+            style="background:#36393F; border-radius: 10px; background-color:rgba(2,0,0,0.7);">
+            <br>
+            <h3>Buscar Residente</h3>
+            <form>
+                <div class="row">
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <label for="rut">RUT</label>
+                            <input type="text" class="form-control" name="rut" placeholder="Ingrese RUT"
+                                required="true">
+                        </div>
+                    </div>
+                    <div class="col-sm"><br>
+                        <button @click="buscar($event)" type="button" class="btn btn-primary">Buscar</button>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <table class="table table-dark" id="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Rut</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Edificio</th>
+                                <th scope="col">Departamento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{x.rut}}</td>
+                                <td>{{x.nombre}}</td>
+                                <td>{{x.apellido}}</td>
+                                <td>{{x.telefono}}</td>
+                                <td>{{x.edificio}}</td>
+                                <td>{{x.departamento}}</td>
+                            </tr>
+                        </tbody>
+
+
+                    </table>
+                    <br>
+                </div>
+
+
+            </form>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <!--IMPORTAR VUE-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <!--IMPORTAR EL INDEX.JS-->
+    <script src="js/buscarResidente.js"></script>
+</body>
+
+</html>

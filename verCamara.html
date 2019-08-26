@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body>
+    <div>
+        <div class="container">
+           <!-- <iframe style="width:100%; height: 100vh;" src="http://192.168.3.156:4747/mjpegfeed?640x480"
+                frameborder="0"></iframe>-->
+
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="http://192.168.0.126/IMAGE.JPG?cidx=20198191492423372" id="frame"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--IMPORTAR VUE-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <!--IMPORTAR EL INDEX.JS-->
+    <script src="js/index.js"></script>
+</body>
+
+</html>
