@@ -77,13 +77,6 @@ var test = new Vue({
             } else {
                 console.log("no compatible")
             }
-        },
-        sweet: function () {
-            Swal.fire(
-                'Good job!',
-                'You clicked the button!',
-                'success'
-            )
         }
 
 
