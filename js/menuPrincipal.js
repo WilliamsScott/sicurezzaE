@@ -70,11 +70,26 @@ var test = new Vue({
                 })
             })
 
+        },
+        storage: function () {
+            if (typeof (Storage) !== 'undefined') {
+                console.log("compatible")
+            } else {
+                console.log("no compatible")
+            }
+        },
+        sweet: function () {
+            Swal.fire(
+                'Good job!',
+                'You clicked the button!',
+                'success'
+            )
         }
 
 
     },
-    mounted:function(){
+    mounted: function () {
         this.cargarEstacionamientos()
+        this.storage()
     }
 });

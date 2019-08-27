@@ -23,6 +23,12 @@ var header = new Vue({
         },
         maximizarVentana: function () {
             this.window.maximize()
+        },
+        cerrarSesion:function(){
+            let user = localStorage.user
+            localStorage.removeItem(user)
+            header.window.loadURL("file://" + __dirname + "/index.html")
+            console.log("caca")
         }
     }
 

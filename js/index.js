@@ -39,7 +39,11 @@ var primero = new Vue({
                 primero.con.query("select * from usuario where rut=? and clave =md5(?)", [usuario, clave], function (error, result) {
                     if (result.length > 0) {
                         primero.window.loadURL("file://" + __dirname + "/menuPrincipal.html")
+                        
                     }
+                    result.forEach(function(dato){
+                        localStorage.user=dato.rut
+                    })
 
                 })
             })

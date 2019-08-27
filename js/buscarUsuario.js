@@ -28,6 +28,8 @@ var usuario3 = new Vue({
                 usuario3.con.query("select * from usuario where rut=?", [rut], function (error, result) {
                     if (result.length == 0) {
                         alert("error, usuario no encontrado")
+                        let user=localStorage.user
+                        console.log(user)   
                     } else {
                         result.forEach(function (element) {
                             usuario3.x=result[0]
