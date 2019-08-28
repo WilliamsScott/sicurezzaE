@@ -43,6 +43,8 @@ var primero = new Vue({
                     }
                     result.forEach(function(dato){
                         localStorage.user=dato.rut
+                        localStorage.bienvenido=(dato.nombre+" "+dato.apellido)
+                        console.log(bienvenido)
                     })
 
                 })

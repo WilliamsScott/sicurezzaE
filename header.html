@@ -13,20 +13,21 @@
 
 <header>
     <div id="header">
-        <nav class="navbar  " style="background:#29323F;">
-
-
-            <div class="col-sm-11">
-                <button class="btn btn-outline-danger"@click="cerrarSesion()">Salir</button>
-            </div>
-            <div class="col-sm">
+        <ul class="nav justify-content-end" style="background:#29323F;">
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Bienvenido {{mostrar}} </a>
+            </li>
+            <li class="nav-item">
                 <button @click="minimizarVentana()">M</button>
+            </li>
+            <li class="nav-item">
                 <button @click="cerrarVentana()">C</button>
+            </li>
+            <li class="nav-item">
                 <button @click="maximizarVentana()">+</button>
-            </div>
+            </li>
 
-
-        </nav>
+        </ul>
     </div>
     <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
         <a class="navbar-brand" href="menuPrincipal.html">Sicurezza</a>
@@ -56,6 +57,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="registrarVisita.html">Registrar Visita</a>
                         <a class="dropdown-item" href="buscarVisita.html">Buscar Visita</a>
+                        <a class="dropdown-item" href="prueba.html">P Visita</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -123,4 +125,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
     <!--IMPORTAR EL INDEX.JS-->
     <script src="js/header.js"></script>
-</header>
+</header>   

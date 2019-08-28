@@ -70,7 +70,6 @@ var visita1 = new Vue({
             edificio = form.edificio.value
             departamento = form.departamento.value
             let user = localStorage.user
-            console.log(user)
             this.con.connect(function () {
                 visita1.con.query("insert into visita (rut,nombre,apellido,telefono,edificio,departamento,usuario) values(?,?,?,?,?,?,?)", [rut, nombre, apellido, telefono, edificio, departamento, user], function (error, result) {
                     form.rut.value = ""

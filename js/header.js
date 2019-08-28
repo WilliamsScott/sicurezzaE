@@ -6,12 +6,14 @@ var header = new Vue({
     el: "#header",
     data: {
         window: remote.getCurrentWindow(),
+        mostrar:"",
         con: mysql.createConnection({
             user: "root",
             password: "",
             host: "localhost",
             database: "sic"
         }),
+        
 
     },
     methods: {
@@ -29,7 +31,16 @@ var header = new Vue({
             localStorage.removeItem(user)
             header.window.loadURL("file://" + __dirname + "/index.html")
             console.log("caca")
+        },
+        cargarBienvenido:function(){
+            let bienvenido = localStorage.bienvenido
+            mostrar=bienvenido
+            console.log(mostrar)
+            
         }
+    },
+    mounted:function(){
+        this.cargarBienvenido()
     }
 
 });
