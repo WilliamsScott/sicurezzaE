@@ -2,13 +2,14 @@ const remote = require("electron").remote;
 const BrowserWindow = remote.BrowserWindow
 const mysql = require("mysql")
 
-var residente3 = new Vue({
-    el: "#residente3",
+var usuario4 = new Vue({
+    el: "#usuario4",
     data: {
         window: remote.getCurrentWindow(),
         x: "",
         est: "",
         tip: "",
+        usuarios: [],
         con: mysql.createConnection({
             user: "root",
             password: "",
@@ -25,18 +26,30 @@ var residente3 = new Vue({
             form = e.target.parentNode.parentNode.parentNode
             rut = form.rut.value
             this.con.connect(function () {
-                residente3.con.query("SELECT residente.rut, residente.nombre,residente.apellido,residente.telefono,edificio.nombre as edificio,departamento.numero as departamento from residente join edificio on residente.edificio=edificio.id join departamento on residente.departamento=departamento.id where rut=?", [rut], function (error, result) {
+                usuario4.con.query("select * from usuario where rut=?", [rut], function (error, result) {
                     if (result.length == 0) {
                         Swal.fire({
                             type: 'error',
                             title: 'Error...',
-                            text: 'Residente no encontrado',
+                            text: 'Usuario no encontrado',
 
                         })
+                        let user = localStorage.user
+                        console.log(user)
                     } else {
                         result.forEach(function (element) {
-                            residente3.x = result[0]
-
+                            this.usuarios = result[0]
+                            console.log(this.usuarios)
+                            if (usuarios.est = result[0].estado == 0) {
+                                usuarios.est = "Deshabilitado"
+                            } else {
+                                usuarios.est = "Habilitado"
+                            }
+                            if (usuarios.tip = result[0].tipo == 0) {
+                                usuarios.tip = "Guardia"
+                            } else {
+                                usuarios.tip = "Administrador"
+                            }
                         })
 
                     }

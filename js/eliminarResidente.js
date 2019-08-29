@@ -45,7 +45,12 @@ var residente4 = new Vue({
             this.con.connect(function () {
                 residente4.con.query("SELECT residente.rut, residente.nombre,residente.apellido,residente.telefono,edificio.nombre as edificio,departamento.numero as departamento from residente join edificio on residente.edificio=edificio.id join departamento on residente.departamento=departamento.id where rut=?", [rut], function (error, result) {
                     if (result.length == 0) {
-                        alert("error, residente no encontrado")
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Residente no encontrado',
+
+                        })
                     } else {
                         result.forEach(function (element) {
                             residente4.x = result[0]

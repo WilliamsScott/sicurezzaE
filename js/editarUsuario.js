@@ -21,8 +21,12 @@ var usuario2 = new Vue({
             this.con.connect(function () {
                 usuario2.con.query("select * from usuario where rut=?", [rut], function (error, result) {
                     if (result.length == 0) {
-                        alert("error, usuario no encontrado")
-                        console.log(result)
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Usuario no encontrado',
+
+                        })
                     } else {
                         result.forEach(function (element) {
                             // console.log(result[0].nombre)
@@ -60,7 +64,7 @@ var usuario2 = new Vue({
                             alert("error, usuario no encontrado")
                             console.log(result)
                         } else {
-                            usuario2.con.query("update usuario set nombre=?,apellido=?,telefono=?,correo=?,clave=md5(?),tipo=?,estado=? where rut=?", [nombre, apellido, telefono, correo, clave, tipo, estado,rut], function (error, result) {
+                            usuario2.con.query("update usuario set nombre=?,apellido=?,telefono=?,correo=?,clave=md5(?),tipo=?,estado=? where rut=?", [nombre, apellido, telefono, correo, clave, tipo, estado, rut], function (error, result) {
                                 form.rut.value = ""
                                 form.nombre.value = ""
                                 form.apellido.value = ""

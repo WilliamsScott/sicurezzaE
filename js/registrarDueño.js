@@ -28,7 +28,12 @@ var dueño1 = new Vue({
                 this.con.connect(function () {
                     dueño1.con.query("select * from dueño where rut=?", [rut], function (error, result) {
                         if (result.length > 0) {
-                            alert("error, ya registrado")
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'Dueño ya registrado',
+
+                            })
                             console.log(result)
                         }
                         else {

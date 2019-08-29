@@ -38,14 +38,26 @@ var primero = new Vue({
             this.con.connect(function () {
                 primero.con.query("select * from usuario where rut=? and clave =md5(?)", [usuario, clave], function (error, result) {
                     if (result.length > 0) {
-                        primero.window.loadURL("file://" + __dirname + "/menuPrincipal.html")
-                        
+                        console.log(result[0].estado)
+                        if (result[0].estado == 1) {
+                            if (result[0].tipo == 1) {
+                                localStorage.user = result[0].rut
+                                localStorage.bienvenido = (result[0].nombre + " " + result[0].apellido)
+                                primero.window.loadURL("file://" + __dirname + "/menuPrincipal.html")
+                                
+                            } else {
+                                //    HACER MENU2 GUARDIA        primero.window.loadURL("file://" + __dirname + "/menuPrincipal.html")
+                            }
+
+                        } else {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'Usuario deshabilitado',
+
+                            })
+                        }
                     }
-                    result.forEach(function(dato){
-                        localStorage.user=dato.rut
-                        localStorage.bienvenido=(dato.nombre+" "+dato.apellido)
-                        console.log(bienvenido)
-                    })
 
                 })
             })

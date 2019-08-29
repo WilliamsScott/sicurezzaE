@@ -2,13 +2,14 @@ const remote = require("electron").remote;
 const BrowserWindow = remote.BrowserWindow
 const mysql = require("mysql")
 
-var residente3 = new Vue({
-    el: "#residente3",
+var estacionamiento2 = new Vue({
+    el: "#estacionamiento2",
     data: {
         window: remote.getCurrentWindow(),
         x: "",
         est: "",
         tip: "",
+        re:[],  
         con: mysql.createConnection({
             user: "root",
             password: "",
@@ -25,18 +26,12 @@ var residente3 = new Vue({
             form = e.target.parentNode.parentNode.parentNode
             rut = form.rut.value
             this.con.connect(function () {
-                residente3.con.query("SELECT residente.rut, residente.nombre,residente.apellido,residente.telefono,edificio.nombre as edificio,departamento.numero as departamento from residente join edificio on residente.edificio=edificio.id join departamento on residente.departamento=departamento.id where rut=?", [rut], function (error, result) {
+                estacionamiento2.con.query("SELECT residente.rut, residente.nombre, residente.apellido, residente.telefono, estacionamientoresidente.numero, estacionamientoresidente.residente as asignado, edificio.nombre as edificio,departamento.numero as departamento from residente left join estacionamientoresidente on residente.departamento=estacionamientoresidente.departamento left join edificio on residente.edificio=edificio.id left join departamento on residente.departamento=departamento.id where rut=?", [rut], function (error, result) {
                     if (result.length == 0) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Residente no encontrado',
-
-                        })
+                        alert("error, residente no encontrado")
                     } else {
                         result.forEach(function (element) {
-                            residente3.x = result[0]
-
+                            this.re=result
                         })
 
                     }
