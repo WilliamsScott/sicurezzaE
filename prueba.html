@@ -82,7 +82,12 @@
                                 <td>{{v.nombre}}</td>
                                 <td>{{v.apellido}}</td>
                                 <td>{{v.telefono}}</td>
-                                <td>{{v.patente}}</td>
+                                <td v-if="v.patente!=null">
+                                    {{v.patente}}
+                                </td>
+                                <td v-else>
+                                    No
+                                </td>
                                 <td>{{v.edificio}}</td>
                                 <td>{{v.departamento}}</td>
                                 <td>{{v.usuario}}</td>

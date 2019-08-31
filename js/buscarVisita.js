@@ -44,8 +44,7 @@ var visita2 = new Vue({
                             let user = localStorage.user
                             console.log(user)
                         } else {
-                            visita2.visitas = result 
-
+                            visita2.visitas = result
                         }
                     })
                 } else {
