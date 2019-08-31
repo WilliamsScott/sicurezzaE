@@ -9,6 +9,7 @@ var visita2 = new Vue({
         x: "",
         est: "",
         tip: "",
+        visitas: [],
         con: mysql.createConnection({
             user: "root",
             password: "",
@@ -39,72 +40,11 @@ var visita2 = new Vue({
                                 text: 'Visita no encontrada',
 
                             })
+                            visita2.visitas = result
                             let user = localStorage.user
                             console.log(user)
                         } else {
-                            result.forEach(function (element) {
-                                // visita2.x = result[0]
-                                var tr = document.createElement("tr")
-                                var td = document.createElement("td")
-                                var td2 = document.createElement("td")
-                                var td3 = document.createElement("td")
-                                var td4 = document.createElement("td")
-                                var td5 = document.createElement("td")
-                                var td6 = document.createElement("td")
-                                var td7 = document.createElement("td")
-                                var td8 = document.createElement("td")
-                                var rut = document.createTextNode(element.rut)
-                                var nombre = document.createTextNode(element.nombre)
-                                var apellido = document.createTextNode(element.apellido)
-                                var telefono = document.createTextNode(element.telefono)
-                                var patente = document.createTextNode(element.patente)
-                                var edificio = document.createTextNode(element.edificio)
-                                var departamento = document.createTextNode(element.departamento)
-                                var usuario = document.createTextNode(element.usuario)
-
-                                td.appendChild(rut)
-                                tr.appendChild(td)
-                                tabla.appendChild(tr)
-
-                                td2.appendChild(nombre)
-                                tr.appendChild(td2)
-                                tabla.appendChild(tr)
-
-                                td3.appendChild(apellido)
-                                tr.appendChild(td3)
-                                tabla.appendChild(tr)
-
-                                td4.appendChild(telefono)
-                                tr.appendChild(td4)
-                                tabla.appendChild(tr)
-
-                                var patentex = element.patente
-                                if (patentex == null) {
-                                    var patente = document.createTextNode("No")
-                                    td5.appendChild(patente)
-                                    tr.appendChild(td5)
-                                    tabla.appendChild(tr)
-                                } else {
-                                    var patente = document.createTextNode(element.patente)
-                                    td5.appendChild(patente)
-                                    tr.appendChild(td5)
-                                    tabla.appendChild(tr)
-                                }
-
-                                td6.appendChild(edificio)
-                                tr.appendChild(td6)
-                                tabla.appendChild(tr)
-
-                                td7.appendChild(departamento)
-                                tr.appendChild(td7)
-                                tabla.appendChild(tr)
-
-                                td8.appendChild(usuario)
-                                tr.appendChild(td8)
-                                tabla.appendChild(tr)
-
-
-                            })
+                            visita2.visitas = result 
 
                         }
                     })
@@ -120,69 +60,7 @@ var visita2 = new Vue({
                             let user = localStorage.user
                             console.log(user)
                         } else {
-                            result.forEach(function (element) {
-                                // visita2.x = result[0]
-                                var tr = document.createElement("tr")
-                                var td = document.createElement("td")
-                                var td2 = document.createElement("td")
-                                var td3 = document.createElement("td")
-                                var td4 = document.createElement("td")
-                                var td5 = document.createElement("td")
-                                var td6 = document.createElement("td")
-                                var td7 = document.createElement("td")
-                                var td8 = document.createElement("td")
-                                var rut = document.createTextNode(element.rut)
-                                var nombre = document.createTextNode(element.nombre)
-                                var apellido = document.createTextNode(element.apellido)
-                                var telefono = document.createTextNode(element.telefono)
-                                var patente = document.createTextNode(element.patente)
-                                var edificio = document.createTextNode(element.edificio)
-                                var departamento = document.createTextNode(element.departamento)
-                                var usuario = document.createTextNode(element.usuario)
-
-                                td.appendChild(rut)
-                                tr.appendChild(td)
-                                tabla.appendChild(tr)
-
-                                td2.appendChild(nombre)
-                                tr.appendChild(td2)
-                                tabla.appendChild(tr)
-
-                                td3.appendChild(apellido)
-                                tr.appendChild(td3)
-                                tabla.appendChild(tr)
-
-                                td4.appendChild(telefono)
-                                tr.appendChild(td4)
-                                tabla.appendChild(tr)
-
-                                var patentex = element.patente
-                                if (patentex == null) {
-                                    var patente = document.createTextNode("No")
-                                    td5.appendChild(patente)
-                                    tr.appendChild(td5)
-                                    tabla.appendChild(tr)
-                                } else {
-                                    var patente = document.createTextNode(element.patente)
-                                    td5.appendChild(patente)
-                                    tr.appendChild(td5)
-                                    tabla.appendChild(tr)
-                                }
-
-                                td6.appendChild(edificio)
-                                tr.appendChild(td6)
-                                tabla.appendChild(tr)
-
-                                td7.appendChild(departamento)
-                                tr.appendChild(td7)
-                                tabla.appendChild(tr)
-
-                                td8.appendChild(usuario)
-                                tr.appendChild(td8)
-                                tabla.appendChild(tr)
-
-
-                            })
+                            visita2.visitas = result
 
                         }
                     })

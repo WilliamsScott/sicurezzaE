@@ -9,7 +9,7 @@ var estacionamiento2 = new Vue({
         x: "",
         est: "",
         tip: "",
-        re:[],  
+        re: [],
         con: mysql.createConnection({
             user: "root",
             password: "",
@@ -28,12 +28,14 @@ var estacionamiento2 = new Vue({
             this.con.connect(function () {
                 estacionamiento2.con.query("SELECT residente.rut, residente.nombre, residente.apellido, residente.telefono, estacionamientoresidente.numero, estacionamientoresidente.residente as asignado, edificio.nombre as edificio,departamento.numero as departamento from residente left join estacionamientoresidente on residente.departamento=estacionamientoresidente.departamento left join edificio on residente.edificio=edificio.id left join departamento on residente.departamento=departamento.id where rut=?", [rut], function (error, result) {
                     if (result.length == 0) {
-                        alert("error, residente no encontrado")
-                    } else {
-                        result.forEach(function (element) {
-                            this.re=result
-                        })
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Residente no encontrado',
 
+                        })
+                    } else {
+                        estacionamiento2.re = result
                     }
                 })
             })

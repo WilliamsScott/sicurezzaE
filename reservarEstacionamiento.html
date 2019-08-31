@@ -48,15 +48,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>{{re.nombre}}</td>
-                                <td>{{re.apellido}}</td>
-                                <td>{{re.telefono}}</td>
-                                <td>{{re.edificio}}</td>
-                                <td>{{re.departamento}}</td>
-                                <td>{{re.numero}}</td>
+                            <tr v-for="x in re">
+                                <td>{{x.nombre}}</td>
+                                <td>{{x.apellido}}</td>
+                                <td>{{x.telefono}}</td>
+                                <td>{{x.edificio}}</td>
+                                <td>{{x.departamento}}</td>
+                                <td>{{x.numero}}</td>
                                 <td></td>
-                                <td>{{re.asignado}}</td>
+                                <td>{{x.asignado}}</td>
                             </tr>
                         </tbody>
 

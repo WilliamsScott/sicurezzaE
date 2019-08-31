@@ -49,7 +49,11 @@
                                 <th scope="col">Usuario</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody">
+                        <tbody >
+                            <tr v-for="v in visitas">
+                                <td>{{v.rut}}</td>
+                                <td>{{v.nombre}}</td>
+                            </tr>
 
                         </tbody>
 
@@ -78,7 +82,7 @@
     <script type="text/javascript" scr="js/bootstrap-datepicker.js"></script>
     <!--IMPORTAR EL JQUERY-->
     <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
-    <script src="sweetalert2.all.min.js"></script>
+    
     <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 
