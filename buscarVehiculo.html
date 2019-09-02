@@ -13,51 +13,58 @@
 
 <body>
     <div class="menuContainer" id="menu"></div>
-    <div id="usuario4">
+    <div id="vehiculo1">
         <br>
         <div class="container-fluid col-md-8"
-            style="background:#36393F; border-radius: 10px; background-color:rgba(2,0,0,0.7);">
+            style="background:#36393F; border-radius: 10px; background-color:rgba(2,0,0,0.8);">
             <br>
-            <h3>Habilitar / Deshabilitar Usuario</h3>
-            <form @submit="deshabilitarUsuario($event)">
-                <div class="form-group">
-                    <label for="rut">RUT</label>
-                    <input type="text" class="form-control" name="rut" placeholder="Ingrese RUT" required="true">
-                </div>
-                <br>
+            <h3>Buscar Vehiculo</h3>
+            <form @submit="editarUsuario($event)">
                 <div class="row">
+                    <div class="col-sm-3">
+                        <label for="buscarpor">Buscar por</label>
+                        <select class="form-control" name="buscarpor">
+
+                            <option value="rut">Dueño</option>
+                            <option value="fecha">Patente</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="form-group">
+                            <label for="buscar">Ingrese dueño o patente</label>
+                            <input type="text" class="form-control" name="buscar" placeholder="Ingrese dueño o patente"
+                                required="true">
+                        </div>
+                    </div>
                     <div class="col-sm">
+                        <br>
                         <button @click="buscar($event)" type="button" class="btn btn-primary">Buscar</button>
                     </div>
+
                 </div>
+               
                 <br>
                 <div class="form-group">
                     <table class="table table-dark" id="table">
                         <thead>
                             <tr>
-                                <th scope="col">Rut</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
-                                <th scope="col">Telefono</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Tipo</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Acción</th>
+                                <th scope="col">Patente</th>
+                                <th scope="col">Marca</th>
+                                <th scope="col">Modelo</th>
+                                <th scope="col">Estacionamiento</th>
+                                <th scope="col">Dueño</th>
+                                <th scope="col">Tipo Dueño</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for='x in usuarios'>
-                                <td>{{x.rut}}</td>
-                                <td>{{x.nombre}}</td>
-                                <td>{{x.apellido}}</td>
-                                <td>{{x.telefono}}</td>
-                                <td>{{x.correo}}</td>
-                                <td v-if="x.tipo==1">Administrador</td>
-                                <td v-else>Guardia</td>
-                                <td v-if="x.estado==1">Habilitado</td>
-                                <td v-else>Deshabilitado</td>
-                                <td v-if="x.estado==1"><button type="button" class="btn btn-danger">Deshabilitar</button></td>
-                                <td v-else><button type="button" class="btn btn-success">Habilitar</button></td>
+                            <tr v-for="x in vehiculo">
+                                <td>{{x.patente}}</td>
+                                <td>{{x.marca}}</td>
+                                <td>{{x.modelo}}</td>
+                                <td>{{x.estacionamiento}}</td>
+                                <td>{{x.dueño}}</td>
+                                
+
                             </tr>
                         </tbody>
 
@@ -68,9 +75,7 @@
 
 
             </form>
-            <pre>
-                {{usuarios}}
-            </pre>
+
 
 
         </div>
@@ -82,12 +87,11 @@
     <!--IMPORTAR VUE-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
     <!--IMPORTAR EL INDEX.JS-->
-    <script src="js/deshabilitarUsuario.js"></script>
+    <script src="js/buscarVehiculo.js"></script>
+    <script src="js/sweetalert2.js"></script>
     <!--IMPORTAR EL JQUERY-->
     <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
-    <script src="sweetalert2.all.min.js"></script>
-    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
-    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
 
     <!--DROPDOWN-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -102,10 +106,8 @@
 
     <!--IMPORTAR AJAX-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <!--IINICIALIZACIONES-->
+
     <script type="text/javascript">
-
-
         $('.dropdown-menu').click(function () {
             var parent = $(this).parent();
             if (parent.hasClass('open')) {

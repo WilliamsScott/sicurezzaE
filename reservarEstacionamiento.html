@@ -16,10 +16,10 @@
     <div id="estacionamiento2">
         <br>
         <div class="container-fluid col-md-8"
-            style="background:#36393F; border-radius: 10px; background-color:rgba(2,0,0,0.7);">
+            style="background:#36393F; border-radius: 10px; background-color:rgba(2,0,0,0.75);">
             <br>
             <h3>Reservar Estacionamiento</h3>
-            <form>
+            <form @submit="reservarEstacionamiento($event)">
                 <div class="row">
                     <div class="col-sm-10">
                         <div class="form-group">
@@ -73,11 +73,20 @@
 
                     </table>
                     <br>
-                    <label for="reservarE">Seleccione estacionamiento</label>
-                    <select class="form-control" id="reservarE">
-                    </select>
-
+                    <div class="col-sm-4">
+                        <label for="reservarE">Seleccione estacionamiento</label>
+                        <select class="form-control" id="reservarE">
+                        </select>
+                    </div>
                     <br>
+                    <div class="row">
+                        <div class="col-sm-10">
+                        </div>
+                        <div class="col-sm">
+                            <button type="submit" class="btn btn-primary">Reservar</button>
+                        </div>
+                        <br><br>
+                    </div>
                 </div>
 
             </form>

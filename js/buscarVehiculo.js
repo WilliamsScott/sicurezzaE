@@ -2,14 +2,12 @@ const remote = require("electron").remote;
 const BrowserWindow = remote.BrowserWindow
 const mysql = require("mysql")
 
-var usuario4 = new Vue({
-    el: "#usuario4",
+var vehiculo1 = new Vue({
+    el: "#vehiculo1",
     data: {
         window: remote.getCurrentWindow(),
         x: "",
-        est: "",
-        tip: "",
-        usuarios: [],
+        vehiculo:[],
         con: mysql.createConnection({
             user: "root",
             password: "",
@@ -24,9 +22,9 @@ var usuario4 = new Vue({
         buscar: function (e) {
             e.preventDefault()
             form = e.target.parentNode.parentNode.parentNode
-            rut = form.rut.value
+            buscarpor = form.buscarpor.value
             this.con.connect(function () {
-                usuario4.con.query("select * from usuario where rut=?", [rut], function (error, result) {
+                vehiculo1.con.query("select * from vehiculoresidente where patente=?", [buscarpor], function (error, result) {
                     if (result.length == 0) {
                         Swal.fire({
                             type: 'error',
@@ -34,11 +32,9 @@ var usuario4 = new Vue({
                             text: 'Usuario no encontrado',
 
                         })
-                        let user = localStorage.user
-                        console.log(user)
+                        console.log(buscarpor)
                     } else {
-                        usuario4.usuarios=result
-
+                        vehiculo1.vehiculo=result
                     }
                 })
             })

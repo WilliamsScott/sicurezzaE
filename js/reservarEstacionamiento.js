@@ -54,25 +54,7 @@ var estacionamiento2 = new Vue({
                 })
             })
         },
-        cargarSelect: function (e) {
-            e.preventDefault()
-            form = e.target.parentNode.parentNode.parentNode
-            rut = form.rut.value
-            var estacionamientosSelect = document.getElementById("reservarE")
-            this.con.connect(function () {
-                estacionamiento2.con.query("SELECT residente.rut, estacionamientoresidente.numero, estacionamientoresidente.residente as asignado, edificio.nombre as edificio,departamento.numero as departamento from residente left join estacionamientoresidente on residente.departamento=estacionamientoresidente.departamento left join edificio on residente.edificio=edificio.id left join departamento on residente.departamento=departamento.id where rut=?", [rut], function (error, result) {
-                    result.forEach(function (dato) {
-                        if (dato.asignado == null) {
-                            var option = document.createElement("option")
-                            option.value = dato.numero
-                            option.innerHTML = dato.numero
-                            console.log(dato.numero)
-                        }
-
-                    })
-                })
-            })
-        }
+        
     }
 
 });
