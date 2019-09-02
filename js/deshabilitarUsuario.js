@@ -26,7 +26,7 @@ var usuario4 = new Vue({
             form = e.target.parentNode.parentNode.parentNode
             rut = form.rut.value
             this.con.connect(function () {
-                usuario4.con.query("select * from usuario where rut=?", [rut], function (error, result) {
+                usuario4.con.query("select usuario.rut,usuario.nombre,usuario.apellido, usuario.telefono, usuario.correo,usuario.tipo,usuario.estado from usuario where rut=?", [rut], function (error, result) {
                     if (result.length == 0) {
                         Swal.fire({
                             type: 'error',
