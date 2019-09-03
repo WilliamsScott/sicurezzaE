@@ -8,7 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="static/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/index.css" />
-    <link rel="stylesheet" type="text/css" href="css/sweetalert2.css">  
+    <link rel="stylesheet" type="text/css" href="css/sweetalert2.css">
 </head>
 
 <body>
@@ -42,17 +42,23 @@
                                 <th scope="col">Correo</th>
                                 <th scope="col">Tipo</th>
                                 <th scope="col">Estado</th>
-                            </tr>
+                                <th scope="col">Acción</th>
+                            </tr>   
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr v-for='x in usuarios'>
                                 <td>{{x.rut}}</td>
                                 <td>{{x.nombre}}</td>
                                 <td>{{x.apellido}}</td>
                                 <td>{{x.telefono}}</td>
                                 <td>{{x.correo}}</td>
-                                <td>{{tip}}</td>
-                                <td>{{est}}</td>
+                                <td v-if="x.tipo==1">Administrador</td>
+                                <td v-else>Guardia</td>
+                                <td v-if="x.estado==1">Habilitado</td>
+                                <td v-else>Deshabilitado</td>
+                                <td v-if="x.estado==1"><button type="button" @click="deshabilitar($event)"
+                                        class="btn btn-danger btn-sm">Deshabilitar</button></td>
+                                <td v-else><button type="button" @click="habilitar($event)" class="btn btn-success btn-sm">Habilitar</button></td>
                             </tr>
                         </tbody>
 
