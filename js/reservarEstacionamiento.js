@@ -54,7 +54,63 @@ var estacionamiento2 = new Vue({
                 })
             })
         },
-        
+        reservarE: function (numero, rut) {
+            this.con.connect(function () {
+                try {
+                    estacionamiento2.con.query("update estacionamientoresidente set residente=? where numero=?", [rut, numero], function (error, result) {
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Listo!',
+                            text: 'Estacionamiento reservado!',
+
+
+                        })
+                        estacionamiento2.re = []
+                    })
+                } catch (error) {
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Error...',
+                        text: 'No se pudo reservar',
+
+                    })
+                }
+            })
+        },
+        quitarE: function (numero, rut) {
+            this.con.connect(function () {
+                estacionamiento2.con.query("select * from vehiculoresidente where numeroEstacionamiento=?", [numero], function (error, result) {
+                    if (result.length != 0) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Hay un vehiculo asignado a este estacionamiento',
+                        })
+                    } else {
+                        try {
+                            estacionamiento2.con.query("update estacionamientoresidente set residente= null where numero=?", [numero], function (error, result) {
+                                Swal.fire({
+                                    type: 'success',
+                                    title: 'Listo!',
+                                    text: 'Estacionamiento quitado!',
+
+                                })
+                                estacionamiento2.re = []
+                            })
+                        } catch (error) {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'No se pudo quitar',
+
+                            })
+                        }
+                    }
+                })
+
+            })
+        }
+
     }
 
 });

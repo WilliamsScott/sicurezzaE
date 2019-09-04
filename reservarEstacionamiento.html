@@ -45,6 +45,7 @@
                                 <th scope="col">Estacionamiento</th>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Reservado por</th>
+                                <th scope="col">Acción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,6 +68,15 @@
                                 <td v-else>
                                     Nadie
                                 </td>
+                                <td v-if="x.asignado==null">
+                                    <button type="button" @click="reservarE(x.numero,x.rut)"
+                                        class="btn btn-success btn-sm">Reservar</button></td>
+                                </td>
+                                <td v-else>
+                                    <button type="button" @click="quitarE(x.numero,x.rut)"
+                                        class="btn btn-danger btn-sm">Quitar</button></td>
+                                </td>
+
                             </tr>
                         </tbody>
 

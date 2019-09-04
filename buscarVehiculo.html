@@ -24,9 +24,8 @@
                     <div class="col-sm-3">
                         <label for="buscarpor">Buscar por</label>
                         <select class="form-control" name="buscarpor">
-
-                            <option value="rut">Dueño</option>
-                            <option value="fecha">Patente</option>
+                            <option value="dueño">Dueño</option>
+                            <option value="patente">Patente</option>
                         </select>
                     </div>
                     <div class="col-sm-7">
@@ -61,8 +60,19 @@
                                 <td>{{x.patente}}</td>
                                 <td>{{x.marca}}</td>
                                 <td>{{x.modelo}}</td>
-                                <td>{{x.estacionamiento}}</td>
-                                <td>{{x.dueño}}</td>
+                                <td>{{x.numeroEstacionamiento}}</td>
+                                <td v-if="x.residente==null">
+                                    {{x.rut}}
+                                </td>
+                                <td v-else>
+                                    {{x.residente}}
+                                </td>
+                                <td v-if="x.residente==null">
+                                    Visita
+                                </td>
+                                <td v-else>
+                                    Dueño
+                                </td>
                                 
 
                             </tr>
