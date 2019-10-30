@@ -62,8 +62,6 @@ var estacionamiento2 = new Vue({
                             type: 'success',
                             title: 'Listo!',
                             text: 'Estacionamiento reservado!',
-
-
                         })
                         estacionamiento2.re = []
                     })

@@ -2,10 +2,6 @@ const remote = require("electron").remote;
 const BrowserWindow = remote.BrowserWindow
 const mysql = require("mysql")
 
-setInterval(() => {
-    var iframe = document.getElementById("frame")
-    iframe.src = iframe.src
-}, 500)
 
 var primero = new Vue({
     el: "#primero",
