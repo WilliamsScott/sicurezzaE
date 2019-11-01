@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/sweetalert2.css">
+</head>
+
+<body>
+    <div class="menuContainer" id="menu"></div>
+    <div id="informe1">
+        <br>
+        <div class="container-fluid col-md-8"
+            style="background:#36393F; border-radius: 10px; background-color:rgba(2,0,0,0.7);">
+            <br>
+            <h3>Generar Informe</h3>
+            <form>
+                <div class="form-group">
+                    <label for="tipo">Informe</label>
+                    <select class="form-control" id="tipo" v-model="selected">
+                        <option value="0">Visitas por Guardia</option>
+                        <option value="1">Visitas por Edificio</option>
+                        <option value="3">Residentes por Edificio</option>
+                        <option value="4">Horarios más visitados</option>
+                        <option value="5">Estacionamientos mas ocupados</option>
+                    </select>
+                    <span>Seleccionado: {{ selected }}</span>
+
+                </div>
+                <div>
+                    <table id="tabla2" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Edificio</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            <tr v-for="v in vxe">
+                                <td>{{v.edificio}}</td>
+                                <td>{{v.total}}</td>
+                            </tr>
+                            <tr v-for="v in vxe2">
+                                <td>{{v.edificio}}</td>
+                                <td>{{v.total}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table id="tabla" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Rut</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Vehiculo</th>
+                                <th scope="col">Edificio</th>
+                                <th scope="col">Departamento</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            <tr v-for="v in visitas">
+                                <td>{{v.rut}}</td>
+                                <td>{{v.nombre}}</td>
+                                <td>{{v.apellido}}</td>
+                                <td>{{v.telefono}}</td>
+                                <td v-if="v.patente!=null">
+                                    {{v.patente}}
+                                </td>
+                                <td v-else>
+                                    No
+                                </td>
+                                <td>{{v.edificio}}</td>
+                                <td>{{v.departamento}}</td>
+                                <td>{{v.usuario}}</td>
+                                <td>{{formatDate(v.fecha)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <button type="button" class="btn btn-success" onclick="tableToExcel('tabla', 'Reporte')">Generar
+                            Excel</button>
+
+                        <button type="button" class="btn btn-success"
+                            onclick="tableToExcel('tabla2', 'Reporte')">Generar
+                            Excel 2</button>
+                    </div>
+
+                    <br><br>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <!--IMPORTAR VUE-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <!--IMPORTAR EL INDEX.JS-->
+    <script src="js/generarInforme.js"></script>
+
+    <script src="js/sweetalert2.js"></script>
+    <!--IMPORTAR EL JQUERY-->
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
+
+    <!--DROPDOWN-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!--IMPORTAR AJAX-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script>
+        var tableToExcel = (function () {
+            var uri = 'data:application/vnd.ms-excel;base64,',
+                template =
+                    `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+          <head>
+            <!--[if gte mso 9]>
+              <xml>
+                <x:ExcelWorkbook>
+                  <x:ExcelWorksheets>
+                    <x:ExcelWorksheet>
+                      <x:Name>{worksheet}</x:Name>
+                      <x:WorksheetOptions>
+                        <x:DisplayGridlines/>
+                      </x:WorksheetOptions>
+                    </x:ExcelWorksheet>
+                  </x:ExcelWorksheets>
+                </x:ExcelWorkbook>
+              </xml>
+            <![endif]-->
+              <meta http-equiv="content-type" content="text/plain; charset=UTF-8"/>
+            </head>
+            <body>
+              <table>{table}</table>
+            </body>
+          </html>`,
+                base64 = function (s) {
+                    return window.btoa(unescape(encodeURIComponent(s)))
+                },
+                format = function (s, c) {
+                    return s.replace(/{(\w+)}/g, function (m, p) {
+                        return c[p];
+                    })
+                }
+            return function (table, name) {
+                if (!table.nodeType) table = document.getElementById(table)
+                var ctx = {
+                    worksheet: name || 'Worksheet',
+                    table: table.innerHTML
+                }
+                window.location.href = uri + base64(format(template, ctx))
+            }
+        })()
+    </script>
+    <script type="text/javascript">
+        $('.dropdown-menu').click(function () {
+            var parent = $(this).parent();
+            if (parent.hasClass('open')) {
+                parent.removeClass('open');
+            } else {
+                parent.addClass('open');
+            }
+        });
+    </script>
+    <script>
+        $.ajax({
+            type: "GET",
+            url: "header.html",
+            success: function (datos) {
+                $("#menu").html(datos);
+            }
+        })
+    </script>
+</body>
+
+</html>

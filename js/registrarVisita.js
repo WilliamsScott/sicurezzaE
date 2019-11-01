@@ -7,6 +7,7 @@ var visita1 = new Vue({
     data: {
         window: remote.getCurrentWindow(),
         texto: "",
+        selected: '',
         isDisabled: true,
         con: mysql.createConnection({
             user: "root",
@@ -34,8 +35,11 @@ var visita1 = new Vue({
         },
         cargarSelect2: function () {
             var departamento = document.getElementById("departamento")
+            var edificio = document.getElementById("edificio")
+            var e = edificio.value
+            console.log(e)
             this.con.connect(function () {
-                visita1.con.query("select * from departamento ", function (error, result) {
+                visita1.con.query("select * from departamento where edificio=?", [e], function (error, result) {
                     result.forEach(function (dato) {
                         var option = document.createElement("option")
                         option.value = dato.id
@@ -105,6 +109,21 @@ var visita1 = new Vue({
             })
 
 
+        },
+        cambio: function () {
+            var d = document.getElementById("departamento")
+            d.innerHTML=""
+            this.con.connect(function () {
+                visita1.con.query("select * from departamento where edificio=?", [visita1.selected], function (error, result) {
+
+                    result.forEach(function (dato) {
+                        var option = document.createElement("option")
+                        option.value = dato.id
+                        option.innerHTML = dato.numero
+                        departamento.appendChild(option)
+                    })
+                })
+            })
         }
 
     },

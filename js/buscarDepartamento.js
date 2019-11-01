@@ -56,11 +56,11 @@ var departamento1 = new Vue({
                             text: 'Dueño no encontrado',
                         })
                     } else {
-                        result.forEach(function (element) {
+                        result.forEach(function () {
                             departamento1.depa = result
                         })
                         departamento1.con.query("select count(*) as total from residente where residente.departamento=?", [departamento], function (error, result) {
-                            result.forEach(function (element) {
+                            result.forEach(function () {
                                 departamento1.residentes = result
                             })
                         })
