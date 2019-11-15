@@ -21,15 +21,15 @@
             <h3>Reservar Estacionamiento</h3>
             <form @submit="reservarEstacionamiento($event)">
                 <div class="row">
-                    <div class="col-sm-10">
-                        <div class="form-group">
-                            <label for="rut">RUT</label>
-                            <input type="text" class="form-control" name="rut" placeholder="Ingrese RUT"
-                                required="true">
+                    <div class="col-sm-6" name="col">
+                        <label for="col">RUT</label>
+                        <br>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="rut" placeholder="Ingrese RUT" required="true">
+                            <div class="input-group-append">
+                                <button @click="buscar($event)" type="button" class="btn btn-primary">Buscar</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm"><br>
-                        <button @click="buscar($event)" type="button" class="btn btn-primary">Buscar</button>
                     </div>
                 </div>
                 <br>
@@ -70,11 +70,11 @@
                                 </td>
                                 <td v-if="x.asignado==null">
                                     <button type="button" @click="reservarE(x.numero,x.rut)"
-                                        class="btn btn-success btn-sm">Reservar</button></td>
+                                        class="btn btn-success btn-sm">Reservar</button>
                                 </td>
                                 <td v-else>
                                     <button type="button" @click="quitarE(x.numero,x.rut)"
-                                        class="btn btn-danger btn-sm">Quitar</button></td>
+                                        class="btn btn-danger btn-sm">Quitar</button>
                                 </td>
 
                             </tr>
@@ -83,20 +83,6 @@
 
                     </table>
                     <br>
-                    <div class="col-sm-4">
-                        <label for="reservarE">Seleccione estacionamiento</label>
-                        <select class="form-control" id="reservarE">
-                        </select>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-sm-10">
-                        </div>
-                        <div class="col-sm">
-                            <button type="submit" class="btn btn-primary">Reservar</button>
-                        </div>
-                        <br><br>
-                    </div>
                 </div>
 
             </form>

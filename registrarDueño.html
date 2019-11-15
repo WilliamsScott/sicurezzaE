@@ -8,7 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="static/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/index.css" />
-    <link rel="stylesheet" type="text/css" href="css/sweetalert2.css">  
+    <link rel="stylesheet" type="text/css" href="css/sweetalert2.css">
 </head>
 
 <body>
@@ -20,22 +20,38 @@
             <br>
             <h3>Registrar Dueño</h3>
             <form @submit="registrarDueño($event)">
-                <div class="form-group">
-                    <label for="rut">RUT</label>
-                    <input type="text" class="form-control" name="rut" placeholder="Ingrese RUT">
-                </div>
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" placeholder="Ingrese Nombre">
-                </div>
-                <div class="form-group">
-                    <label for="apellido">Apellido</label>
-                    <input type="text" class="form-control" name="apellido" placeholder="Ingrese Apellido">
-                </div>
+                <div class="row">
+                    <div class="col sm-6">
+                        <div class="form-group">
+                            <label for="rut">RUT</label>
+                            <input type="text" class="form-control" name="rut" placeholder="Ingrese RUT"
+                                required="true">
+                        </div>
 
-                <div class="form-group">
-                    <label for="telefono">Telefono</label>
-                    <input type="number" class="form-control" name="telefono" placeholder="Ingrese Telefono">
+                    </div>
+                    <div class="col sm">
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" placeholder="Ingrese Nombre"
+                                required="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col sm-6">
+                        <div class="form-group">
+                            <label for="apellido">Apellido</label>
+                            <input type="text" class="form-control" name="apellido" placeholder="Ingrese Apellido"
+                                required="true">
+                        </div>
+                    </div>
+                    <div class="col sm">
+                        <div class="form-group">
+                            <label for="telefono">Telefono</label>
+                            <input type="number" class="form-control" name="telefono" placeholder="Ingrese Telefono"
+                                required="true">
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-10">
@@ -55,9 +71,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
     <!--IMPORTAR EL INDEX.JS-->
     <script src="js/registrarDueño.js"></script>
-
+    <script src="js/sweetalert2.js"></script>
+    <!--IMPORTAR EL JQUERY-->
     <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 
+
+    <!--DROPDOWN-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -67,6 +86,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+    <!--IMPORTAR AJAX-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <script type="text/javascript">
@@ -79,7 +100,6 @@
             }
         });
     </script>
-
     <script>
         $.ajax({
             type: "GET",

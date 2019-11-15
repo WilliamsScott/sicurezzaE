@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/sweetalert2.css">
+</head>
+
+<body>
+
+
+    <div class="menuContainer" id="menu"></div>
+    <div id="informev3"><br>
+
+        <div class="container-fluid col-md-8"
+            style="background:#36393F; border-radius: 10px; background-color:rgba(2,0,0,0.7);">
+            <br>
+            <h3>Visitas por usuario</h3>
+            <form>
+                <div class="form-group">
+                    <label for="tipo">Grafico visitas por usuario</label>
+                    <table id="tabla" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Hora</th>
+                                <th scope="col">Visitas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            <tr v-for="v in arregloExcel1">
+                                <td v-if="v.hora<10">0{{v.hora}}</td>
+                                <td v-else>{{v.hora}}</td>
+                                <td>{{v.total}}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <canvas id="myChart" width="20" height="8"></canvas><br>
+
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-primary" onclick="grafico()">Ver
+                                grafico</button>
+
+                        </div>
+                        <div class="col sm">
+                            <button type="button" class="btn btn-success" onclick="tableToExcel('tabla', 'Reporte')">
+                                Generar Excel</button>
+                        </div>
+                        <br><br>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--<a class="btn btn-primary" @click="x()" role="button">Link</a>-->
+
+    </div>
+
+
+    <!--IMPORTAR VUE-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <!--IMPORTAR EL INDEX.JS-->
+    <script src="js/visitaHora.js"></script>
+    <script src="js/sweetalert2.js"></script>
+    <!--IMPORTAR EL JQUERY-->
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+
+    <!--DROPDOWN-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!--IMPORTAR AJAX-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $('.dropdown-menu').click(function () {
+            var parent = $(this).parent();
+            if (parent.hasClass('open')) {
+                parent.removeClass('open');
+            } else {
+                parent.addClass('open');
+            }
+        });
+    </script>
+    <script>
+        $.ajax({
+            type: "GET",
+            url: "header.html",
+            success: function (datos) {
+                $("#menu").html(datos);
+            }
+        })
+    </script>
+    <script>
+        var grafico = (function () {
+            var ctx = document.getElementById("myChart").getContext("2d");
+            var myChart = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: informev3.arreglo2,
+                    datasets: [{
+                        label: 'Visitas',
+                        data: informev3.arreglo,
+                        backgroundColor: [
+                            'rgb(231, 76, 60)',
+                            'rgb(142, 68, 173)',
+                            'rgb(52, 152, 219)',
+                            'rgb(22, 160, 133 )',
+                            'rgb(41,11,32)',
+                            'rgb(39, 174, 96)',
+                            'rgb(241, 196, 15)',
+                            'rgb(230, 126, 34 )',
+                            'rgb(166, 172, 175)',
+                            'rgb(112, 123, 124 )',
+                            'rgb(231, 76, 60)',
+                            'rgb(142, 68, 173)',
+                            'rgb(52, 152, 219)',
+                            'rgb(22, 160, 133 )',
+                            'rgb(41,11,32)',
+                        ]
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            })
+        })
+    </script>
+    <script>
+        var tableToExcel = (function () {
+            var uri = 'data:application/vnd.ms-excel;base64,',
+                template =
+                    `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+          <head>
+            <!--[if gte mso 9]>
+              <xml>
+                <x:ExcelWorkbook>
+                  <x:ExcelWorksheets>
+                    <x:ExcelWorksheet>
+                      <x:Name>{worksheet}</x:Name>
+                      <x:WorksheetOptions>
+                        <x:DisplayGridlines/>
+                      </x:WorksheetOptions>
+                    </x:ExcelWorksheet>
+                  </x:ExcelWorksheets>
+                </x:ExcelWorkbook>
+              </xml>
+            <![endif]-->
+              <meta http-equiv="content-type" content="text/plain; charset=UTF-8"/>
+            </head>
+            <body>
+              <table>{table}</table>
+            </body>
+          </html>`,
+                base64 = function (s) {
+                    return window.btoa(unescape(encodeURIComponent(s)))
+                },
+                format = function (s, c) {
+                    return s.replace(/{(\w+)}/g, function (m, p) {
+                        return c[p];
+                    })
+                }
+            return function (table, name) {
+                if (!table.nodeType) table = document.getElementById(table)
+                var ctx = {
+                    worksheet: name || 'Worksheet',
+                    table: table.innerHTML
+                }
+                window.location.href = uri + base64(format(template, ctx))
+            }
+        })()
+    </script>
+</body>
+
+</html>

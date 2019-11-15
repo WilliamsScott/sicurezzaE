@@ -20,14 +20,16 @@
             <br>
             <h3>Buscar Usuario</h3>
             <form @submit="editarUsuario($event)">
-                <div class="form-group">
-                    <label for="rut">RUT</label>
-                    <input type="text" class="form-control" name="rut" placeholder="Ingrese RUT" required="true">
-                </div>
-                <br>
                 <div class="row">
-                    <div class="col-sm">
-                        <button @click="buscar($event)" type="button" class="btn btn-primary">Buscar</button>
+                    <div class="col-sm-6" name="col">
+                        <label for="col">RUT</label>
+                        <br>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="rut" placeholder="Ingrese RUT" required="true">
+                            <div class="input-group-append">
+                                <button @click="buscar($event)" type="button" class="btn btn-primary">Buscar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -43,7 +45,7 @@
                                 <th scope="col">Tipo</th>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Acción</th>
-                            </tr>   
+                            </tr>
                         </thead>
                         <tbody>
                             <tr v-for='x in usuarios'>
@@ -58,7 +60,8 @@
                                 <td v-else>Deshabilitado</td>
                                 <td v-if="x.estado==1"><button type="button" @click="deshabilitar($event)"
                                         class="btn btn-danger btn-sm">Deshabilitar</button></td>
-                                <td v-else><button type="button" @click="habilitar($event)" class="btn btn-success btn-sm">Habilitar</button></td>
+                                <td v-else><button type="button" @click="habilitar($event)"
+                                        class="btn btn-success btn-sm">Habilitar</button></td>
                             </tr>
                         </tbody>
 
@@ -82,6 +85,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
     <!--IMPORTAR EL INDEX.JS-->
     <script src="js/buscarUsuario.js"></script>
+    <script src="js/validarRut.js"></script>
     <script src="js/sweetalert2.js"></script>
     <!--IMPORTAR EL JQUERY-->
     <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>

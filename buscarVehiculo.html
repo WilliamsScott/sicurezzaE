@@ -19,29 +19,28 @@
             style="background:#36393F; border-radius: 10px; background-color:rgba(2,0,0,0.8);">
             <br>
             <h3>Buscar Vehiculo</h3>
-            <form @submit="editarUsuario($event)">
+            <form @submit="buscarVehiculo($event)">
                 <div class="row">
                     <div class="col-sm-3">
                         <label for="buscarpor">Buscar por</label>
-                        <select class="form-control" name="buscarpor">
+                        <select class="form-control" id="buscarpor">
                             <option value="dueño">Dueño</option>
                             <option value="patente">Patente</option>
                         </select>
                     </div>
-                    <div class="col-sm-7">
-                        <div class="form-group">
-                            <label for="buscar">Ingrese dueño o patente</label>
-                            <input type="text" class="form-control" name="buscar" placeholder="Ingrese dueño o patente"
-                                required="true">
-                        </div>
-                    </div>
-                    <div class="col-sm">
+                    <div class="col-sm-6" name="col">
+                        <label for="col">Ingrese dueño o patente</label>
                         <br>
-                        <button @click="buscar($event)" type="button" class="btn btn-primary">Buscar</button>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="buscar" placeholder="Ingrese RUT o patente" required="true">
+                            <div class="input-group-append">
+                                <button @click="buscar($event)" type="button" class="btn btn-primary">Buscar</button>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
-               
+
                 <br>
                 <div class="form-group">
                     <table class="table table-dark" id="table">
@@ -73,7 +72,7 @@
                                 <td v-else>
                                     Residente
                                 </td>
-                                
+
 
                             </tr>
                         </tbody>
@@ -98,6 +97,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
     <!--IMPORTAR EL INDEX.JS-->
     <script src="js/buscarVehiculo.js"></script>
+    <script src="js/validarRut.js"></script>
     <script src="js/sweetalert2.js"></script>
     <!--IMPORTAR EL JQUERY-->
     <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>

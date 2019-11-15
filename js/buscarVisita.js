@@ -72,6 +72,23 @@ var visita2 = new Vue({
                 }
             })
         },
+        cambio:function(){
+            var busqueda=document.getElementById("buscarpor").value
+            if(busqueda=="rut"){
+                document.getElementById("1").style.display="block"
+                document.getElementById("2").style.display="block"
+                document.getElementById("3").style.display="none"
+                document.getElementById("4").style.display="none"
+                document.getElementById("5").style.display="none"
+            }else{
+                document.getElementById("1").style.display="none"
+                document.getElementById("2").style.display="none"
+                document.getElementById("3").style.display="block"
+                document.getElementById("4").style.display="block"
+                document.getElementById("5").style.display="block"
+            }
+        },
+
         formatDate: function (fecha) {
             var mes = fecha.getMonth() + 1
             var hora = fecha.getHours()

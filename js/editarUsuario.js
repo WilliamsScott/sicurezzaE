@@ -16,63 +16,88 @@ var usuario2 = new Vue({
     methods: {
         buscar: function (e) {
             e.preventDefault()
-            form = e.target.parentNode.parentNode.parentNode
-            rut = form.rut.value
-            this.con.connect(function () {
-                usuario2.con.query("select * from usuario where rut=?", [rut], function (error, result) {
-                    if (result.length == 0) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Usuario no encontrado',
-
-                        })
-                    } else {
-                        result.forEach(function (element) {
-                            // console.log(result[0].nombre)
-                            form.nombre.value = result[0].nombre
-                            form.apellido.value = result[0].apellido
-                            form.telefono.value = result[0].telefono
-                            form.correo.value = result[0].correo
-                            form.tipo.value = result[0].tipo
-                            form.estado.value = result[0].estado
-                        })
-
-                    }
+            rut = document.getElementById("rut").value
+            x = validaRut(rut)
+            if (x == false) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Revise RUT',
                 })
-            })
-        },
-        editarUsuario: function (ru) {
-            ru.preventDefault()
-            form = ru.target
-            rut = form.rut.value
-            nombre = form.nombre.value
-            apellido = form.apellido.value
-            telefono = form.telefono.value
-            correo = form.correo.value
-            clave = form.clave.value
-            clave2 = form.clave2.value
-            tipo = form.tipo.value
-            estado = form.estado.value
-            if (clave != clave2) {
-                alert("error revise las claves")
-
             } else {
                 this.con.connect(function () {
                     usuario2.con.query("select * from usuario where rut=?", [rut], function (error, result) {
                         if (result.length == 0) {
-                            alert("error, usuario no encontrado")
-                            console.log(result)
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'Usuario no encontrado',
+                            })
+                            document.getElementById("nombre").value = ""
+                            document.getElementById("apellido").value = ""
+                            document.getElementById("telefono").value = ""
+                            document.getElementById("correo").value = ""
                         } else {
-                            usuario2.con.query("update usuario set nombre=?,apellido=?,telefono=?,correo=?,clave=md5(?),tipo=?,estado=? where rut=?", [nombre, apellido, telefono, correo, clave, tipo, estado, rut], function (error, result) {
-                                form.rut.value = ""
-                                form.nombre.value = ""
-                                form.apellido.value = ""
-                                form.telefono.value = ""
-                                form.correo.value = ""
-                                form.clave.value = ""
-                                form.clave2.value = ""
-                                alert("registrado")
+                            result.forEach(function () {
+                                document.getElementById("nombre").value = result[0].nombre
+                                document.getElementById("apellido").value = result[0].apellido
+                                document.getElementById("telefono").value = result[0].telefono
+                                document.getElementById("correo").value = result[0].correo
+                                document.getElementById("tipo").value = result[0].tipo
+                            })
+
+                        }
+                    })
+                })
+            }
+        },
+        editarUsuario: function (ru) {
+            ru.preventDefault()
+            rut = document.getElementById("rut").value
+            nombre = document.getElementById("nombre").value
+            apellido = document.getElementById("apellido").value
+            telefono = document.getElementById("telefono").value
+            correo = document.getElementById("correo").value
+            tipo = document.getElementById("tipo").value
+            clave = document.getElementById("clave").value
+            clave2 = document.getElementById("clave2").value
+            x = validaRut(rut)
+            if (clave != clave2) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Las claves deben ser iguales',
+                })
+            } else if (x == false) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Revise RUT',
+                })
+            } else {
+                this.con.connect(function () {
+                    usuario2.con.query("select * from usuario where rut=?", [rut], function (error, result) {
+                        if (result.length == 0) {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'Usuario no encotrado',
+                            })
+                        } else {
+                            usuario2.con.query("update usuario set nombre=?,apellido=?,telefono=?,correo=?,clave=md5(?),tipo=? where rut=?", [nombre, apellido, telefono, correo, clave, tipo, rut], function (error, result) {
+                                document.getElementById("rut").value = ""
+                                document.getElementById("nombre").value = ""
+                                document.getElementById("apellido").value = ""
+                                document.getElementById("telefono").value = ""
+                                document.getElementById("correo").value = ""
+                                document.getElementById("tipo").value = ""
+                                document.getElementById("clave").value = ""
+                                document.getElementById("clave2").value = ""
+                                Swal.fire({
+                                    type: 'success',
+                                    title: 'Listo!',
+                                    text: 'Usuario actualizado!',
+                                })
                             })
                         }
                     })

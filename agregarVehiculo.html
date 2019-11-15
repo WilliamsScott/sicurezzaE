@@ -21,20 +21,22 @@
             <h3>Agregar Vehículo</h3>
             <form @submit="agregarVehiculo($event)">
                 <div class="row">
-                    <div class="col-sm-10">
-                        <div class="form-group">
-                            <label for="rut">RUT</label>
-                            <input type="text" class="form-control" id="rut" placeholder="Ingrese RUT"
-                                required="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" readonly>
+                    <div class="col-sm-6" name="col">
+                        <label for="col">RUT</label>
+                        <br>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="rut" placeholder="Ingrese RUT" required="true">
+                            <div class="input-group-append">
+                                <button @click="buscar($event)" type="button" class="btn btn-primary">Buscar</button>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm">
-                        <br>
-                        <button @click="buscar($event)" type="button" class="btn btn-primary">Buscar</button>
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre"
+                                readonly>
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -43,14 +45,14 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="patente">Patente</label>
-                            <input type="text" class="form-control" name="patente" placeholder="Ingrese Patente"
+                            <input type="text" class="form-control" id="patente" placeholder="Ingrese Patente"
                                 required="true">
                         </div>
                     </div>
                     <div class="col-sm">
                         <div class="form-group">
                             <label for="marca">Marca</label>
-                            <input type="text" class="form-control" name="marca" placeholder="Ingrese Marca"
+                            <input type="text" class="form-control" id="marca" placeholder="Ingrese Marca"
                                 required="true">
                         </div>
                     </div>
@@ -59,7 +61,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="modelo">Modelo</label>
-                            <input type="text" class="form-control" name="modelo" placeholder="Ingrese Modelo"
+                            <input type="text" class="form-control" id="modelo" placeholder="Ingrese Modelo"
                                 required="true">
                         </div>
                     </div>

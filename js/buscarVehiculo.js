@@ -15,15 +15,11 @@ var vehiculo1 = new Vue({
             database: "sic"
         }),
     },
-    mounted: function () {
-
-    },
     methods: {
         buscar: function (e) {
             e.preventDefault()
-            form = e.target.parentNode.parentNode.parentNode
-            buscarpor = form.buscarpor.value
-            buscar = form.buscar.value
+            buscarpor = document.getElementById("buscarpor").value
+            buscar = document.getElementById("buscar").value
             this.con.connect(function () {
                 if (buscarpor == "patente") {
                     vehiculo1.con.query("select * from vehiculoresidente where patente=?", [buscar], function (error, result) {
@@ -34,39 +30,47 @@ var vehiculo1 = new Vue({
                                         type: 'error',
                                         title: 'Error...',
                                         text: 'Vehiculo no encontrado',
-
                                     })
+                                    vehiculo1.vehiculo = []
                                 } else {
                                     vehiculo1.vehiculo = result
                                 }
                             })
-
                             console.log(buscarpor)
                         } else {
                             vehiculo1.vehiculo = result
                         }
                     })
                 } else {
-                    vehiculo1.con.query("select * from vehiculoresidente where residente=?", [buscar], function (error, result) {
-                        if (result.length == 0) {
-                            vehiculo1.con.query("select vehiculovisita.*,visita.rut from vehiculovisita join visita on visita.id=vehiculovisita.visita where visita.rut=?", [buscar], function (error, result) {
-                                if (result.length == 0) {
-                                    Swal.fire({
-                                        type: 'error',
-                                        title: 'Error...',
-                                        text: 'Vehiculo no encontrado',
+                    if (validaRut(buscar) == false) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Revise RUT',
+                        })
+                        vehiculo1.vehiculo = []
+                    } else {
+                        vehiculo1.con.query("select * from vehiculoresidente where residente=?", [buscar], function (error, result) {
+                            if (result.length == 0) {
+                                vehiculo1.vehiculo = []
+                                vehiculo1.con.query("select vehiculovisita.*,visita.rut from vehiculovisita join visita on visita.id=vehiculovisita.visita where visita.rut=?", [buscar], function (error, result) {
+                                    if (result.length == 0) {
+                                        Swal.fire({
+                                            type: 'error',
+                                            title: 'Error...',
+                                            text: 'Vehiculo no encontrado',
+                                        })
+                                        vehiculo1.vehiculo = []
+                                    } else {
+                                        vehiculo1.vehiculo = result
+                                    }
+                                })
+                            } else {
+                                vehiculo1.vehiculo = result
+                            }
+                        })
 
-                                    })
-                                } else {
-                                    vehiculo1.vehiculo = result
-                                }
-                            })
-
-                            console.log(buscarpor)
-                        } else {
-                            vehiculo1.vehiculo = result
-                        }
-                    })
+                    }
                 }
 
 

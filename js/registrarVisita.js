@@ -2,6 +2,7 @@ const remote = require("electron").remote;
 const BrowserWindow = remote.BrowserWindow
 const mysql = require("mysql")
 
+
 var visita1 = new Vue({
     el: "#visita1",
     data: {
@@ -17,9 +18,6 @@ var visita1 = new Vue({
         }),
     },
     methods: {
-        x: function () {
-            this.texto = "hola"
-        },
         cargarSelect: function () {
             var edificio = document.getElementById("edificio")
             this.con.connect(function () {
@@ -39,7 +37,7 @@ var visita1 = new Vue({
             var e = edificio.value
             console.log(e)
             this.con.connect(function () {
-                visita1.con.query("select * from departamento where edificio=?", [e], function (error, result) {
+                visita1.con.query("select * from departamento where edificio=1", function (error, result) {
                     result.forEach(function (dato) {
                         var option = document.createElement("option")
                         option.value = dato.id
@@ -73,46 +71,83 @@ var visita1 = new Vue({
             telefono = form.telefono.value
             edificio = form.edificio.value
             departamento = form.departamento.value
+            patente = form.patente.value
             let user = localStorage.user
-            this.con.connect(function () {
-                visita1.con.query("insert into visita (rut,nombre,apellido,telefono,edificio,departamento,usuario) values(?,?,?,?,?,?,?)", [rut, nombre, apellido, telefono, edificio, departamento, user], function (error, result) {
-                    form.rut.value = ""
-                    form.nombre.value = ""
-                    form.apellido.value = ""
-                    form.telefono.value = ""
-                    Swal.fire(
-                        'Listo!',
-                        'Visita Registrada Con Éxito!',
-                        'success'
-                    )
-                })
-
-            })
-            this.con.connect(function () {
-                if (form.patente.value != "") {
-                    patente = form.patente.value
-                    marca = form.marca.value
-                    modelo = form.modelo.value
-                    estacionamiento = form.estacionamiento.value
-                    visita1.con.query("select max(id) as idv from visita", function (error, result) {
-                        result.forEach(function () {
-                            var idv = result[0].idv
-                            visita1.con.query("insert into vehiculovisita (patente,marca,modelo,numeroEstacionamiento,visita) values(?,?,?,?,?)", [patente, marca, modelo, estacionamiento, idv], function (error, result) {
-                                form.patente.value = ""
-                                form.marca.value = ""
-                                form.modelo.value = ""
-                            })
+            x = validaRut(rut)
+            if (x == false) {
+                Swal.fire(
+                    'Error!',
+                    'Revise Rut',
+                    'error'
+                )
+            }
+            else {
+                if (patente=="") {
+                    var rut2 = x
+                    this.con.connect(function () {
+                        visita1.con.query("insert into visita (rut,nombre,apellido,telefono,edificio,departamento,usuario) values(?,?,?,?,?,?,?)", [rut2, nombre, apellido, telefono, edificio, departamento, user], function (error, result) {
+                            form.rut.value = ""
+                            form.nombre.value = ""
+                            form.apellido.value = ""
+                            form.telefono.value = ""
+                            Swal.fire(
+                                'Listo!',
+                                'Visita Registrada Con Éxito!',
+                                'success'
+                            )
                         })
+
                     })
+                } else {
+                    this.con.connect(function () {
+                        if (form.patente.value != "") {
+                            patente = form.patente.value
+                            var expReg = /^([A-Za-z]{2,4}\d{2,4})$/
+                            if (expReg.test(patente)) {
+                                var rut2 = x
+                                visita1.con.query("insert into visita (rut,nombre,apellido,telefono,edificio,departamento,usuario) values(?,?,?,?,?,?,?)", [rut2, nombre, apellido, telefono, edificio, departamento, user], function (error, result) {
+                                    form.rut.value = ""
+                                    form.nombre.value = ""
+                                    form.apellido.value = ""
+                                    form.telefono.value = ""
+                                    
+                                })
+                                marca = form.marca.value
+                                modelo = form.modelo.value
+                                estacionamiento = form.estacionamiento.value
+                                visita1.con.query("select max(id) as idv from visita", function (error, result) {
+                                    result.forEach(function () {
+                                        var idv = result[0].idv
+                                        visita1.con.query("insert into vehiculovisita (patente,marca,modelo,numeroEstacionamiento,visita) values(?,?,?,?,?)", [patente, marca, modelo, estacionamiento, idv], function (error, result) {
+                                            form.patente.value = ""
+                                            form.marca.value = ""
+                                            form.modelo.value = ""
+                                            Swal.fire(
+                                                'Listo!',
+                                                'Visita y Vehiculo Registrados Con Éxito!',
+                                                'success'
+                                            )
+                                        })
+                                    })
+                                })
+                            } else {
+                                Swal.fire(
+                                    'Error!',
+                                    'Revise Patente',
+                                    'error'
+                                )
+                            }
 
+
+                        }
+                    })
                 }
-            })
-
+            }
 
         },
         cambio: function () {
-            var d = document.getElementById("departamento")
-            d.innerHTML=""
+            var departamento = document.getElementById("departamento")
+            departamento.innerHTML = ""
             this.con.connect(function () {
                 visita1.con.query("select * from departamento where edificio=?", [visita1.selected], function (error, result) {
 
@@ -124,12 +159,31 @@ var visita1 = new Vue({
                     })
                 })
             })
+        },
+        vehiculo: function () {
+            document.getElementById("vh").style.display = "block"
+            document.getElementById("patente").disabled = false
+            document.getElementById("marca").disabled = false
+            document.getElementById("modelo").disabled = false
+            document.getElementById("estacionamiento").disabled = false
+        },
+        vehiculo2: function () {
+            document.getElementById("vh").style.display = "none"
+            document.getElementById("patente").disabled = true
+            document.getElementById("marca").disabled = true
+            document.getElementById("modelo").disabled = true
+            document.getElementById("estacionamiento").disabled = true
+
         }
+
+
+
 
     },
     mounted: function () {
         this.cargarSelect()
         this.cargarSelect2()
         this.cargarSelectV()
+
     }
 });

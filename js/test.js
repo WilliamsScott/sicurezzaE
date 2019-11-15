@@ -10,6 +10,9 @@ var test = new Vue({
     methods: {
         x: function () {
             this.window.minimize()
+        },
+        caca:function(){
+            console.log("wea")
         }
     }
 });

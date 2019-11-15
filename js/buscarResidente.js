@@ -21,8 +21,7 @@ var residente3 = new Vue({
     methods: {
         buscar: function (e) {
             e.preventDefault()
-            form = e.target.parentNode.parentNode.parentNode
-            rut = form.rut.value
+            rut=document.getElementById("rut").value
             this.con.connect(function () {
                 residente3.con.query("SELECT residente.rut, residente.nombre,residente.apellido,residente.telefono,edificio.nombre as edificio,departamento.numero as departamento from residente join edificio on residente.edificio=edificio.id join departamento on residente.departamento=departamento.id where rut=?", [rut], function (error, result) {
                     if (result.length == 0) {
