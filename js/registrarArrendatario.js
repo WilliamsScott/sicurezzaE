@@ -16,18 +16,17 @@ var arrendatario1 = new Vue({
     methods: {
         registrarArrendatario: function (ra) {
             ra.preventDefault()
-            form = ra.target
-            rut = form.rut.value
-            nombre = form.nombre.value
-            apellido = form.apellido.value
-            telefono = form.telefono.value
-            if (rut == "" || nombre == "" || apellido == "" || telefono == "") {
+            rut = document.getElementById("rut").value
+            nombre = document.getElementById("nombre").value
+            apellido = document.getElementById("apellido").value
+            telefono = document.getElementById("telefono").value
+            x = validaRut(rut)
+            if (x == false) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
-                    text: 'Complete todos los campos',
+                    text: 'Revise RUT',
                 })
-
             } else {
                 this.con.connect(function () {
                     arrendatario1.con.query("select * from arrendatario where rut=?", [rut], function (error, result) {
@@ -37,18 +36,17 @@ var arrendatario1 = new Vue({
                                 title: 'Error...',
                                 text: 'Arrendatario ya registrado',
                             })
-                            console.log(result)
                         }
                         else {
                             arrendatario1.con.query("insert into arrendatario (rut,nombre,apellido,telefono) values (?,?,?,?)  ", [rut, nombre, apellido, telefono], function (error, result) {
-                                form.rut.value = ""
-                                form.nombre.value = ""
-                                form.apellido.value = ""
-                                form.telefono.value = ""
+                                document.getElementById("rut").value = ""
+                                document.getElementById("nombre").value = ""
+                                document.getElementById("apellido").value = ""
+                                document.getElementById("telefono").value = ""
                                 Swal.fire({
                                     type: 'success',
                                     title: 'Listo!',
-                                    text: 'Arrendatario asignado!',
+                                    text: 'Arrendatario registrado!',
                                 })
                             })
                         }

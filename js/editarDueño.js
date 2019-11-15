@@ -16,35 +16,42 @@ var dueño2 = new Vue({
     methods: {
         buscar: function (e) {
             e.preventDefault()
-            form = e.target.parentNode.parentNode.parentNode
-            rut = form.rut.value
-            this.con.connect(function () {
-                dueño2.con.query("select * from dueño where rut=?", [rut], function (error, result) {
-                    if (result.length == 0) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Dueño no encontrado',
-
-                        })
-                    } else {
-                        result.forEach(function (element) {
-                            form.nombre.value = result[0].nombre
-                            form.apellido.value = result[0].apellido
-                            form.telefono.value = result[0].telefono
-                        })
-
-                    }
+            rut = document.getElementById("rut").value
+            x = validaRut(rut)
+            if (x == false) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Revise RUT',
                 })
-            })
+            } else {
+                this.con.connect(function () {
+                    dueño2.con.query("select * from dueño where rut=?", [rut], function (error, result) {
+                        if (result.length == 0) {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'Dueño no encontrado',
+
+                            })
+                        } else {
+                            result.forEach(function (element) {
+                                document.getElementById("nombre").value = result[0].nombre
+                                document.getElementById("apellido").value = result[0].apellido
+                                document.getElementById("telefono").value = result[0].telefono
+                            })
+
+                        }
+                    })
+                })
+            }
         },
         editarDueño: function (er) {
             er.preventDefault()
-            form = er.target
-            rut = form.rut.value
-            nombre = form.nombre.value
-            apellido = form.apellido.value
-            telefono = form.telefono.value
+            rut = document.getElementById("rut").value
+            nombre = document.getElementById("nombre").value
+            apellido = document.getElementById("apellido").value
+            telefono = document.getElementById("telefono").value
 
             this.con.connect(function () {
                 dueño2.con.query("select * from dueño where rut=?", [rut], function (error, result) {
@@ -53,27 +60,25 @@ var dueño2 = new Vue({
                             type: 'error',
                             title: 'Error...',
                             text: 'Dueño no encontrado',
-
                         })
                     } else {
                         dueño2.con.query("update dueño set nombre=?,apellido=?,telefono=? where rut=?", [nombre, apellido, telefono, rut], function (error, result) {
-                            form.rut.value = ""
-                            form.nombre.value = ""
-                            form.apellido.value = ""
-                            form.telefono.value = ""
+                            document.getElementById("rut").value = ""
+                            document.getElementById("nombre").value = ""
+                            document.getElementById("apellido").value = ""
+                            document.getElementById("telefono").value = ""
                             Swal.fire({
                                 type: 'success',
                                 title: 'Listo!',
                                 text: 'Dueño actualizado!',
-    
+
                             })
                         })
                     }
                 })
             })
+
         }
     },
-    mounted: function () {
-    }
 
 });
