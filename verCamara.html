@@ -20,7 +20,19 @@
             <br>
             <h3>Ver cámaras en vivo</h3>
             <form>
-                <img id="img" />
+                <div class="row">
+                    <label></label>
+                    <div class="col-sm-6"> 
+                        <label for="img">Cámara 1</label>
+                        <img id="img" style="width: 450px;"/>
+                    </div>
+                    <div class="col-sm">
+                            <label for="img2">Cámara 2</label>
+                        <img id="img2" style="width: 450px;"/>
+                    </div>
+                </div>
+
+                <canvas id="canvas"></canvas>
                 <canvas id="canvas"></canvas>
                 <br><br>
             </form>
@@ -28,11 +40,11 @@
 
     </div>
 
-    >
     <script>
         var img = document.getElementById("img");
-        img.src = "http://192.168.43.41:4747/mjpegfeed?640x480";
-
+        img.src = "http://192.168.3.156:4747/mjpegfeed?640x480";
+        var img2 = document.getElementById("img2");
+        img2.src = "http://192.168.0.156:4747/mjpegfeed?640x480";
         setInterval(function () {
             //var ctx=img.getContext("2d");
             //ctx.drawImage("http://192.168.43.142:4747/mjpegfeed?640x480",10,10);
