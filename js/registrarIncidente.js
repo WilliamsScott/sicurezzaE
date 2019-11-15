@@ -16,16 +16,14 @@ var incidente1 = new Vue({
     methods: {
         registrarIncidente: function (ri) {
             ri.preventDefault()
-            form = ri.target
-            tipo = form.tipo.value
-            descripcion = form.descripcion.value
+            tipo = document.getElementById("tipo").value
+            descripcion = document.getElementById("descripcion").value
             let user = localStorage.user
-            console.log(user,tipo)
             this.con.connect(function () {
                 try {
                     incidente1.con.query("insert into incidente (tipo,descripcion,usuario) VALUES(?,?,?) ", [tipo, descripcion, user], function (error, result) {
-                        form.tipo.value =1
-                        form.descripcion.value = ""
+                        document.getElementById("tipo").value = 1
+                        document.getElementById("descripcion").value = ""
                         Swal.fire(
                             'Listo!',
                             'Incidente Registrado Con Éxito!',
