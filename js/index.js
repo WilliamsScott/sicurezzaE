@@ -30,11 +30,9 @@ var primero = new Vue({
             form = login.target//AL RECIBIR EL EVENTO EL TARGET ES EL FORMULARIO.
             usuario = form.user.value
             clave = form.clave.value
-            console.log(clave)
             this.con.connect(function () {
                 primero.con.query("select * from usuario where rut=? and clave =md5(?)", [usuario, clave], function (error, result) {
                     if (result.length > 0) {
-                        console.log(result[0].estado)
                         if (result[0].estado == 1) {
                             if (result[0].tipo == 1) {
                                 localStorage.user = result[0].rut
@@ -42,9 +40,9 @@ var primero = new Vue({
                                 primero.window.loadURL("file://" + __dirname + "/menuPrincipal.html")
                                 
                             } else {
-                                //    HACER MENU2 GUARDIA        primero.window.loadURL("file://" + __dirname + "/menuPrincipal.html")
+                                console.log("guardia")
+                                primero.window.loadURL("file://" + __dirname + "/menuGuardia.html")
                             }
-
                         } else {
                             Swal.fire({
                                 type: 'error',
