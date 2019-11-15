@@ -23,7 +23,7 @@
                 <div class="row">
                     <div class="col-sm-5">
                         <label for="edificio">Seleccione edificio</label>
-                        <select class="form-control" id="edificio">
+                        <select class="form-control" id="edificio" v-model="selected" @change="cambio()">
                         </select>
                     </div>
                     <div class="col-sm-5">
@@ -65,14 +65,17 @@
                 <br>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-sm-10">
-                            <label for="rut">Nuevo dueño</label>
-                            <input type="text" class="form-control" id="rut" placeholder="Ingrese RUT del nuevo dueño"
-                                required="true">
-                        </div>
-                        <div class="col-sm">
+                        <div class="col-sm-6" name="col">
+                            <label for="col">RUT</label>
                             <br>
-                            <button @click="buscar2($event)" type="button" class="btn btn-primary">Buscar</button>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="rut" placeholder="Ingrese RUT"
+                                    required="true">
+                                <div class="input-group-append">
+                                    <button @click="buscar2($event)" type="button"
+                                        class="btn btn-primary">Buscar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -96,7 +99,7 @@
                                         <td>{{d.apellido}}</td>
                                         <td>{{d.telefono}}</td>
                                         <td>
-                                            <button type="submit" class="btn btn-primary">Asignar</button>         
+                                            <button type="submit" class="btn btn-primary">Asignar</button>
                                         </td>
                                     </tr>
                                 </tbody>

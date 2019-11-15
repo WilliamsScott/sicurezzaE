@@ -7,7 +7,8 @@ var dueño5 = new Vue({
     data: {
         window: remote.getCurrentWindow(),
         dueño: [],
-        dueñoNuevo:[],
+        dueñoNuevo: [],
+        selected: "",
         con: mysql.createConnection({
             user: "root",
             password: "",
@@ -31,8 +32,10 @@ var dueño5 = new Vue({
         },
         cargarSelect2: function () {
             var departamento = document.getElementById("departamento")
+            var edificio = document.getElementById("edificio")
+            var e = edificio.value
             this.con.connect(function () {
-                dueño5.con.query("select * from departamento ", function (error, result) {
+                dueño5.con.query("select * from departamento where edificio=1", function (error, result) {
                     result.forEach(function (dato) {
                         var option = document.createElement("option")
                         option.value = dato.id
@@ -45,8 +48,8 @@ var dueño5 = new Vue({
         buscar: function (e) {
             e.preventDefault()
             form = e.target.parentNode.parentNode.parentNode
-            edificio=form.edificio.value
-            departamento=form.departamento.value
+            edificio = form.edificio.value
+            departamento = form.departamento.value
             this.con.connect(function () {
                 dueño5.con.query("select departamento.dueño,dueño.* from departamento join dueño on departamento.dueño=dueño.rut where departamento.id=?", [departamento], function (error, result) {
                     if (result.length == 0) {
@@ -66,7 +69,7 @@ var dueño5 = new Vue({
         },
         buscar2: function (e) {
             e.preventDefault()
-            rut=document.getElementById("rut").value
+            rut = document.getElementById("rut").value
             console.log(rut)
             this.con.connect(function () {
                 dueño5.con.query("select * from dueño where rut=?", [rut], function (error, result) {
@@ -81,15 +84,15 @@ var dueño5 = new Vue({
                             dueño5.dueñoNuevo = result
                         })
 
-                    }   
+                    }
                 })
             })
         },
         asignarDueño: function (e) {
             e.preventDefault()
-            rut=document.getElementById("rut").value
-            edificio=form.edificio.value
-            departamento=form.departamento.value
+            rut = document.getElementById("rut").value
+            edificio = form.edificio.value
+            departamento = form.departamento.value
             console.log(rut)
             this.con.connect(function () {
                 dueño5.con.query("select * from dueño where rut=?", [rut], function (error, result) {
@@ -100,20 +103,34 @@ var dueño5 = new Vue({
                             text: 'Dueño no encontrado',
                         })
                     } else {
-                        dueño5.con.query("update departamento set dueño=? where id=?", [rut,departamento], function (error, result) {
+                        dueño5.con.query("update departamento set dueño=? where id=?", [rut, departamento], function (error, result) {
                             form.rut.value = ""
                             Swal.fire({
                                 type: 'success',
                                 title: 'Listo!',
                                 text: 'Dueño asignado!',
                             })
-                            dueño5.dueñoNuevo=[]
-                            dueño5.dueño=[]
+                            dueño5.dueñoNuevo = []
+                            dueño5.dueño = []
                         })
                     }
                 })
             })
-        }
+        },
+        cambio: function () {
+            var departamento = document.getElementById("departamento")
+            departamento.innerHTML = ""
+            this.con.connect(function () {
+                dueño5.con.query("select * from departamento where edificio=?", [dueño5.selected], function (error, result) {
+                    result.forEach(function (dato) {
+                        var option = document.createElement("option")
+                        option.value = dato.id
+                        option.innerHTML = dato.numero
+                        departamento.appendChild(option)
+                    })
+                })
+            })
+        },
     },
     mounted: function () {
         this.cargarSelect()

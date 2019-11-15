@@ -8,6 +8,7 @@ var dueño3 = new Vue({
         window: remote.getCurrentWindow(),
         dueños: [],
         depa: "",
+        selected:"",
         con: mysql.createConnection({
             user: "root",
             password: "",
@@ -31,8 +32,10 @@ var dueño3 = new Vue({
         },
         cargarSelect2: function () {
             var departamento = document.getElementById("departamento")
+            var edificio = document.getElementById("edificio")
+            var e = edificio.value
             this.con.connect(function () {
-                dueño3.con.query("select * from departamento ", function (error, result) {
+                dueño3.con.query("select * from departamento where edificio=1", function (error, result) {
                     result.forEach(function (dato) {
                         var option = document.createElement("option")
                         option.value = dato.id
@@ -45,7 +48,6 @@ var dueño3 = new Vue({
         buscar: function (e) {
             e.preventDefault()
             form = e.target.parentNode.parentNode.parentNode
-            edificio = form.edificio.value
             departamento = form.departamento.value
             this.con.connect(function () {
                 dueño3.con.query("select departamento.dueño,dueño.* from departamento join dueño on departamento.dueño=dueño.rut where departamento.id=?", [departamento], function (error, result) {
@@ -54,15 +56,14 @@ var dueño3 = new Vue({
                             type: 'error',
                             title: 'Error...',
                             text: 'Dueño no encontrado',
-
                         })
                     } else {
                         result.forEach(function (element) {
                             dueño3.dueños = result
                             dueño3.depa=departamento
-                            console.log(dueño3.depa)
                         })
-
+                        //document.getElementById("edificio").innerHTML=""
+                        //dueño3.cargarSelect()
                     }
                 })
             })
@@ -89,7 +90,21 @@ var dueño3 = new Vue({
                 }
 
             })
-        }
+        },
+        cambio: function () {
+            var departamento = document.getElementById("departamento")
+            departamento.innerHTML = ""
+            this.con.connect(function () {
+                dueño3.con.query("select * from departamento where edificio=?", [dueño3.selected], function (error, result) {
+                    result.forEach(function (dato) {
+                        var option = document.createElement("option")
+                        option.value = dato.id
+                        option.innerHTML = dato.numero
+                        departamento.appendChild(option)
+                    })
+                })
+            })
+        },
 
     },
     mounted: function () {

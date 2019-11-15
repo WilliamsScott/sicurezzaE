@@ -8,6 +8,7 @@ var arrendatario4 = new Vue({
         window: remote.getCurrentWindow(),
         arrendatario: [],
         arrendatarioNuevo:[],
+        selected:"",
         con: mysql.createConnection({
             user: "root",
             password: "",
@@ -31,8 +32,10 @@ var arrendatario4 = new Vue({
         },
         cargarSelect2: function () {
             var departamento = document.getElementById("departamento")
+            var edificio = document.getElementById("edificio")
+            var e = edificio.value
             this.con.connect(function () {
-                arrendatario4.con.query("select * from departamento ", function (error, result) {
+                arrendatario4.con.query("select * from departamento where edificio=1", function (error, result) {
                     result.forEach(function (dato) {
                         var option = document.createElement("option")
                         option.value = dato.id
@@ -113,7 +116,21 @@ var arrendatario4 = new Vue({
                     }
                 })
             })
-        }
+        },
+        cambio: function () {
+            var departamento = document.getElementById("departamento")
+            departamento.innerHTML = ""
+            this.con.connect(function () {
+                arrendatario4.con.query("select * from departamento where edificio=?", [arrendatario4.selected], function (error, result) {
+                    result.forEach(function (dato) {
+                        var option = document.createElement("option")
+                        option.value = dato.id
+                        option.innerHTML = dato.numero
+                        departamento.appendChild(option)
+                    })
+                })
+            })
+        },
     },
     mounted: function () {
         this.cargarSelect()
