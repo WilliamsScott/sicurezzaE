@@ -30,38 +30,53 @@ var primero = new Vue({
             form = login.target//AL RECIBIR EL EVENTO EL TARGET ES EL FORMULARIO.
             usuario = form.user.value
             clave = form.clave.value
-            this.con.connect(function () {
-                primero.con.query("select * from usuario where rut=? and clave =md5(?)", [usuario, clave], function (error, result) {
-                    if (result.length > 0) {
-                        if (result[0].estado == 1) {
-                            if (result[0].tipo == 1) {
-                                localStorage.user = result[0].rut
-                                localStorage.bienvenido = (result[0].nombre + " " + result[0].apellido)
-                                primero.window.loadURL("file://" + __dirname + "/menuPrincipal.html")
-                                
+            x = validaRut(usuario)
+            if (x == false && usuario!='admin') {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Revise RUT',
+                })
+            } else {
+                this.con.connect(function () {
+                    primero.con.query("select * from usuario where rut=? and clave =md5(?)", [usuario, clave], function (error, result) {
+                        if (result.length > 0) {
+                            if (result[0].estado == 1) {
+                                if (result[0].tipo == 1) {
+                                    localStorage.user = result[0].rut
+                                    localStorage.tipoUser = result[0].tipo
+                                    localStorage.bienvenido = (result[0].nombre + " " + result[0].apellido)
+                                    primero.window.loadURL("file://" + __dirname + "/menuPrincipal.html")
+
+                                } else {
+                                    console.log("guardia")
+                                    primero.window.loadURL("file://" + __dirname + "/menuPrincipalGuardia.html")
+                                }
                             } else {
-                                console.log("guardia")
-                                primero.window.loadURL("file://" + __dirname + "/menuGuardia.html")
+                                Swal.fire({
+                                    type: 'error',
+                                    title: 'Error...',
+                                    text: 'Usuario deshabilitado',
+                                })
                             }
                         } else {
                             Swal.fire({
                                 type: 'error',
                                 title: 'Error...',
-                                text: 'Usuario deshabilitado',
-
+                                text: 'RUT o clave incorrectos',
                             })
                         }
-                    }
 
+                    })
                 })
-            })
+            }
+
         },
         limpiar: function (e) {
             e.preventDefault()
             form = e.target.parentNode.parentNode.parentNode
             form.user.value = ""
             form.clave.value = ""
-            //console.log(form)
         },
         nueva: function () {
             var nueva = new BrowserWindow({

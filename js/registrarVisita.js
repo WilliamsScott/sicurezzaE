@@ -8,6 +8,7 @@ var visita1 = new Vue({
     data: {
         window: remote.getCurrentWindow(),
         texto: "",
+        tipo: "",
         selected: '',
         isDisabled: true,
         con: mysql.createConnection({
@@ -35,7 +36,6 @@ var visita1 = new Vue({
             var departamento = document.getElementById("departamento")
             var edificio = document.getElementById("edificio")
             var e = edificio.value
-            console.log(e)
             this.con.connect(function () {
                 visita1.con.query("select * from departamento where edificio=1", function (error, result) {
                     result.forEach(function (dato) {
@@ -82,7 +82,7 @@ var visita1 = new Vue({
                 )
             }
             else {
-                if (patente=="") {
+                if (patente == "") {
                     var rut2 = x
                     this.con.connect(function () {
                         visita1.con.query("insert into visita (rut,nombre,apellido,telefono,edificio,departamento,usuario) values(?,?,?,?,?,?,?)", [rut2, nombre, apellido, telefono, edificio, departamento, user], function (error, result) {
@@ -110,7 +110,7 @@ var visita1 = new Vue({
                                     form.nombre.value = ""
                                     form.apellido.value = ""
                                     form.telefono.value = ""
-                                    
+
                                 })
                                 marca = form.marca.value
                                 modelo = form.modelo.value
@@ -160,6 +160,11 @@ var visita1 = new Vue({
                 })
             })
         },
+        tipoUser: function () {
+            let tipo = localStorage.tipoUser
+            this.tipo = tipo
+            console.log(tipo)
+        },
         vehiculo: function () {
             document.getElementById("vh").style.display = "block"
             document.getElementById("patente").disabled = false
@@ -184,6 +189,8 @@ var visita1 = new Vue({
         this.cargarSelect()
         this.cargarSelect2()
         this.cargarSelectV()
+        this.tipoUser()
+        
 
     }
 });

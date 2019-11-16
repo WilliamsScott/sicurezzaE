@@ -8,72 +8,56 @@
     <title>Document</title>
     <link rel="stylesheet" href="static/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/index.css" />
-    <link rel="stylesheet" type="text/css" href="css/sweetalert2.css"> 
+    <link rel="stylesheet" type="text/css" href="css/sweetalert2.css">
 </head>
 
 <body>
-    <div id="primero">
-        <nav class="navbar  " style="background:#29323F;">
-            <div>
-                <span>Sicurezza</span>
-                <button @click="minimizarVentana()">M</button>
-                <button @click="cerrarVentana()">C</button>
-                <button @click="maximizarVentana()">+</button>
-            </div>
-        </nav>
-
+    <div class="menuContainer" id="menu"></div>
+    <div id="camara1">
         <br>
-
-
-        <div class="container-fluid col-md-6"
+        <div class="container-fluid col-md-8"
             style="background:#36393F; border-radius: 10px; background-color:rgba(2,0,0,0.7);">
             <br>
-            <h3>Iniciar Sesión</h3>
-
-            <form @submit="iniciarSesion($event)">
-
-                <div class="form-group">
-                    <label for="user">Usuario</label>
-                    <input type="text" class="form-control" name="user" aria-describedby="userHelp"
-                        placeholder="Ingrese RUT">
-                    <!--<small id="userHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
-                </div>
-                <div class="form-group">
-                    <label for="clave">Clave</label>
-                    <input type="password" class="form-control" name="clave" placeholder="Ingrese Clave">
-                </div>
-
+            <h3>Ver cámaras en vivo</h3>
+            <form>
                 <div class="row">
-                    <div class="col-sm-10">
-                        <button @click="limpiar($event)" type="button" class="btn btn-danger">Limpiar</button>
+                    <label></label>
+                    <div class="col-sm-6"> 
+                        <label for="img">Cámara 1</label>
+                        <img id="img" style="width: 450px;"/>
                     </div>
                     <div class="col-sm">
-                        <button type="submit" class="btn btn-primary">Ingresar</button>
+                            <label for="img2">Cámara 2</label>
+                        <img id="img2" style="width: 450px;"/>
                     </div>
                 </div>
-                <!--<a class="btn btn-primary" @click="nueva()" role="button">Link</a>-->
 
+                <canvas id="canvas"></canvas>
+                <canvas id="canvas"></canvas>
+                <br><br>
             </form>
-            <br>
         </div>
 
     </div>
 
-
-
-
-
-
-
+    <script>
+        var img = document.getElementById("img");
+        img.src = "http://192.168.3.156:4747/mjpegfeed?640x480";
+        var img2 = document.getElementById("img2");
+        img2.src = "http://192.168.0.156:4747/mjpegfeed?640x480";
+        setInterval(function () {
+            //var ctx=img.getContext("2d");
+            //ctx.drawImage("http://192.168.43.142:4747/mjpegfeed?640x480",10,10);
+        }, 1000 / 4);
+    </script>
     <!--IMPORTAR VUE-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
     <!--IMPORTAR EL INDEX.JS-->
     <script src="js/index.js"></script>
-    <script src="js/validarRut.js"></script>
     <script src="js/sweetalert2.js"></script>
     <!--IMPORTAR EL JQUERY-->
     <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
 
     <!--DROPDOWN-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -102,13 +86,14 @@
     <script>
         $.ajax({
             type: "GET",
-            url: "header.html",
+            url: "headerGuardia.html",
             success: function (datos) {
                 $("#menu").html(datos);
             }
         })
     </script>
-
 </body>
+
+
 
 </html>
