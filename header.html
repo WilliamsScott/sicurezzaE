@@ -14,21 +14,19 @@
 
 <header>
     <div id="header">
-        <ul class="nav justify-content-end" style="background:#29323F;">
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Bienvenido {{mostrar}} </a>
-            </li>
-            <li class="nav-item">
-                <button @click="minimizarVentana()">M</button>
-            </li>
-            <li class="nav-item">
-                <button @click="cerrarVentana()">C</button>
-            </li>
-            <li class="nav-item">
-                <button @click="maximizarVentana()">+</button>
-            </li>
+        <div>
+            <ul class="nav justify-content-end" style="background:#29323F; height: 31px;">
 
-        </ul>
+                <div class="col-sm-11">
+                    <button @click="cerrarSesion()" class="left">Cerrar Sesión</button>
+                </div>
+                <button @click="minimizarVentana()">__</button>
+                <button @click="maximizarVentana()">❐</button>
+                <button @click="cerrarVentana()">🗙</button>
+
+
+            </ul>
+        </div>
     </div>
     <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
         <a class="navbar-brand" href="menuPrincipal.html">Sicurezza</a>
@@ -132,8 +130,9 @@
                         <a class="dropdown-item" href="visitaEdificio.html">Visitas por edificio</a>
                         <a class="dropdown-item" href="visitaUsuario.html">Visitas por Usuario</a>
                         <a class="dropdown-item" href="visitaHora.html">Visitas por Hora</a>
-                        <a class="dropdown-item" href="estacionamientoMasOcupado.html">Estacionamientos más utilizados</a>
-                        
+                        <a class="dropdown-item" href="estacionamientoMasOcupado.html">Estacionamientos más
+                            utilizados</a>
+
                     </div>
                 </li>
                 <li class="nav-item dropdown">

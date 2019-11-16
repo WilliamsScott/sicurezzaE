@@ -18,104 +18,126 @@
             style="background:#36393F; border-radius: 10px; background-color:rgba(2,0,0,0.7);">
             <form @submit="registrarVisita($event)">
                 <br>
-
+                <h3>Registrar Visita</h3>
                 <div class="row">
-
-                    <div class="col">
-                        <h3>Registrar Visita</h3><br>
-                        <a id="tipo" style="display: none;">{{tipo}}</a>
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label for="rut">RUT</label>
                             <input type="text" class="form-control" name="rut" placeholder="Ingrese RUT" id='rut'
                                 required="true">
                         </div>
+                    </div>
+                    <div class="col-sm">
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
                             <input type="text" class="form-control" name="nombre" placeholder="Ingrese Nombre"
                                 required="true">
                         </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label for="Apellido">Apellido</label>
                             <input type="text" class="form-control" name="apellido" placeholder="Ingrese Apellido"
                                 required="true">
                         </div>
+                    </div>
+                    <div class="col-sm">
                         <div class="form-group">
                             <label for="telefono">Telefono</label>
                             <input type="number" class="form-control" name="telefono" placeholder="Ingrese Telefono"
                                 required="true">
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
                         <label for="edificio">Edificio</label>
                         <select class="form-control" id="edificio" v-model="selected" @change="cambio()">
                         </select><br>
+                    </div>
+                    <div class="col-sm">
                         <label for="departamento">Departamento</label>
                         <select class="form-control" id="departamento">
                         </select>
-                        <br>
-                        <h6>Vehiculo</h6>
-                        <div class="form-check">
-
-                            <div class="col">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
-                                    value="option1" checked @click="vehiculo2($event)">
-                                <label class="form-check-label" for="gridRadios1">
-                                    No
-                                </label>
-                            </div>
-                            <div class="col">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
-                                    value="option1" @click="vehiculo($event)">
-                                <label class="form-check-label" for="gridRadios1">
-                                    Sí
-                                </label>
-                            </div>
-
-
-                        </div>
-                        <br>
-
-
                     </div>
-                    <div class="col" id="vh" style="display: none;">
-                        <h3>Registrar Vehiculo</h3><br>
-                        <div class="form-group">
-                            <label for="patente">Patente</label>
-                            <input type="text" class="form-control" id="patente" placeholder="Ingrese Patente"
-                                required="true" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="marca">Marca</label>
-                            <input type="text" class="form-control" id="marca" placeholder="Ingrese Marca"
-                                required="true" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="modelo">Modelo</label>
-                            <input type="text" class="form-control" id="modelo" placeholder="Ingrese Modelo"
-                                required="true" disabled>
-                        </div>
-                        <label for="estacionamiento">Estacionamiento</label>
-                        <select class="form-control" id="estacionamiento" disabled>
-                        </select>
-                        <br>
-
-                    </div>
-
                 </div>
                 <div class="row">
-                    <div class="col-sm-10">
+                    <div class="col-sm-6">
+                        <h6>Vehiculo</h6>
+                        <div class="form-check">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
+                                        value="option1" checked @click="vehiculo2($event)">
+                                    <label class="form-check-label" for="gridRadios1">
+                                        No
+                                    </label>
+                                </div>
+                                <div class="col-sm">
+                                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
+                                        value="option1" @click="vehiculo($event)">
+                                    <label class="form-check-label" for="gridRadios1">
+                                        Sí
+                                    </label>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
 
+                <div id="vh" style="display: none;">
+                    <h3>Registrar Vehiculo</h3>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="patente">Patente</label>
+                                <input type="text" class="form-control" id="patente" placeholder="Ingrese Patente"
+                                    required="true" disabled>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label for="marca">Marca</label>
+                                <input type="text" class="form-control" id="marca" placeholder="Ingrese Marca"
+                                    required="true" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="modelo">Modelo</label>
+                                <input type="text" class="form-control" id="modelo" placeholder="Ingrese Modelo"
+                                    required="true" disabled>
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <label for="estacionamiento">Estacionamiento</label>
+                            <select class="form-control" id="estacionamiento" disabled>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-10">
                     </div>
                     <div class="col-sm">
                         <button type="submit" class="btn btn-primary">Registrar</button>
                     </div>
-
                 </div>
                 <br>
-
             </form>
         </div>
-        <!--<a class="btn btn-primary" @click="x()" role="button">Link</a>-->
-
-    </div><br>
+    </div>
+    <br>
 
     <!--IMPORTAR VUE-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>

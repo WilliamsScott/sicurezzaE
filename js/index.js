@@ -26,8 +26,8 @@ var primero = new Vue({
             this.window.maximize()
         },
         iniciarSesion: function (login) {
-            login.preventDefault() //EL SUBMIT POR DEFECTO HACE QUE SE RECARGUE LA PAG Y CON EL PREVENTDEFAULT NO PASA ESA WEA.
-            form = login.target//AL RECIBIR EL EVENTO EL TARGET ES EL FORMULARIO.
+            login.preventDefault() 
+            form = login.target
             usuario = form.user.value
             clave = form.clave.value
             x = validaRut(usuario)

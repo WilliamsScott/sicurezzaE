@@ -7,7 +7,8 @@ var test = new Vue({
     data: {
         window: remote.getCurrentWindow(),
         texto: "",
-        estacionamientos:[],
+        bienvenido:"",
+        estacionamientos: [],
         con: mysql.createConnection({
             user: "root",
             password: "",
@@ -38,7 +39,7 @@ var test = new Vue({
             var tabla = document.getElementById("tbody")
             this.con.connect(function () {
                 test.con.query("select * from estacionamientovisita", function (error, result) {
-                    test.estacionamientos=result
+                    test.estacionamientos = result
                 })
             })
 
@@ -49,6 +50,12 @@ var test = new Vue({
             } else {
                 console.log("no compatible")
             }
+        },
+        cargarBienvenido: function () {
+            let bienvenido = localStorage.bienvenido
+            this.bienvenido = bienvenido
+            console.log(bienvenido)
+
         }
 
 
@@ -56,5 +63,6 @@ var test = new Vue({
     mounted: function () {
         this.cargarEstacionamientos()
         this.storage()
+        this.cargarBienvenido()
     }
 });

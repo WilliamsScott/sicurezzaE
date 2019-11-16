@@ -2,8 +2,8 @@ const remote = require("electron").remote;
 const BrowserWindow = remote.BrowserWindow
 const mysql = require("mysql")
 
-var header = new Vue({
-    el: "#header",
+var headerGuardia = new Vue({
+    el: "#headerGuardia",
     data: {
         window: remote.getCurrentWindow(),
         bienvenido:"",
@@ -29,7 +29,7 @@ var header = new Vue({
         cerrarSesion:function(){
             let user = localStorage.user
             localStorage.removeItem(user)
-            header.window.loadURL("file://" + __dirname + "/index.html")
+            headerGuardia.window.loadURL("file://" + __dirname + "/index.html")
             
         },
         cargarBienvenido:function(){
