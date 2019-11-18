@@ -25,20 +25,20 @@
                 <div class="form-group">
                     <label for="tipo">Grafico visitas por usuario</label>
                     <table id="tabla" style="display: none;">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Usuario</th>
-                                    <th scope="col">Visitas</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody">
-                                <tr v-for="v in arregloExcel1">
-                                    <td>{{v.nombre}} {{v.apellido}}</td>
-                                    <td>{{v.total}}</td>
-                                </tr>
-                            </tbody>
-                            
-                        </table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Visitas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            <tr v-for="v in arregloExcel1">
+                                <td>{{v.nombre}} {{v.apellido}}</td>
+                                <td>{{v.total}}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
                     <canvas id="myChart" width="20" height="8"></canvas><br>
 
                     <div class="row">
@@ -125,6 +125,7 @@
                             'rgb(166, 172, 175)',
                             'rgb(112, 123, 124 )',
                         ]
+
                     }]
                 },
                 options: {
@@ -134,6 +135,12 @@
                                 beginAtZero: true
                             }
                         }]
+                    },
+                    legend: {
+                        labels: {
+                            // This more specific font property overrides the global property
+                            fontColor: 'white'
+                        }
                     }
                 }
             })
