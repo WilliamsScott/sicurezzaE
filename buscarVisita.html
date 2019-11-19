@@ -31,15 +31,14 @@
                     <div class="col-sm-7" id="1">
                         <div class="form-group">
                             <label for="rut">RUT</label>
-                            <input type="text" class="form-control" name="rut" placeholder="Ingrese RUT"
-                                required="true">
+                            <input type="text" class="form-control" id="rut" placeholder="Ingrese RUT" required="true">
                         </div>
                     </div>
                     <div class="col-sm" id="2">
                         <br>
                         <button @click="buscar($event)" type="button" class="btn btn-primary">Buscar</button>
                     </div>
-                    <div class="col-sm-3"  style="display: none;" id="3">
+                    <div class="col-sm-3" style="display: none;" id="3">
                         <div class="dates" style="color:#FFFF;">
                             <label>Seleccione Fecha Desde</label>
                             <input type="text" style="width:200px;background-color:#FFFF;" class="form-control"
@@ -81,7 +80,7 @@
                             </tr>
                         </thead>
                         <tbody id="tbody">
-                            <tr v-for="v in visitas">
+                            <tr v-for="v in visitasPaginacion">
                                 <td>{{v.rut}}</td>
                                 <td>{{v.nombre}}</td>
                                 <td>{{v.apellido}}</td>
@@ -102,6 +101,17 @@
 
                     </table>
                     <br>
+                   
+                    <div class="col">
+                        <div class="row">
+
+                            <p v-for="j in totalPaginacion">
+                                <button @click="paginacion(j)" style="border-color:#007BFF; border-radius: 1px; background-color:#007BFF;color:white">{{j}}</button>
+                            </p>
+
+                        </div>
+                    </div>
+                    
 
                 </div>
 
