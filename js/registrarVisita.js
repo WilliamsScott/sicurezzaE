@@ -81,6 +81,13 @@ var visita1 = new Vue({
                     'error'
                 )
             }
+            else if (telefono.length < 8 || telefono.length > 11) {
+                Swal.fire(
+                    'Error!',
+                    'Revise Telefono',
+                    'error'
+                )
+            }
             else {
                 if (patente == "") {
                     var rut2 = x
@@ -179,6 +186,11 @@ var visita1 = new Vue({
             document.getElementById("modelo").disabled = true
             document.getElementById("estacionamiento").disabled = true
 
+        },
+        onlyNumber: function (e) {
+            if (!/\d/.test(e.key) && e.keyCode != 8 && e.keyCode != 13 && e.keyCode != 9) {
+                e.preventDefault();
+            }
         }
 
 
@@ -190,7 +202,7 @@ var visita1 = new Vue({
         this.cargarSelect2()
         this.cargarSelectV()
         this.tipoUser()
-        
+
 
     }
 });

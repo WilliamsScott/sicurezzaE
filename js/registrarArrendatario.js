@@ -57,6 +57,11 @@ var arrendatario1 = new Vue({
             }
 
 
+        },
+        onlyNumber: function (e) {
+            if (!/\d/.test(e.key) && e.keyCode != 8 && e.keyCode != 13 && e.keyCode != 9) {
+                e.preventDefault();
+            }
         }
     }
 })

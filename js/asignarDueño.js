@@ -8,7 +8,7 @@ var dueño5 = new Vue({
         window: remote.getCurrentWindow(),
         dueño: [],
         dueñoNuevo: [],
-        selected: "",
+        selected: "1",
         con: mysql.createConnection({
             user: "root",
             password: "",
@@ -70,52 +70,68 @@ var dueño5 = new Vue({
         buscar2: function (e) {
             e.preventDefault()
             rut = document.getElementById("rut").value
-            console.log(rut)
-            this.con.connect(function () {
-                dueño5.con.query("select * from dueño where rut=?", [rut], function (error, result) {
-                    if (result.length == 0) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Dueño no encontrado',
-                        })
-                    } else {
-                        result.forEach(function (element) {
-                            dueño5.dueñoNuevo = result
-                        })
-
-                    }
+            x = validaRut(rut)
+            if (x == false) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Revise RUT',
                 })
-            })
+            } else {
+                this.con.connect(function () {
+                    dueño5.con.query("select * from dueño where rut=?", [rut], function (error, result) {
+                        if (result.length == 0) {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'Dueño no encontrado',
+                            })
+                        } else {
+                            result.forEach(function (element) {
+                                dueño5.dueñoNuevo = result
+                            })
+
+                        }
+                    })
+                })
+            }
         },
         asignarDueño: function (e) {
             e.preventDefault()
             rut = document.getElementById("rut").value
             edificio = form.edificio.value
             departamento = form.departamento.value
-            console.log(rut)
-            this.con.connect(function () {
-                dueño5.con.query("select * from dueño where rut=?", [rut], function (error, result) {
-                    if (result.length == 0) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Dueño no encontrado',
-                        })
-                    } else {
-                        dueño5.con.query("update departamento set dueño=? where id=?", [rut, departamento], function (error, result) {
-                            form.rut.value = ""
-                            Swal.fire({
-                                type: 'success',
-                                title: 'Listo!',
-                                text: 'Dueño asignado!',
-                            })
-                            dueño5.dueñoNuevo = []
-                            dueño5.dueño = []
-                        })
-                    }
+            x = validaRut(rut)
+            if (x == false) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Revise RUT',
                 })
-            })
+            } else {
+                this.con.connect(function () {
+                    dueño5.con.query("select * from dueño where rut=?", [rut], function (error, result) {
+                        if (result.length == 0) {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'Dueño no encontrado',
+                            })
+                        } else {
+                            dueño5.con.query("update departamento set dueño=? where id=?", [rut, departamento], function (error, result) {
+                                form.rut.value = ""
+                                Swal.fire({
+                                    type: 'success',
+                                    title: 'Listo!',
+                                    text: 'Dueño asignado!',
+                                })
+                                dueño5.dueñoNuevo = []
+                                dueño5.dueño = []
+                            })
+                        }
+                    })
+                })
+            }
         },
         cambio: function () {
             var departamento = document.getElementById("departamento")

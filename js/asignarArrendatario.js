@@ -7,8 +7,9 @@ var arrendatario4 = new Vue({
     data: {
         window: remote.getCurrentWindow(),
         arrendatario: [],
-        arrendatarioNuevo:[],
-        selected:"",
+        arrendatarioNuevo: [],
+        selected: 1,
+        depa: "",
         con: mysql.createConnection({
             user: "root",
             password: "",
@@ -48,74 +49,89 @@ var arrendatario4 = new Vue({
         buscar: function (e) {
             e.preventDefault()
             form = e.target.parentNode.parentNode.parentNode
-            edificio=form.edificio.value
-            departamento=form.departamento.value
+            edificio = form.edificio.value
+            departamento = form.departamento.value
+            arrendatario4.depa = departamento
             this.con.connect(function () {
                 arrendatario4.con.query("select departamento.arrendatario,arrendatario.* from departamento join arrendatario on departamento.arrendatario=arrendatario.rut where departamento.id=?", [departamento], function (error, result) {
                     if (result.length == 0) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Arrendatario no encontrado',
-                        })
-                    } else {
-                        result.forEach(function (element) {
-                            arrendatario4.arrendatario = result
-                        })
+                        Swal.fire(
+                            'Aviso',
+                            'Departamento no posee arrendatario',
+                            'info'
+                        )
+                        arrendatario4.arrendatario = []
 
+                    } else {
+                        arrendatario4.arrendatario = result
                     }
                 })
             })
         },
         buscar2: function (e) {
             e.preventDefault()
-            rut=document.getElementById("rut").value
-            console.log(rut)
-            this.con.connect(function () {
-                arrendatario4.con.query("select * from arrendatario where rut=?", [rut], function (error, result) {
-                    if (result.length == 0) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Arrendatario no encontrado',
-                        })
-                    } else {
-                        result.forEach(function (element) {
-                            arrendatario4.arrendatarioNuevo = result
-                        })
+            rut = document.getElementById("rut").value
+            x = validaRut(rut)
+            if (x == false) {
+                Swal.fire(
+                    'Error!',
+                    'Revise Rut',
+                    'error'
+                )
+            } else {
+                this.con.connect(function () {
+                    arrendatario4.con.query("select * from arrendatario where rut=?", [rut], function (error, result) {
+                        if (result.length == 0) {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'Arrendatario no encontrado',
+                            })
+                        } else {
+                            result.forEach(function (element) {
+                                arrendatario4.arrendatarioNuevo = result
+                            })
 
-                    }   
+                        }
+                    })
                 })
-            })
+            }
         },
         asignarArrendatario: function (e) {
             e.preventDefault()
-            rut=document.getElementById("rut").value
-            edificio=form.edificio.value
-            departamento=form.departamento.value
-            console.log(rut)
-            this.con.connect(function () {
-                arrendatario4.con.query("select * from arrendatario where rut=?", [rut], function (error, result) {
-                    if (result.length == 0) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Arrendatario no encontrado',
-                        })
-                    } else {
-                        arrendatario4.con.query("update departamento set arrendatario=? where id=?", [rut,departamento], function (error, result) {
-                            form.rut.value = ""
-                            Swal.fire({
-                                type: 'success',
-                                title: 'Listo!',
-                                text: 'Arrendatario asignado!',
-                            })
-                            arrendatario4.arrendatarioNuevo=[]
-                            arrendatario4.arrendatario=[]
-                        })
-                    }
+            rut = document.getElementById("rut").value
+            departamento = arrendatario4.depa
+            if (departamento == "") {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Debe buscar un departamento',
                 })
-            })
+            } else {
+                this.con.connect(function () {
+                    arrendatario4.con.query("select * from arrendatario where rut=?", [rut], function (error, result) {
+                        if (result.length == 0) {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'Arrendatario no encontrado',
+                            })
+                        } else {
+                            arrendatario4.con.query("update departamento set arrendatario=? where id=?", [rut, departamento], function (error, result) {
+                                document.getElementById("rut").value = ""
+                                Swal.fire({
+                                    type: 'success',
+                                    title: 'Listo!',
+                                    text: 'Arrendatario asignado!',
+                                })
+                                arrendatario4.depa=""
+                                arrendatario4.arrendatarioNuevo = []
+                                arrendatario4.arrendatario = []
+                            })
+                        }
+                    })
+                })
+            }
         },
         cambio: function () {
             var departamento = document.getElementById("departamento")

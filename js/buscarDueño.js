@@ -8,7 +8,7 @@ var dueño3 = new Vue({
         window: remote.getCurrentWindow(),
         dueños: [],
         depa: "",
-        selected:"",
+        selected:1,
         con: mysql.createConnection({
             user: "root",
             password: "",
@@ -58,7 +58,7 @@ var dueño3 = new Vue({
                             text: 'Dueño no encontrado',
                         })
                     } else {
-                        result.forEach(function (element) {
+                        result.forEach(function () {
                             dueño3.dueños = result
                             dueño3.depa=departamento
                         })

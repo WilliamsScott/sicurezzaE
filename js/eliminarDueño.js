@@ -23,28 +23,35 @@ var dueño6 = new Vue({
         buscar: function (e) {
             e.preventDefault()
             rut = document.getElementById("rut").value
-            this.con.connect(function () {
-                dueño6.con.query("select dueño.*, count(*) as total from departamento join dueño on departamento.dueño=dueño.rut where rut=?", [rut], function (error, result) {
-                    if (result.length == 0 || result[0].rut==null) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Dueño no encontrado',
-
-                        })
-                        dueño6.dueño = []
-                    } else {
-                        dueño6.dueño = result
-                        dueño6.rutD = result[0].rut
-                    }
+            x = validaRut(rut)
+            if (x == false) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Revise RUT',
                 })
-            })
+            } else {
+                this.con.connect(function () {
+                    dueño6.con.query("select dueño.*, count(*) as total from departamento join dueño on departamento.dueño=dueño.rut where rut=?", [rut], function (error, result) {
+                        if (result.length == 0 || result[0].rut == null) {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'Dueño no encontrado',
+
+                            })
+                            dueño6.dueño = []
+                        } else {
+                            dueño6.dueño = result
+                            dueño6.rutD = result[0].rut
+                        }
+                    })
+                })
+            }
         },
         eliminar: function (e) {
             e.preventDefault()
-            rut = document.getElementById("rut")
             this.con.connect(function () {
-
                 dueño6.con.query("update departamento set dueño = 'Condominio' where dueño=?", [dueño6.rutD], function (error, result) {
                     dueño6.con.query("DELETE from dueño where rut=?", [dueño6.rutD], function (error, result) {
                         Swal.fire({
@@ -53,13 +60,13 @@ var dueño6 = new Vue({
                             text: 'Dueño eliminado!',
                         })
                         dueño6.dueño = []
-                        rut.value = ""
+                        dueño6.rutD.value=""
+                        document.getElementById("rut").value = ""
+
                     })
                 })
-
-
-
             })
+
 
         }
     }

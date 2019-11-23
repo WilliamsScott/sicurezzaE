@@ -8,7 +8,7 @@ var arrendatario3 = new Vue({
         window: remote.getCurrentWindow(),
         arrendatarios: [],
         depa: "",
-        selected:"",
+        selected:"1",
         con: mysql.createConnection({
             user: "root",
             password: "",

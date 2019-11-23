@@ -12,14 +12,14 @@ var visita2 = new Vue({
         tip: "",
         rut: "",
         visitas: [],
+        rrr:"",
+        f1:"",
+        f2:"",
+        mostrarBoton:false,
+        paginaA:1,
         visitasPaginacion: [],
         totalPaginacion: "",
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         buscar: function (e) {
@@ -43,15 +43,16 @@ var visita2 = new Vue({
 
                             })
                             visita2.visitas = result
-                            let user = localStorage.user
-                            console.log(user)
 
                         } else {
+                            visita2.rrr=result[0].rut
+                            console.log(visita2.rrr)
                             visita2.visitas = result
                             var fecha = new Date(result[0].fecha)
                             var f = result[0].fecha
                             fechaFinal = visita2.formatDate(f)
                             console.log(fechaFinal)
+                            visita2.paginacion(1)
                             //visita2.rut=result.rut
 
                             //console.log(mysqlTimeStampToDate(result[0].fecha))
@@ -67,10 +68,11 @@ var visita2 = new Vue({
                                 text: 'Visita no encontrada',
 
                             })
-                            let user = localStorage.user
-                            console.log(user)
                         } else {
                             visita2.visitas = result
+                            visita2.f1=fecha1
+                            visita2.f2=fecha2
+                            visita2.paginacion2(1)
 
                         }
                     })
@@ -78,6 +80,11 @@ var visita2 = new Vue({
             })
         },
         cambio: function () {
+            visita2.visitas=[]
+            visita2.visitasPaginacion=[]
+            visita2.rrr=""
+            visita2.paginacion()
+            this.mostrarBoton=!this.mostrarBoton
             var busqueda = document.getElementById("buscarpor").value
             if (busqueda == "rut") {
                 document.getElementById("1").style.display = "block"
@@ -102,8 +109,9 @@ var visita2 = new Vue({
             return fecha.getDate() + "-" + mes + "-" + fecha.getFullYear() + " " + hora + ":" + minutos + ":" + segundos
         },
         paginacion: function (actual) {
+            this.paginaA=actual
             this.con.connect(function () {
-                visita2.con.query("SELECT count(*) as total FROM visita where rut='20802302-0'", function (error, result) {
+                visita2.con.query("SELECT count(*) as total FROM visita where rut=?", [visita2.rrr],function (error, result) {
                     var total = result[0].total
                     total2 = (total / 5).toFixed()
                     resto = ((total / 5).toFixed(2) - (total / 5).toFixed())
@@ -116,7 +124,7 @@ var visita2 = new Vue({
                     //visita2.totalPaginacion = parseInt((total / 5).toFixed())
                     console.log(visita2.totalPaginacion)
                 })
-                visita2.con.query("SELECT * FROM visita where rut='20802302-0' limit ?,?", [(actual - 1) * 5, 5], function (error, result) {
+                visita2.con.query("SELECT visita.rut,visita.nombre,visita.apellido,visita.telefono, visita.usuario, visita.fecha, vehiculovisita.patente, edificio.nombre as edificio, departamento.numero as departamento from visita left join vehiculovisita on visita.id=vehiculovisita.visita join edificio on edificio.id=visita.edificio join departamento on visita.departamento=departamento.id where rut=? limit ?,?", [visita2.rrr,(actual - 1) * 5, 5], function (error, result) {
 
                     visita2.visitasPaginacion = result
                 })
@@ -124,22 +132,33 @@ var visita2 = new Vue({
             })
         },
         paginacion2: function (actual) {
+            this.paginaA=actual
             this.con.connect(function () {
-                visita2.con.query("SELECT count(*) as total FROM visita where rut=?", [visita2.rut], function (error, result) {
+                visita2.con.query("SELECT count(*) as total FROM visita where visita.fecha between ? and ?", [visita2.f1,visita2.f2],function (error, result) {
                     var total = result[0].total
-                    console.log(total)
-                    visita2.totalPaginacion = parseInt((total / 5).toFixed())
-                    console.log(visita2.totalPaginacion)
+                    total2 = (total / 5).toFixed()
+                    resto = ((total / 5).toFixed(2) - (total / 5).toFixed())
+                    
+                    if (resto > 0 && resto < 5) {
+                        visita2.totalPaginacion = parseInt(total2)+parseInt(1)
+                    }else{
+                        visita2.totalPaginacion = parseInt(total2)
+                    }
+                    //visita2.totalPaginacion = parseInt((total / 5).toFixed())
                 })
-                visita2.con.query("SELECT * FROM visita where rut=? limit ?,?", [visita2.rut, (actual - 1) * 5, 5], function (error, result) {
+                visita2.con.query("SELECT visita.rut,visita.nombre,visita.apellido,visita.telefono, visita.usuario, visita.fecha, vehiculovisita.patente, edificio.nombre as edificio, departamento.numero as departamento from visita left join vehiculovisita on visita.id=vehiculovisita.visita join edificio on edificio.id=visita.edificio join departamento on visita.departamento=departamento.id where visita.fecha between ? and ? limit ? , ?", [visita2.f1,visita2.f2,(actual - 1) * 5, 5], function (error, result) {
+                    
                     visita2.visitasPaginacion = result
+                    console.log(error)
                 })
 
             })
-        }
+        },
+        
     },
     mounted: function () {
         this.paginacion()
+        this.paginacion2()
     }
 
 

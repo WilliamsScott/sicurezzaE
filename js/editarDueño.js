@@ -52,32 +52,45 @@ var dueño2 = new Vue({
             nombre = document.getElementById("nombre").value
             apellido = document.getElementById("apellido").value
             telefono = document.getElementById("telefono").value
-
-            this.con.connect(function () {
-                dueño2.con.query("select * from dueño where rut=?", [rut], function (error, result) {
-                    if (result.length == 0) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Dueño no encontrado',
-                        })
-                    } else {
-                        dueño2.con.query("update dueño set nombre=?,apellido=?,telefono=? where rut=?", [nombre, apellido, telefono, rut], function (error, result) {
-                            document.getElementById("rut").value = ""
-                            document.getElementById("nombre").value = ""
-                            document.getElementById("apellido").value = ""
-                            document.getElementById("telefono").value = ""
-                            Swal.fire({
-                                type: 'success',
-                                title: 'Listo!',
-                                text: 'Dueño actualizado!',
-
-                            })
-                        })
-                    }
+            x = validaRut(rut)
+            if (x == false) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Revise RUT',
                 })
-            })
+            } else {
+                this.con.connect(function () {
+                    dueño2.con.query("select * from dueño where rut=?", [rut], function (error, result) {
+                        if (result.length == 0) {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'Dueño no encontrado',
+                            })
+                        } else {
+                            dueño2.con.query("update dueño set nombre=?,apellido=?,telefono=? where rut=?", [nombre, apellido, telefono, rut], function (error, result) {
+                                document.getElementById("rut").value = ""
+                                document.getElementById("nombre").value = ""
+                                document.getElementById("apellido").value = ""
+                                document.getElementById("telefono").value = ""
+                                Swal.fire({
+                                    type: 'success',
+                                    title: 'Listo!',
+                                    text: 'Dueño actualizado!',
 
+                                })
+                            })
+                        }
+                    })
+                })
+            }
+
+        },
+        onlyNumber: function (e) {
+            if (!/\d/.test(e.key) && e.keyCode != 8 && e.keyCode != 13 && e.keyCode != 9) {
+                e.preventDefault();
+            }
         }
     },
 

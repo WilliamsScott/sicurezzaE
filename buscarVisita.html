@@ -19,7 +19,7 @@
             style="background:#36393F; border-radius: 10px; background-color:rgba(2,0,0,0.7);">
             <br>
             <h3>Buscar Visita</h3>
-            <form>
+            <form id="form">
                 <div class="row">
                     <div class="col-sm-3">
                         <label for="buscarpor">Buscar por</label>
@@ -101,17 +101,42 @@
 
                     </table>
                     <br>
-                   
-                    <!--<div class="col">
+
+                    <div class="col">
                         <div class="row">
+                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 
-                            <p v-for="j in totalPaginacion">
-                                <button @click="paginacion(j)" style="border-color:#007BFF; border-radius: 1px; background-color:#007BFF;color:white">{{j}}</button>
-                            </p>
+                                <div v-for="j in totalPaginacion"
+                                    v-if="paginaA > j-2 && paginaA<j+2 || j==paginaA || j==1 || j==totalPaginacion">
 
-                        </div>
-                    </div> -->
-                    
+                                    <span style="margin-left: .3em; font-size: 1.2em; font-weight: bold;"
+                                        v-if="j==totalPaginacion && paginaA<j-2 ">...</span>
+
+                                    <button v-if="!mostrarBoton" type="button" style="margin-left: .3em;" @click="paginacion(j)"
+                                        class="btn btn-secondary">{{j}}</button>
+                                    <button v-if="mostrarBoton" type="button" style="margin-left: .3em;" @click="paginacion2(j)"
+                                        class="btn btn-secondary">{{j}}</button>
+                                    <span style="margin-left: .3em; font-size: 1.2em; font-weight: bold;"
+                                        v-if="j==1 && paginaA>3 ">...</span>
+                                </div>
+
+
+
+
+
+                            </div>
+
+
+
+
+
+                            <!--<p v-for="j in totalPaginacion">
+                                <a @click="paginacion(j)" style="border-color:#007BFF; border-radius: 1px; background-color:#007BFF;color:white">{{j}}</a>
+                            </p>-->
+
+                        </div><br>
+                    </div>
+
 
                 </div>
 

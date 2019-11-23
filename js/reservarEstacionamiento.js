@@ -20,21 +20,30 @@ var estacionamiento2 = new Vue({
     methods: {
         buscar: function (e) {
             e.preventDefault()
-            rut=document.getElementById("rut").value
-            this.con.connect(function () {
-                estacionamiento2.con.query("SELECT residente.rut, residente.nombre, residente.apellido, residente.telefono, estacionamientoresidente.numero, estacionamientoresidente.residente as asignado, edificio.nombre as edificio,departamento.numero as departamento from residente left join estacionamientoresidente on residente.departamento=estacionamientoresidente.departamento left join edificio on residente.edificio=edificio.id left join departamento on residente.departamento=departamento.id where rut=?", [rut], function (error, result) {
-                    if (result.length == 0) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Residente no encontrado',
+            rut = document.getElementById("rut").value
+            x = validaRut(rut)
+            if (x == false) {
+                Swal.fire(
+                    'Error!',
+                    'Revise Rut',
+                    'error'
+                )
+            } else {
+                this.con.connect(function () {
+                    estacionamiento2.con.query("SELECT residente.rut, residente.nombre, residente.apellido, residente.telefono, estacionamientoresidente.numero, estacionamientoresidente.residente as asignado, edificio.nombre as edificio,departamento.numero as departamento from residente left join estacionamientoresidente on residente.departamento=estacionamientoresidente.departamento left join edificio on residente.edificio=edificio.id left join departamento on residente.departamento=departamento.id where rut=?", [rut], function (error, result) {
+                        if (result.length == 0) {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'Residente no encontrado',
 
-                        })
-                    } else {
-                        estacionamiento2.re = result
-                    }
+                            })
+                        } else {
+                            estacionamiento2.re = result
+                        }
+                    })
                 })
-            })
+            }
         },
         reservarE: function (numero, rut) {
             this.con.connect(function () {
