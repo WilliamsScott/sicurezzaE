@@ -18,35 +18,45 @@ var vehiculo3 = new Vue({
     methods: {
         buscar: function (e) {
             e.preventDefault()
-            rut=document.getElementById("rut").value
-            this.con.connect(function () {
-                vehiculo3.con.query("select * from vehiculoresidente where residente=?", [rut], function (error, result) {
-                    if (result.length == 0) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: "Ningun vehiculo encontrado para ese RUT",
-                        })
-                    } else {
-                        vehiculo3.vehiculo = result
-                    }
+            rut = document.getElementById("rut").value
+            x = validaRut(rut)
+            if (x == false) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Revise RUT',
                 })
-            })
+            } else {
+                rut2=x
+                this.con.connect(function () {
+                    vehiculo3.con.query("select * from vehiculoresidente where residente=?", [rut2], function (error, result) {
+                        if (result.length == 0) {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: "Ningun vehiculo encontrado para ese RUT",
+                            })
+                        } else {
+                            vehiculo3.vehiculo = result
+                        }
+                    })
+                })
+            }
         },
-        eliminarVehiculo:function(patente){
-            this.con.connect(function(){
-                try{
-                    vehiculo3.con.query("delete from vehiculoresidente where patente=?",[patente],function(error,result){
+        eliminarVehiculo: function (patente) {
+            this.con.connect(function () {
+                try {
+                    vehiculo3.con.query("delete from vehiculoresidente where patente=?", [patente], function (error, result) {
                         Swal.fire({
                             type: 'success',
                             title: 'Listo!',
                             text: 'Vehiculo Eliminado',
                         })
                     })
-                    vehiculo3.vehiculo=[]
-                    document.getElementById("rut").value=""
+                    vehiculo3.vehiculo = []
+                    document.getElementById("rut").value = ""
 
-                }catch{
+                } catch{
                     Swal.fire({
                         type: 'error',
                         title: 'Error...',
@@ -54,7 +64,7 @@ var vehiculo3 = new Vue({
 
                     })
                 }
-                
+
             })
         }
     }

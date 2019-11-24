@@ -22,25 +22,35 @@ var vehiculo1 = new Vue({
             buscar = document.getElementById("buscar").value
             this.con.connect(function () {
                 if (buscarpor == "patente") {
-                    vehiculo1.con.query("select * from vehiculoresidente where patente=?", [buscar], function (error, result) {
-                        if (result.length == 0) {
-                            vehiculo1.con.query("select vehiculovisita.*, visita.rut from vehiculovisita JOIN visita on vehiculovisita.visita=visita.id where patente =?", [buscar], function (error, result) {
-                                if (result.length == 0) {
-                                    Swal.fire({
-                                        type: 'error',
-                                        title: 'Error...',
-                                        text: 'Vehiculo no encontrado',
-                                    })
-                                    vehiculo1.vehiculo = []
-                                } else {
-                                    vehiculo1.vehiculo = result
-                                }
-                            })
-                            console.log(buscarpor)
-                        } else {
-                            vehiculo1.vehiculo = result
-                        }
-                    })
+                    var expReg = /^([A-Za-z]{2,4}\d{2,4})$/
+                    if (expReg.test(buscar)) {
+                        vehiculo1.con.query("select * from vehiculoresidente where patente=?", [buscar], function (error, result) {
+                            if (result.length == 0) {
+                                vehiculo1.con.query("select vehiculovisita.*, visita.rut from vehiculovisita JOIN visita on vehiculovisita.visita=visita.id where patente =?", [buscar], function (error, result) {
+                                    if (result.length == 0) {
+                                        Swal.fire({
+                                            type: 'error',
+                                            title: 'Error...',
+                                            text: 'Vehiculo no encontrado',
+                                        })
+                                        vehiculo1.vehiculo = []
+                                    } else {
+                                        vehiculo1.vehiculo = result
+                                    }
+                                })
+                                console.log(buscarpor)
+                            } else {
+                                vehiculo1.vehiculo = result
+                            }
+                        })
+                    }else{
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Revise patente',
+                        }) 
+                    }
+
                 } else {
                     if (validaRut(buscar) == false) {
                         Swal.fire({

@@ -52,8 +52,8 @@
                     <div class="col-sm">
                         <div class="form-group">
                             <label for="telefono">Telefono</label>
-                            <input type="number" class="form-control" id="telefono" placeholder="Ingrese Telefono"
-                                required="true">
+                            <input type="text" maxlength="9" class="form-control" id="telefono" placeholder="Ingrese Telefono"
+                                required="true" @keydown="onlyNumber($event)">
                         </div>
                     </div>
                 </div>
@@ -90,6 +90,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
     <!--IMPORTAR EL INDEX.JS-->
     <script src="js/editarResidente.js"></script>
+    <script src="js/validarRut.js"></script>
     <script src="js/sweetalert2.js"></script>
     <!--IMPORTAR EL JQUERY-->
     <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>

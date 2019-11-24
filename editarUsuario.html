@@ -51,8 +51,8 @@
                     <div class="col-sm">
                         <div class="form-group">
                             <label for="telefono">Telefono</label>
-                            <input type="number" class="form-control" id="telefono" placeholder="Ingrese Telefono"
-                                required="true">
+                            <input type="text" maxlength="9" class="form-control" id="telefono" placeholder="Ingrese Telefono"
+                                required="true" @keydown="onlyNumber($event)">
                         </div>
                     </div>
 

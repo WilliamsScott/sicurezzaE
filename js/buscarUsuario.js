@@ -26,6 +26,8 @@ var usuario3 = new Vue({
                     title: 'Error...',
                     text: 'Revise RUT',
                 })
+                usuario3.usuarios = []
+                usuario3.rutU =""
             } else {
                 this.con.connect(function () {
                     usuario3.con.query("select usuario.rut,usuario.nombre,usuario.apellido, usuario.telefono, usuario.correo,usuario.tipo,usuario.estado from usuario where rut=?", [rut], function (error, result) {
@@ -35,8 +37,8 @@ var usuario3 = new Vue({
                                 title: 'Error...',
                                 text: 'Usuario no encontrado',
                             })
-                            //let user = localStorage.user
-                            //console.log(user)
+                            usuario3.usuarios = []
+                            usuario3.rutU =""
                         } else {
                             usuario3.usuarios = result
                             usuario3.rutU = result[0].rut

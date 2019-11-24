@@ -21,26 +21,37 @@ var residente3 = new Vue({
     methods: {
         buscar: function (e) {
             e.preventDefault()
-            rut=document.getElementById("rut").value
-            this.con.connect(function () {
-                residente3.con.query("SELECT residente.rut, residente.nombre,residente.apellido,residente.telefono,edificio.nombre as edificio,departamento.numero as departamento from residente join edificio on residente.edificio=edificio.id join departamento on residente.departamento=departamento.id where rut=?", [rut], function (error, result) {
-                    if (result.length == 0) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Residente no encontrado',
-
-                        })
-                    } else {
-                        residente3.residentes = result
-                        residente3.rutR = result[0].rut
-                    }
+            rut = document.getElementById("rut").value
+            x = validaRut(rut)
+            if (x == false) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Revise RUT',
                 })
-            })
+                residente3.residentes = []
+                residente3.rutR = ""
+            } else {
+                this.con.connect(function () {
+                    residente3.con.query("SELECT residente.rut, residente.nombre,residente.apellido,residente.telefono,edificio.nombre as edificio,departamento.numero as departamento from residente join edificio on residente.edificio=edificio.id join departamento on residente.departamento=departamento.id where rut=?", [rut], function (error, result) {
+                        if (result.length == 0) {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'Residente no encontrado',
+
+                            })
+                        } else {
+                            residente3.residentes = result
+                            residente3.rutR = result[0].rut
+                        }
+                    })
+                })
+            }
         },
         eliminar: function (e) {
             e.preventDefault()
-            rut=document.getElementById("rut")
+            rut = document.getElementById("rut")
             this.con.connect(function () {
                 try {
                     residente3.con.query("DELETE from vehiculoresidente where residente=?", [residente3.rutR], function (error, result) {
@@ -52,7 +63,7 @@ var residente3 = new Vue({
                                     text: 'Residente eliminado!',
                                 })
                                 residente3.residentes = []
-                                rut.value=""
+                                rut.value = ""
                             })
                         })
                     })
