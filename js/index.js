@@ -7,12 +7,7 @@ var primero = new Vue({
     el: "#primero",
     data: {
         window: remote.getCurrentWindow(),
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic2"
-        }),
+        con: remote.getGlobal("con")
 
     },
     methods: {

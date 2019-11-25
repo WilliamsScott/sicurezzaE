@@ -6,12 +6,7 @@ var usuario1 = new Vue({
     el: "#usuario1",
     data: {
         window: remote.getCurrentWindow(),
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         registrarUsuario: function (ru) {

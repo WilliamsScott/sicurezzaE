@@ -7,12 +7,7 @@ var header = new Vue({
     data: {
         window: remote.getCurrentWindow(),
         bienvenido:"",
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
         
 
     },

@@ -7,12 +7,7 @@ var incidente2 = new Vue({
     data: {
         window: remote.getCurrentWindow(),
         incidentes: [],
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         buscar: function (e) {

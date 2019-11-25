@@ -8,12 +8,7 @@ var usuario3 = new Vue({
         window: remote.getCurrentWindow(),
         usuarios: [],
         rutU: "",
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         buscar: function (e) {

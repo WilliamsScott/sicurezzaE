@@ -8,12 +8,7 @@ var vehiculo1 = new Vue({
         window: remote.getCurrentWindow(),
         x: "",
         vehiculo: [],
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         buscar: function (e) {

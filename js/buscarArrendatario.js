@@ -9,12 +9,7 @@ var arrendatario3 = new Vue({
         arrendatarios: [],
         depa: "",
         selected:"1",
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         cargarSelect: function () {

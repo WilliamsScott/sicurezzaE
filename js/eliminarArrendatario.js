@@ -9,12 +9,7 @@ var arrendatario6 = new Vue({
         arrendatario: [],
         departamentos: "",
         rutA: "",
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     mounted: function () {
 

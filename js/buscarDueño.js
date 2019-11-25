@@ -9,12 +9,7 @@ var dueño3 = new Vue({
         dueños: [],
         depa: "",
         selected:1,
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         cargarSelect: function () {

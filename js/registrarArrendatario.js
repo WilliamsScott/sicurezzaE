@@ -6,12 +6,7 @@ var arrendatario1 = new Vue({
     el: "#arrendatario1",
     data: {
         window: remote.getCurrentWindow(),
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         registrarArrendatario: function (ra) {

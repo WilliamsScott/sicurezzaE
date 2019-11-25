@@ -11,12 +11,7 @@ var informe1 = new Vue({
         vxe: [],
         vxe2: [],
         selected:'',
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         cargarVisitas: function () {

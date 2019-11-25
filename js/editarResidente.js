@@ -9,12 +9,7 @@ var residente2 = new Vue({
         selected: 1,
         dpe1: [],
         dpe2: [],
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         cargarSelect: function () {

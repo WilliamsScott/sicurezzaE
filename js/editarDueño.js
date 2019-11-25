@@ -6,12 +6,7 @@ var dueño2 = new Vue({
     el: "#dueño2",
     data: {
         window: remote.getCurrentWindow(),
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         buscar: function (e) {

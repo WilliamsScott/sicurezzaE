@@ -11,12 +11,7 @@ var informev2 = new Vue({
         arregloExcel1: [],
         arregloExcel2: [],
         visitas: [],
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         cargarGrafico: function () {

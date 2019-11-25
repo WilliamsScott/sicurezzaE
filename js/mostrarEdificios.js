@@ -9,12 +9,7 @@ var edificio1 = new Vue({
         edificios: [],
         res: [],
         dep: [],
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         cargarEdificios() {

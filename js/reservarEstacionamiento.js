@@ -10,12 +10,7 @@ var estacionamiento2 = new Vue({
         est: "",
         tip: "",
         re: [],
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         buscar: function (e) {

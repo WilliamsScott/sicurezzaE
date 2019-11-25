@@ -7,12 +7,7 @@ var vehiculo2 = new Vue({
     data: {
         window: remote.getCurrentWindow(),
         residentes: [],
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     mounted: function () {
 

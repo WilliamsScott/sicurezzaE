@@ -11,12 +11,7 @@ var visita1 = new Vue({
         tipo: "",
         selected: '',
         isDisabled: true,
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         cargarSelect: function () {
@@ -149,6 +144,40 @@ var visita1 = new Vue({
                         }
                     })
                 }
+            }
+
+        },
+        ver: function () {
+            rut = document.getElementById("rut").value
+            x = validaRut(rut)
+            if (x == false) {
+                Swal.fire(
+                    'Error!',
+                    'Revise Rut',
+                    'error'
+                )
+                document.getElementById("nombre").value = ""
+                document.getElementById("apellido").value = ""
+                document.getElementById("telefono").value = ""
+            } else {
+                visita1.con.query("SELECT visita.rut, visita.nombre, visita.apellido, visita.telefono FROM `visita` WHERE rut=? ORDER BY id DESC", [x], function (error, result) {
+                    if (result.length == 0) {
+                        Swal.fire(
+                            'Aviso',
+                            'Visita no registrada anteriormente',
+                            'info'
+                        )
+                        document.getElementById("nombre").value = ""
+                        document.getElementById("apellido").value = ""
+                        document.getElementById("telefono").value = ""
+                    } else {
+                        document.getElementById("nombre").value = result[0].nombre
+                        document.getElementById("apellido").value = result[0].apellido
+                        document.getElementById("telefono").value = result[0].telefono
+
+
+                    }
+                })
             }
 
         },

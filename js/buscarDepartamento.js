@@ -8,12 +8,7 @@ var departamento1 = new Vue({
         window: remote.getCurrentWindow(),
         depa: [],
         residentes: [],
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         cargarSelect: function () {

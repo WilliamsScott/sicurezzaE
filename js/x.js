@@ -8,12 +8,7 @@ var x = new Vue({
         window: remote.getCurrentWindow(),
         arreglo: [],
         arreglo2: [],
-        con: mysql.createConnection({
-            user: "root",
-            password: "",
-            host: "localhost",
-            database: "sic"
-        }),
+        con: remote.getGlobal("con")
     },
     methods: {
         cargarGrafico: function () {
