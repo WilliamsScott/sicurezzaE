@@ -12,22 +12,24 @@ var dueño2 = new Vue({
         buscar: function (e) {
             e.preventDefault()
             rut = document.getElementById("rut").value
-            x = validaRut(rut)
-            if (x == false) {
+            rut2 = validaRut(rut)
+            if (rut2 == false) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
                     text: 'Revise RUT',
                 })
+                document.getElementById("nombre").value = ""
+                document.getElementById("apellido").value = ""
+                document.getElementById("telefono").value = ""
             } else {
                 this.con.connect(function () {
-                    dueño2.con.query("select * from dueño where rut=?", [rut], function (error, result) {
+                    dueño2.con.query("select * from dueño where rut=?", [rut2], function (error, result) {
                         if (result.length == 0) {
                             Swal.fire({
                                 type: 'error',
                                 title: 'Error...',
                                 text: 'Dueño no encontrado',
-
                             })
                         } else {
                             result.forEach(function (element) {
@@ -47,8 +49,8 @@ var dueño2 = new Vue({
             nombre = document.getElementById("nombre").value
             apellido = document.getElementById("apellido").value
             telefono = document.getElementById("telefono").value
-            x = validaRut(rut)
-            if (x == false) {
+            rut2 = validaRut(rut)
+            if (rut2 == false) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
@@ -56,7 +58,7 @@ var dueño2 = new Vue({
                 })
             } else {
                 this.con.connect(function () {
-                    dueño2.con.query("select * from dueño where rut=?", [rut], function (error, result) {
+                    dueño2.con.query("select * from dueño where rut=?", [rut2], function (error, result) {
                         if (result.length == 0) {
                             Swal.fire({
                                 type: 'error',
@@ -64,7 +66,7 @@ var dueño2 = new Vue({
                                 text: 'Dueño no encontrado',
                             })
                         } else {
-                            dueño2.con.query("update dueño set nombre=?,apellido=?,telefono=? where rut=?", [nombre, apellido, telefono, rut], function (error, result) {
+                            dueño2.con.query("update dueño set nombre=?,apellido=?,telefono=? where rut=?", [nombre, apellido, telefono, rut2], function (error, result) {
                                 document.getElementById("rut").value = ""
                                 document.getElementById("nombre").value = ""
                                 document.getElementById("apellido").value = ""

@@ -65,8 +65,8 @@ var dueño5 = new Vue({
         buscar2: function (e) {
             e.preventDefault()
             rut = document.getElementById("rut").value
-            x = validaRut(rut)
-            if (x == false) {
+            rut2 = validaRut(rut)
+            if (rut2 == false) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
@@ -74,7 +74,7 @@ var dueño5 = new Vue({
                 })
             } else {
                 this.con.connect(function () {
-                    dueño5.con.query("select * from dueño where rut=?", [rut], function (error, result) {
+                    dueño5.con.query("select * from dueño where rut=?", [rut2], function (error, result) {
                         if (result.length == 0) {
                             Swal.fire({
                                 type: 'error',
@@ -94,18 +94,24 @@ var dueño5 = new Vue({
         asignarDueño: function (e) {
             e.preventDefault()
             rut = document.getElementById("rut").value
-            edificio = form.edificio.value
-            departamento = form.departamento.value
-            x = validaRut(rut)
-            if (x == false) {
+            departamento = document.getElementById("departamento").value
+            rut2 = validaRut(rut)
+            if (rut2 == false) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
                     text: 'Revise RUT',
                 })
-            } else {
+            }else if(dueño5.dueño.length==0){
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Debe buscar un departamento',
+                })
+            } 
+            else {
                 this.con.connect(function () {
-                    dueño5.con.query("select * from dueño where rut=?", [rut], function (error, result) {
+                    dueño5.con.query("select * from dueño where rut=?", [rut2], function (error, result) {
                         if (result.length == 0) {
                             Swal.fire({
                                 type: 'error',
@@ -113,7 +119,7 @@ var dueño5 = new Vue({
                                 text: 'Dueño no encontrado',
                             })
                         } else {
-                            dueño5.con.query("update departamento set dueño=? where id=?", [rut, departamento], function (error, result) {
+                            dueño5.con.query("update departamento set dueño=? where id=?", [rut2, departamento], function (error, result) {
                                 form.rut.value = ""
                                 Swal.fire({
                                     type: 'success',

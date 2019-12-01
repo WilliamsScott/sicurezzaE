@@ -18,8 +18,8 @@ var dueño6 = new Vue({
         buscar: function (e) {
             e.preventDefault()
             rut = document.getElementById("rut").value
-            x = validaRut(rut)
-            if (x == false) {
+            rut2 = validaRut(rut)
+            if (rut2 == false) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
@@ -27,7 +27,7 @@ var dueño6 = new Vue({
                 })
             } else {
                 this.con.connect(function () {
-                    dueño6.con.query("select dueño.*, count(*) as total from departamento join dueño on departamento.dueño=dueño.rut where rut=?", [rut], function (error, result) {
+                    dueño6.con.query("select dueño.*, count(*) as total from departamento join dueño on departamento.dueño=dueño.rut where rut=?", [rut2], function (error, result) {
                         if (result.length == 0 || result[0].rut == null) {
                             Swal.fire({
                                 type: 'error',

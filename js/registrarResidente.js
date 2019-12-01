@@ -58,7 +58,7 @@ var residente1 = new Vue({
                 )
             } else {
                 this.con.connect(function () {
-                    residente1.con.query("select * from residente where rut=?", [rut], function (error, result) {
+                    residente1.con.query("select * from residente where rut=?", [x], function (error, result) {
                         if (result.length > 0) {
                             Swal.fire({
                                 type: 'error',
@@ -66,7 +66,7 @@ var residente1 = new Vue({
                                 text: 'Residente ya registrado',
                             })
                         } else {
-                            residente1.con.query("insert into residente (rut,nombre,apellido,telefono,edificio,departamento) values(?,?,?,?,?,?)", [rut, nombre, apellido, telefono, edificio, departamento], function (error, result) {
+                            residente1.con.query("insert into residente (rut,nombre,apellido,telefono,edificio,departamento) values(?,?,?,?,?,?)", [x, nombre, apellido, telefono, edificio, departamento], function (error, result) {
                                 form.rut.value = ""
                                 form.nombre.value = ""
                                 form.apellido.value = ""

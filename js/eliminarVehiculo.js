@@ -14,15 +14,15 @@ var vehiculo3 = new Vue({
         buscar: function (e) {
             e.preventDefault()
             rut = document.getElementById("rut").value
-            x = validaRut(rut)
-            if (x == false) {
+            rut2 = validaRut(rut)
+            if (rut2 == false) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
                     text: 'Revise RUT',
                 })
+                vehiculo3.vehiculo = []
             } else {
-                rut2=x
                 this.con.connect(function () {
                     vehiculo3.con.query("select * from vehiculoresidente where residente=?", [rut2], function (error, result) {
                         if (result.length == 0) {

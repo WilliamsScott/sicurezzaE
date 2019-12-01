@@ -10,9 +10,6 @@ var residente3 = new Vue({
         rutR: "",
         con: remote.getGlobal("con")
     },
-    mounted: function () {
-
-    },
     methods: {
         buscar: function (e) {
             e.preventDefault()
@@ -28,7 +25,7 @@ var residente3 = new Vue({
                 residente3.rutR = ""
             } else {
                 this.con.connect(function () {
-                    residente3.con.query("SELECT residente.rut, residente.nombre,residente.apellido,residente.telefono,edificio.nombre as edificio,departamento.numero as departamento from residente join edificio on residente.edificio=edificio.id join departamento on residente.departamento=departamento.id where rut=?", [rut], function (error, result) {
+                    residente3.con.query("SELECT residente.rut, residente.nombre,residente.apellido,residente.telefono,edificio.nombre as edificio,departamento.numero as departamento from residente join edificio on residente.edificio=edificio.id join departamento on residente.departamento=departamento.id where rut=?", [x], function (error, result) {
                         if (result.length == 0) {
                             Swal.fire({
                                 type: 'error',
@@ -58,7 +55,7 @@ var residente3 = new Vue({
                                     text: 'Residente eliminado!',
                                 })
                                 residente3.residentes = []
-                                rut.value = ""
+                                document.getElementById("rut").value = ""
                             })
                         })
                     })

@@ -21,12 +21,12 @@ var primero = new Vue({
             this.window.maximize()
         },
         iniciarSesion: function (login) {
-            login.preventDefault() 
+            login.preventDefault()
             form = login.target
             usuario = form.user.value
             clave = form.clave.value
             x = validaRut(usuario)
-            if (x == false && usuario!='admin') {
+            if (x == false && usuario != 'admin') {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
@@ -34,7 +34,8 @@ var primero = new Vue({
                 })
             } else {
                 this.con.connect(function () {
-                    primero.con.query("select * from usuario where rut=? and clave=aes_encrypt(?,'williams')", [usuario, clave], function (error, result) {
+                    //primero.con.query("select * from usuario where rut=? and clave=aes_encrypt(?,'williams')", [usuario, clave], function (error, result) {
+                    primero.con.query("select * from usuario where rut=? and clave=MD5(?)", [usuario, clave], function (error, result) {
                         if (result.length > 0) {
                             if (result[0].estado == 1) {
                                 if (result[0].tipo == 1) {

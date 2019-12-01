@@ -12,8 +12,8 @@ var usuario2 = new Vue({
         buscar: function (e) {
             e.preventDefault()
             rut = document.getElementById("rut").value
-            x = validaRut(rut)
-            if (x == false) {
+            rut2 = validaRut(rut)
+            if (rut2 == false) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
@@ -21,7 +21,7 @@ var usuario2 = new Vue({
                 })
             } else {
                 this.con.connect(function () {
-                    usuario2.con.query("select * from usuario where rut=?", [rut], function (error, result) {
+                    usuario2.con.query("select * from usuario where rut=?", [rut2], function (error, result) {
                         if (result.length == 0) {
                             Swal.fire({
                                 type: 'error',
@@ -56,14 +56,14 @@ var usuario2 = new Vue({
             tipo = document.getElementById("tipo").value
             clave = document.getElementById("clave").value
             clave2 = document.getElementById("clave2").value
-            x = validaRut(rut)
+            rut2 = validaRut(rut)
             if (clave != clave2) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
                     text: 'Las claves deben ser iguales',
                 })
-            } else if (x == false) {
+            } else if (rut2 == false) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
@@ -71,7 +71,7 @@ var usuario2 = new Vue({
                 })
             } else {
                 this.con.connect(function () {
-                    usuario2.con.query("select * from usuario where rut=?", [rut], function (error, result) {
+                    usuario2.con.query("select * from usuario where rut=?", [rut2], function (error, result) {
                         if (result.length == 0) {
                             Swal.fire({
                                 type: 'error',
@@ -79,7 +79,7 @@ var usuario2 = new Vue({
                                 text: 'Usuario no encotrado',
                             })
                         } else {
-                            usuario2.con.query("update usuario set nombre=?,apellido=?,telefono=?,correo=?,clave=md5(?),tipo=? where rut=?", [nombre, apellido, telefono, correo, clave, tipo, rut], function (error, result) {
+                            usuario2.con.query("update usuario set nombre=?,apellido=?,telefono=?,correo=?,clave=md5(?),tipo=? where rut=?", [nombre, apellido, telefono, correo, clave, tipo, rut2], function (error, result) {
                                 document.getElementById("rut").value = ""
                                 document.getElementById("nombre").value = ""
                                 document.getElementById("apellido").value = ""

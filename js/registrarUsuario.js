@@ -19,14 +19,14 @@ var usuario1 = new Vue({
             clave = document.getElementById("clave").value
             clave2 = document.getElementById("clave2").value
             tipo = document.getElementById("tipo").value
-            x = validaRut(rut)
+            rut2 = validaRut(rut)
             if (clave != clave2) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
                     text: 'Las claves deben ser iguales',
                 })
-            } else if (x == false) {
+            } else if (rut2 == false) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
@@ -34,7 +34,7 @@ var usuario1 = new Vue({
                 })
             } else {
                 this.con.connect(function () {
-                    usuario1.con.query("select * from usuario where rut=?", [rut], function (error, result) {
+                    usuario1.con.query("select * from usuario where rut=?", [rut2], function (error, result) {
                         if (result.length > 0) {
                             Swal.fire({
                                 type: 'error',
@@ -42,7 +42,7 @@ var usuario1 = new Vue({
                                 text: 'Usuario ya registrado',
                             })
                         } else {
-                            usuario1.con.query("insert into usuario (rut,nombre,apellido,telefono,correo,clave,tipo,estado) values(?,?,?,?,?,md5(?),?,1)", [rut, nombre, apellido, telefono, correo, clave, tipo], function (error, result) {
+                            usuario1.con.query("insert into usuario (rut,nombre,apellido,telefono,correo,clave,tipo,estado) values(?,?,?,?,?,md5(?),?,1)", [rut2, nombre, apellido, telefono, correo, clave, tipo], function (error, result) {
 
                                 document.getElementById("rut").value = ""
                                 document.getElementById("nombre").value = ""

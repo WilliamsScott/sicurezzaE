@@ -44,6 +44,7 @@ var vehiculo1 = new Vue({
                             title: 'Error...',
                             text: 'Revise patente',
                         }) 
+                        vehiculo1.vehiculo = []
                     }
 
                 } else {
@@ -55,7 +56,8 @@ var vehiculo1 = new Vue({
                         })
                         vehiculo1.vehiculo = []
                     } else {
-                        vehiculo1.con.query("select * from vehiculoresidente where residente=?", [buscar], function (error, result) {
+                        var rut2=validaRut(buscar)
+                        vehiculo1.con.query("select * from vehiculoresidente where residente=?", [rut2], function (error, result) {
                             if (result.length == 0) {
                                 vehiculo1.vehiculo = []
                                 vehiculo1.con.query("select vehiculovisita.*,visita.rut from vehiculovisita join visita on visita.id=vehiculovisita.visita where visita.rut=?", [buscar], function (error, result) {
