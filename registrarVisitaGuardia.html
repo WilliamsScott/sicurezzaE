@@ -21,16 +21,19 @@
                 <h3>Registrar Visita</h3>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="rut">RUT</label>
-                            <input type="text" class="form-control" name="rut" placeholder="Ingrese RUT" id='rut'
-                                required="true">
+                        <label for="col">RUT</label>
+                        <br>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="rut" placeholder="Ingrese RUT" required="true">
+                            <div class="input-group-append">
+                                <button @click="ver($event)" type="button" class="btn btn-primary">Ver</button>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm">
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" name="nombre" placeholder="Ingrese Nombre"
+                            <input type="text" class="form-control" id="nombre" placeholder="Ingrese Nombre"
                                 required="true">
                         </div>
                     </div>
@@ -40,15 +43,15 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="Apellido">Apellido</label>
-                            <input type="text" class="form-control" name="apellido" placeholder="Ingrese Apellido"
+                            <input type="text" class="form-control" id="apellido" placeholder="Ingrese Apellido"
                                 required="true">
                         </div>
                     </div>
                     <div class="col-sm">
                         <div class="form-group">
                             <label for="telefono">Telefono</label>
-                            <input type="number" class="form-control" name="telefono" placeholder="Ingrese Telefono"
-                                required="true">
+                            <input type="text" class="form-control" id="telefono" placeholder="Ingrese Telefono"
+                                required="true" maxlength="9" @keydown="onlyNumber($event)">
                         </div>
                     </div>
                 </div>

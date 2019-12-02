@@ -44,7 +44,9 @@ var primero = new Vue({
                                     primero.window.loadURL("file://" + __dirname + "/menuPrincipal.html")
 
                                 } else {
-                                    console.log("guardia")
+                                    localStorage.user = result[0].rut
+                                    localStorage.tipoUser = result[0].tipo
+                                    localStorage.bienvenido = (result[0].nombre + " " + result[0].apellido)
                                     primero.window.loadURL("file://" + __dirname + "/menuPrincipalGuardia.html")
                                 }
                             } else {
@@ -88,9 +90,17 @@ var primero = new Vue({
             setInterval(() => {
                 this.frame = frame + 1
             }, 100);
+        },
+        cerrarVentana: function () {
+            this.window.close()
+        },
+        minimizarVentana: function () {
+            this.window.minimize()
+        },
+        maximizarVentana: function () {
+            this.window.maximize()
+        },
 
-
-        }
     }
 
 });

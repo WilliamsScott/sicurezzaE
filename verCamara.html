@@ -21,15 +21,6 @@
             <h3>Ver cámaras en vivo</h3>
             <form>
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" placeholder="Ingrese Nombre"
-                                required="true">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <label></label>
                     <div class="col-sm-6">
                         <label for="img">Cámara 1</label>
@@ -40,10 +31,14 @@
                         <img id="img2" style="width: 450px;" />
                     </div>
                 </div>
-
-                <canvas id="canvas"></canvas>
-                <canvas id="canvas"></canvas>
                 <br><br>
+                <div class="row">
+                    <div class="col">
+                        <button type="button" @click="verCamara()" class="btn btn-secondary btn-lg btn-block">Ver cámara
+                            entrada</button>
+                    </div>
+                </div>
+                <br>
             </form>
         </div>
 
@@ -51,18 +46,18 @@
 
     <script>
         var img = document.getElementById("img");
-        img.src = "http://192.168.1.38:4747/mjpegfeed?640x480";
+        img.src = "http://192.168.1.39:4747/mjpegfeed?640x480";
         var img2 = document.getElementById("img2");
         img2.src = "http://192.168.1.37:4747/mjpegfeed?640x480";
+        var img3 = document.getElementById("img3");
         setInterval(function () {
-           // var ctx = img.getContext("2d");
-            //ctx.drawImage("http://192.168.43.142:4747/mjpegfeed?640x480", 10, 10);
-        }, 1000 / 4);
+            img3.src = "http://192.168.1.35/IMAGE.JPG?cidx=" + new Date().getTime() + Math.floor(Math.random() * 10);
+        }, 1000 / 2);
     </script>
     <!--IMPORTAR VUE-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
     <!--IMPORTAR EL INDEX.JS-->
-    <script src="js/index.js"></script>
+    <script src="js/verCamara.js"></script>
     <script src="js/sweetalert2.js"></script>
     <!--IMPORTAR EL JQUERY-->
     <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>

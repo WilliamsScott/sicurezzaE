@@ -19,7 +19,7 @@
             style="background:#36393F; border-radius: 10px; background-color:rgba(2,0,0,0.7);">
             <br>
             <h3>Buscar Visita</h3>
-            <form>
+            <form id="form">
                 <div class="row">
                     <div class="col-sm-3">
                         <label for="buscarpor">Buscar por</label>
@@ -31,23 +31,20 @@
                     <div class="col-sm-7" id="1">
                         <div class="form-group">
                             <label for="rut">RUT</label>
-                            <input type="text" class="form-control" name="rut" placeholder="Ingrese RUT"
-                                required="true">
+                            <input type="text" class="form-control" id="rut" placeholder="Ingrese RUT" required="true">
                         </div>
                     </div>
                     <div class="col-sm" id="2">
                         <br>
                         <button @click="buscar($event)" type="button" class="btn btn-primary">Buscar</button>
                     </div>
-                    <div class="col-sm-3"  style="display: none;" id="3">
+                    <div class="col-sm-3" style="display: none;" id="3">
                         <div class="dates" style="color:#FFFF;">
                             <label>Seleccione Fecha Desde</label>
                             <input type="text" style="width:200px;background-color:#FFFF;" class="form-control"
                                 id="fecha1" name="event_date" placeholder="YYYY-MM-DD" autocomplete="off">
 
-                        </div><br>
-                        <label>Hora</label>
-                        <input type="time" style="border-radius: 8px">
+                        </div>
                     </div>
                     <div class="col-sm-3" style="display: none;" id="4">
                         <div class="dates" style="color:#FFFF;">
@@ -55,9 +52,6 @@
                             <input type="text" style="width:200px;background-color:#FFFF;" class="form-control"
                                 id="fecha2" name="event_date" placeholder="YYYY-MM-DD" autocomplete="off">
                         </div>
-                        <br>
-                        <label>Hora</label>
-                        <input type="time" style="border-radius: 8px">
                     </div>
                     <div class="col-sm-3" style="display: none;" id="5">
                         <br>
@@ -81,7 +75,7 @@
                             </tr>
                         </thead>
                         <tbody id="tbody">
-                            <tr v-for="v in visitas">
+                            <tr v-for="v in visitasPaginacion">
                                 <td>{{v.rut}}</td>
                                 <td>{{v.nombre}}</td>
                                 <td>{{v.apellido}}</td>
@@ -103,6 +97,42 @@
                     </table>
                     <br>
 
+                    <div class="col">
+                        <div class="row">
+                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+                                <div v-for="j in totalPaginacion"
+                                    v-if="paginaA > j-2 && paginaA<j+2 || j==paginaA || j==1 || j==totalPaginacion">
+
+                                    <span style="margin-left: .3em; font-size: 1.2em; font-weight: bold;"
+                                        v-if="j==totalPaginacion && paginaA<j-2 ">...</span>
+
+                                    <button v-if="!mostrarBoton" type="button" style="margin-left: .3em;" @click="paginacion(j)"
+                                        class="btn btn-secondary">{{j}}</button>
+                                    <button v-if="mostrarBoton" type="button" style="margin-left: .3em;" @click="paginacion2(j)"
+                                        class="btn btn-secondary">{{j}}</button>
+                                    <span style="margin-left: .3em; font-size: 1.2em; font-weight: bold;"
+                                        v-if="j==1 && paginaA>3 ">...</span>
+                                </div>
+
+
+
+
+
+                            </div>
+
+
+
+
+
+                            <!--<p v-for="j in totalPaginacion">
+                                <a @click="paginacion(j)" style="border-color:#007BFF; border-radius: 1px; background-color:#007BFF;color:white">{{j}}</a>
+                            </p>-->
+
+                        </div><br>
+                    </div>
+
+
                 </div>
 
             </form>
@@ -115,6 +145,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
     <!--IMPORTAR EL INDEX.JS-->
     <script src="js/buscarVisita.js"></script>
+    <script src="js/validarRut.js"></script>
     <script src="js/sweetalert2.js"></script>
     <script type="text/javascript" scr="js/bootstrap-datepicker.js"></script>
     <!--IMPORTAR EL JQUERY-->

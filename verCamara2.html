@@ -21,34 +21,20 @@
             <h3>Ver cámaras en vivo</h3>
             <form>
                 <div class="row">
-                    <label></label>
-                    <div class="col-sm-6">
-                        <label for="img">Cámara 1</label>
-                        <img id="img" style="width: 450px;" />
-                    </div>
-                    <div class="col-sm">
-                        <label for="img2">Cámara 2</label>
-                        <img id="img2" style="width: 450px;" />
-                    </div>
-                </div>
-                <br><br>
-                <div class="row">
                     <div class="col">
-                        <button type="button" @click="verCamara()" class="btn btn-secondary btn-lg btn-block">Ver cámara
-                            entrada</button>
+                        <label for="img3">Cámara Ip</label>
+                        <div class="col">
+                            <img id="img3" style="width: 450px;" />
+                        </div>
                     </div>
                 </div>
+
                 <br>
             </form>
         </div>
 
     </div>
-
     <script>
-        var img = document.getElementById("img");
-        img.src = "http://192.168.1.39:4747/mjpegfeed?640x480";
-        var img2 = document.getElementById("img2");
-        img2.src = "http://192.168.1.37:4747/mjpegfeed?640x480";
         var img3 = document.getElementById("img3");
         setInterval(function () {
             img3.src = "http://192.168.1.35/IMAGE.JPG?cidx=" + new Date().getTime() + Math.floor(Math.random() * 10);
@@ -90,7 +76,7 @@
     <script>
         $.ajax({
             type: "GET",
-            url: "headerGuardia.html",
+            url: "header.html",
             success: function (datos) {
                 $("#menu").html(datos);
             }

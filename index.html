@@ -9,6 +9,23 @@
     <link rel="stylesheet" href="static/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/sweetalert2.css">
+    <style>
+        .botones {
+            border: 0em;
+            background: transparent;
+            color: whitesmoke;
+            outline: none;
+            -webkit-app-region: none;
+        }
+
+        .botones:hover {
+            background: rgb(58, 65, 75);
+        }
+
+        .botonCerrar:hover {
+            background: #D41223;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,9 +35,9 @@
 
             <ul class="nav justify-content-end" style="background:#29323F; height: 31px;">
 
-                <button @click="minimizarVentana()">__</button>
-                <button @click="maximizarVentana()">❐</button>
-                <button @click="cerrarVentana()">🗙</button>
+                <button class="botones" @click="minimizarVentana()">__</button>
+                <button class="botones" @click="maximizarVentana()">❐</button>
+                <button class="botones botonCerrar" @click="cerrarVentana()">🗙</button>
             </ul>
         </div>
 

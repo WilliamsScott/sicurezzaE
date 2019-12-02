@@ -9,11 +9,40 @@
     <link rel="stylesheet" href="static/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/sweetalert2.css">
-</head>
+    <style>
+        .botones {
+            border: 0em;
+            background: transparent;
+            color: whitesmoke;
+            outline: none;
+            -webkit-app-region: none;
+        }
 
+        .botones:hover {
+            background: rgb(58, 65, 75);
+        }
+
+        .botonCerrar:hover {
+            background: #D41223;
+        }
+    </style>
+</head>
+<header>
+    <div id="header" style="-webkit-user-select: none; -webkit-app-region:drag;">
+        <div>
+            <ul class="nav justify-content-end" style="background:#29323F; height: 31px;">
+                <button class="botones" @click="minimizarVentana()">__</button>
+                <button class="botones" @click="maximizarVentana()">❐</button>
+                <button class="botones botonCerrar" @click="cerrarVentana()">🗙</button>
+
+
+            </ul>
+        </div>
+    </div>
+</header>
 <body>
-    <div class="menuContainer" id="menu"></div>
-    <div id="camara1">
+    <div id="camara2">
+
         <br>
         <div class="container-fluid col-md-8"
             style="background:#36393F; border-radius: 10px; background-color:rgba(2,0,0,0.7);">
@@ -21,38 +50,25 @@
             <h3>Ver cámaras en vivo</h3>
             <form>
                 <div class="row">
-                    <label></label>
-                    <div class="col-sm-6">
-                        <label for="img">Cámara 1</label>
-                        <img id="img" style="width: 450px;" />
-                    </div>
-                    <div class="col-sm">
-                        <label for="img2">Cámara 2</label>
-                        <img id="img2" style="width: 450px;" />
-                    </div>
-                </div>
-                <br><br>
-                <div class="row">
                     <div class="col">
-                        <button type="button" @click="verCamara()" class="btn btn-secondary btn-lg btn-block">Ver cámara
-                            entrada</button>
+                        <label for="img3">Cámara Ip</label>
+                        <div class="col">
+                            <img id="img3" style="width: 450px;" />
+                        </div>
                     </div>
                 </div>
+
                 <br>
             </form>
         </div>
 
     </div>
-
     <script>
-        var img = document.getElementById("img");
-        img.src = "http://192.168.1.39:4747/mjpegfeed?640x480";
-        var img2 = document.getElementById("img2");
-        img2.src = "http://192.168.1.37:4747/mjpegfeed?640x480";
         var img3 = document.getElementById("img3");
         setInterval(function () {
             img3.src = "http://192.168.1.35/IMAGE.JPG?cidx=" + new Date().getTime() + Math.floor(Math.random() * 10);
         }, 1000 / 2);
+    </script>
     </script>
     <!--IMPORTAR VUE-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
@@ -86,15 +102,6 @@
                 parent.addClass('open');
             }
         });
-    </script>
-    <script>
-        $.ajax({
-            type: "GET",
-            url: "headerGuardia.html",
-            success: function (datos) {
-                $("#menu").html(datos);
-            }
-        })
     </script>
 </body>
 

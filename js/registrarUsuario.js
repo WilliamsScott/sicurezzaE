@@ -42,7 +42,7 @@ var usuario1 = new Vue({
                                 text: 'Usuario ya registrado',
                             })
                         } else {
-                            usuario1.con.query("insert into usuario (rut,nombre,apellido,telefono,correo,clave,tipo,estado) values(?,?,?,?,?,md5(?),?,1)", [rut2, nombre, apellido, telefono, correo, clave, tipo], function (error, result) {
+                            usuario1.con.query("insert into usuario (rut,nombre,apellido,telefono,correo,clave,tipo,estado,condominio) values(?,?,?,?,?,aes_encrypt(?,'williams'),?,1,1)", [rut2, nombre, apellido, telefono, correo,clave, tipo], function (error, result) {
 
                                 document.getElementById("rut").value = ""
                                 document.getElementById("nombre").value = ""
@@ -56,6 +56,7 @@ var usuario1 = new Vue({
                                     title: 'Listo!',
                                     text: 'Usuario registrado!',
                                 })
+                                console.log(clave)
                             })
                         }
                     })
