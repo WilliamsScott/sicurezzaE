@@ -21,14 +21,23 @@
             <h3>Ver cámaras en vivo</h3>
             <form>
                 <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="Ingrese Nombre"
+                                required="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <label></label>
-                    <div class="col-sm-6"> 
+                    <div class="col-sm-6">
                         <label for="img">Cámara 1</label>
-                        <img id="img" style="width: 450px;"/>
+                        <img id="img" style="width: 450px;" />
                     </div>
                     <div class="col-sm">
-                            <label for="img2">Cámara 2</label>
-                        <img id="img2" style="width: 450px;"/>
+                        <label for="img2">Cámara 2</label>
+                        <img id="img2" style="width: 450px;" />
                     </div>
                 </div>
 
@@ -42,12 +51,12 @@
 
     <script>
         var img = document.getElementById("img");
-        img.src = "http://192.168.3.159:4747/mjpegfeed?640x480";
+        img.src = "http://192.168.1.38:4747/mjpegfeed?640x480";
         var img2 = document.getElementById("img2");
-        img2.src = "http://192.168.137.91:4747/mjpegfeed?640x480";
+        img2.src = "http://192.168.1.37:4747/mjpegfeed?640x480";
         setInterval(function () {
-            //var ctx=img.getContext("2d");
-            //ctx.drawImage("http://192.168.43.142:4747/mjpegfeed?640x480",10,10);
+           // var ctx = img.getContext("2d");
+            //ctx.drawImage("http://192.168.43.142:4747/mjpegfeed?640x480", 10, 10);
         }, 1000 / 4);
     </script>
     <!--IMPORTAR VUE-->

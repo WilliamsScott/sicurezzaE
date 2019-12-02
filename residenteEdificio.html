@@ -33,13 +33,10 @@
                         </thead>
                         <tbody id="tbody">
                             <tr v-for="r in arregloExcel1">
-                                <td>{{r.edificio}}</td>
+                                <td>{{r.nombre}}</td>
                                 <td>{{r.total}}</td>
                             </tr>
-                            <tr v-for="r in arregloExcel2">
-                                <td>{{r.edificio}}</td>
-                                <td>{{r.total}}</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                     <canvas id="myChart" width="20" height="8"></canvas><br>
@@ -129,12 +126,10 @@
                     }]
                 },
                 options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
+                    legend: {
+                        labels: {
+                            fontColor: 'white'
+                        }
                     }
                 }
             })

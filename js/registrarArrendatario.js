@@ -15,8 +15,8 @@ var arrendatario1 = new Vue({
             nombre = document.getElementById("nombre").value
             apellido = document.getElementById("apellido").value
             telefono = document.getElementById("telefono").value
-            x = validaRut(rut)
-            if (x == false) {
+            rut2 = validaRut(rut)
+            if (rut2 == false) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
@@ -24,7 +24,7 @@ var arrendatario1 = new Vue({
                 })
             } else {
                 this.con.connect(function () {
-                    arrendatario1.con.query("select * from arrendatario where rut=?", [rut], function (error, result) {
+                    arrendatario1.con.query("select * from arrendatario where rut=?", [rut2], function (error, result) {
                         if (result.length > 0) {
                             Swal.fire({
                                 type: 'error',
@@ -33,7 +33,7 @@ var arrendatario1 = new Vue({
                             })
                         }
                         else {
-                            arrendatario1.con.query("insert into arrendatario (rut,nombre,apellido,telefono) values (?,?,?,?)  ", [rut, nombre, apellido, telefono], function (error, result) {
+                            arrendatario1.con.query("insert into arrendatario (rut,nombre,apellido,telefono) values (?,?,?,?)  ", [rut2, nombre, apellido, telefono], function (error, result) {
                                 document.getElementById("rut").value = ""
                                 document.getElementById("nombre").value = ""
                                 document.getElementById("apellido").value = ""

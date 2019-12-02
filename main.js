@@ -16,5 +16,5 @@ global.con = mysql.createConnection({
     user: "root",
     password: "",
     host: "localhost",
-    database: "sic"
+    database: "sic2"
 })

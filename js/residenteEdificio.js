@@ -39,16 +39,10 @@ var informer1 = new Vue({
                         })
                     } else {
                         result.forEach(function (element) {
-                            
-                            informer1.con.query("select count(*) as total,edificio.nombre as edificio from residente join edificio on residente.edificio=edificio.id where edificio=1", function (error, result) {
-                                result.forEach(function () {
+                            informer1.con.query("SELECT count(*) as total,residente.edificio, edificio.nombre FROM `residente` join edificio on residente.edificio=edificio.id group by edificio.id", function (error, result) {
+                                
                                     informer1.arregloExcel1=result
-                                })
-                            })
-                            informer1.con.query("select count(*) as total,edificio.nombre as edificio from residente join edificio on residente.edificio=edificio.id where edificio=2", function (error, result) {
-                                result.forEach(function () {
-                                    informer1.arregloExcel2=result
-                                })
+                                
                             })
                         })
 

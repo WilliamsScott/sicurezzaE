@@ -25,7 +25,7 @@ var informev1 = new Vue({
 
                         })
                     } else {
-                        result.forEach(function (element) {
+                        result.forEach(function () {
                             informev1.visitas = result
                             var fecha = new Date(result[0].fecha)
                             var f = result[0].fecha
@@ -63,15 +63,9 @@ var informev1 = new Vue({
                     } else {
                         result.forEach(function (element) {
 
-                            informev1.con.query("select count(*) as total,edificio.nombre as edificio from visita join edificio on visita.edificio=edificio.id where edificio=1", function (error, result) {
-                                result.forEach(function () {
+                            informev1.con.query("SELECT count(*) as total,visita.edificio, edificio.nombre FROM `visita` join edificio on visita.edificio=edificio.id group by edificio.id", function (error, result) {
+                                
                                     informev1.arregloExcel1 = result
-                                })
-                            })
-                            informev1.con.query("select count(*) as total,edificio.nombre as edificio from visita join edificio on visita.edificio=edificio.id where edificio=2", function (error, result) {
-                                result.forEach(function () {
-                                    informev1.arregloExcel2 = result
-                                })
                             })
                         })
 

@@ -12,8 +12,8 @@ var arrendatario2 = new Vue({
         buscar: function (e) {
             e.preventDefault()
             rut = document.getElementById("rut").value
-            x = validaRut(rut)
-            if (x == false) {
+            rut2 = validaRut(rut)
+            if (rut2 == false) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
@@ -24,7 +24,7 @@ var arrendatario2 = new Vue({
                 document.getElementById("telefono").value = ""
             } else {
                 this.con.connect(function () {
-                    arrendatario2.con.query("select * from arrendatario where rut=?", [rut], function (error, result) {
+                    arrendatario2.con.query("select * from arrendatario where rut=?", [rut2], function (error, result) {
                         if (result.length == 0) {
                             Swal.fire({
                                 type: 'error',
@@ -53,30 +53,39 @@ var arrendatario2 = new Vue({
             nombre = document.getElementById("nombre").value
             apellido = document.getElementById("apellido").value
             telefono = document.getElementById("telefono").value
-            this.con.connect(function () {
-                arrendatario2.con.query("select * from arrendatario where rut=?", [rut], function (error, result) {
-                    if (result.length == 0) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Arrendatario no encontrado',
-                        })
-                    } else {
-                        arrendatario2.con.query("update arrendatario set nombre=?,apellido=?,telefono=? where rut=?", [nombre, apellido, telefono, rut], function (error, result) {
-                            document.getElementById("rut").value = ""
-                            document.getElementById("nombre").value = ""
-                            document.getElementById("apellido").value = ""
-                            document.getElementById("telefono").value = ""
-                            Swal.fire({
-                                type: 'success',
-                                title: 'Listo!',
-                                text: 'Arrendatario actualizado!',
-
-                            })
-                        })
-                    }
+            rut2 = validaRut(rut)
+            if (rut2 == false) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Revise RUT',
                 })
-            })
+            } else {
+                this.con.connect(function () {
+                    arrendatario2.con.query("select * from arrendatario where rut=?", [rut2], function (error, result) {
+                        if (result.length == 0) {
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Error...',
+                                text: 'Arrendatario no encontrado',
+                            })
+                        } else {
+                            arrendatario2.con.query("update arrendatario set nombre=?,apellido=?,telefono=? where rut=?", [nombre, apellido, telefono, rut2], function (error, result) {
+                                document.getElementById("rut").value = ""
+                                document.getElementById("nombre").value = ""
+                                document.getElementById("apellido").value = ""
+                                document.getElementById("telefono").value = ""
+                                Swal.fire({
+                                    type: 'success',
+                                    title: 'Listo!',
+                                    text: 'Arrendatario actualizado!',
+
+                                })
+                            })
+                        }
+                    })
+                })
+            }
         },
         onlyNumber: function (e) {
             if (!/\d/.test(e.key) && e.keyCode != 8 && e.keyCode != 13 && e.keyCode != 9) {

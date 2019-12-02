@@ -66,8 +66,8 @@ var arrendatario4 = new Vue({
         buscar2: function (e) {
             e.preventDefault()
             rut = document.getElementById("rut").value
-            x = validaRut(rut)
-            if (x == false) {
+            rut2 = validaRut(rut)
+            if (rut2 == false) {
                 Swal.fire(
                     'Error!',
                     'Revise Rut',
@@ -75,7 +75,7 @@ var arrendatario4 = new Vue({
                 )
             } else {
                 this.con.connect(function () {
-                    arrendatario4.con.query("select * from arrendatario where rut=?", [rut], function (error, result) {
+                    arrendatario4.con.query("select * from arrendatario where rut=?", [rut2], function (error, result) {
                         if (result.length == 0) {
                             Swal.fire({
                                 type: 'error',
@@ -96,7 +96,14 @@ var arrendatario4 = new Vue({
             e.preventDefault()
             rut = document.getElementById("rut").value
             departamento = arrendatario4.depa
-            if (departamento == "") {
+            rut2 = validaRut(rut)
+            if (rut2 == false) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error...',
+                    text: 'Revise RUT',
+                })
+            } else if (departamento == "") {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
@@ -104,7 +111,7 @@ var arrendatario4 = new Vue({
                 })
             } else {
                 this.con.connect(function () {
-                    arrendatario4.con.query("select * from arrendatario where rut=?", [rut], function (error, result) {
+                    arrendatario4.con.query("select * from arrendatario where rut=?", [rut2], function (error, result) {
                         if (result.length == 0) {
                             Swal.fire({
                                 type: 'error',
@@ -112,14 +119,14 @@ var arrendatario4 = new Vue({
                                 text: 'Arrendatario no encontrado',
                             })
                         } else {
-                            arrendatario4.con.query("update departamento set arrendatario=? where id=?", [rut, departamento], function (error, result) {
+                            arrendatario4.con.query("update departamento set arrendatario=? where id=?", [rut2, departamento], function (error, result) {
                                 document.getElementById("rut").value = ""
                                 Swal.fire({
                                     type: 'success',
                                     title: 'Listo!',
                                     text: 'Arrendatario asignado!',
                                 })
-                                arrendatario4.depa=""
+                                arrendatario4.depa = ""
                                 arrendatario4.arrendatarioNuevo = []
                                 arrendatario4.arrendatario = []
                             })

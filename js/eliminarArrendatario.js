@@ -11,15 +11,12 @@ var arrendatario6 = new Vue({
         rutA: "",
         con: remote.getGlobal("con")
     },
-    mounted: function () {
-
-    },
     methods: {
         buscar: function (e) {
             e.preventDefault()
             rut = document.getElementById("rut").value
-            x = validaRut(rut)
-            if (x == false) {
+            rut2 = validaRut(rut)
+            if (rut2 == false) {
                 Swal.fire({
                     type: 'error',
                     title: 'Error...',
@@ -27,7 +24,7 @@ var arrendatario6 = new Vue({
                 })
             } else {
                 this.con.connect(function () {
-                    arrendatario6.con.query("select arrendatario.*, count(*) as total from departamento join arrendatario on departamento.arrendatario=arrendatario.rut where rut=?", [rut], function (error, result) {
+                    arrendatario6.con.query("select arrendatario.*, count(*) as total from departamento join arrendatario on departamento.arrendatario=arrendatario.rut where rut=?", [rut2], function (error, result) {
                         if (result.length == 0 || result[0].rut == null) {
                             Swal.fire({
                                 type: 'error',
@@ -48,7 +45,6 @@ var arrendatario6 = new Vue({
             e.preventDefault()
             rut = document.getElementById("rut")
             this.con.connect(function () {
-
                 arrendatario6.con.query("update departamento set arrendatario = null where arrendatario=?", [arrendatario6.rutA], function (error, result) {
                     arrendatario6.con.query("DELETE from arrendatario where rut=?", [arrendatario6.rutA], function (error, result) {
                         Swal.fire({
@@ -60,12 +56,9 @@ var arrendatario6 = new Vue({
                         rut.value = ""
                     })
                 })
-
-
-
             })
-
         }
+
     }
 
 });

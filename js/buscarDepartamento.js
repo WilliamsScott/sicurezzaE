@@ -8,6 +8,7 @@ var departamento1 = new Vue({
         window: remote.getCurrentWindow(),
         depa: [],
         residentes: [],
+        selected:1,
         con: remote.getGlobal("con")
     },
     methods: {
@@ -26,8 +27,10 @@ var departamento1 = new Vue({
         },
         cargarSelect2: function () {
             var departamento = document.getElementById("departamento")
+            var edificio = document.getElementById("edificio")
+            var e = edificio.value
             this.con.connect(function () {
-                departamento1.con.query("select * from departamento ", function (error, result) {
+                departamento1.con.query("select * from departamento where edificio=1", function (error, result) {
                     result.forEach(function (dato) {
                         var option = document.createElement("option")
                         option.value = dato.id
@@ -86,7 +89,21 @@ var departamento1 = new Vue({
                 }
 
             })
-        }
+        },
+        cambio: function () {
+            var departamento = document.getElementById("departamento")
+            departamento.innerHTML = ""
+            this.con.connect(function () {
+                departamento1.con.query("select * from departamento where edificio=?", [departamento1.selected], function (error, result) {
+                    result.forEach(function (dato) {
+                        var option = document.createElement("option")
+                        option.value = dato.id
+                        option.innerHTML = dato.numero
+                        departamento.appendChild(option)
+                    })
+                })
+            })
+        },
 
     },
     mounted: function () {
