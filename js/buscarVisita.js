@@ -113,13 +113,18 @@ var visita2 = new Vue({
                 document.getElementById("5").style.display = "block"
             }
         },
-
         formatDate: function (fecha) {
             var mes = fecha.getMonth() + 1
             var hora = fecha.getHours()
             var minutos = fecha.getMinutes()
             var segundos = fecha.getSeconds()
-            return fecha.getDate() + "-" + mes + "-" + fecha.getFullYear() + " " + hora + ":" + minutos + ":" + segundos
+            var dia = fecha.getDate()
+            mes = (mes > 9) ? mes : '0' + mes
+            dia = (dia > 9) ? dia : '0' + dia
+            minutos = (minutos > 9) ? minutos : '0' + minutos
+            hora = (hora > 9) ? hora : '0' + hora
+            segundos = (segundos > 9) ? segundos : '0' + segundos
+            return dia + "-" + mes + "-" + fecha.getFullYear() + " " + hora + ":" + minutos + ":" + segundos
         },
         paginacion: function (actual) {
             this.paginaA = actual

@@ -22,6 +22,64 @@ background-size: cover;
 de fondo o si hay problemas para cargarla */
 
 }
+@media (max-width: 1400px){
+    #table thead{
+        display: none;
+    }
+
+    #table tbody tr{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1em;
+    }
+
+    #table tbody tr td{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    /*#table tbody tr td::before{
+        margin-right: 4em;
+    }*/
+
+    #table tbody tr td:nth-child(1)::before{
+        content: "RUT:";
+    }
+    #table tbody tr td:nth-child(2)::before{
+        content: "Nombre:";
+
+    }
+    #table tbody tr td:nth-child(3)::before{
+        content: "Apellido:";
+
+    }
+    #table tbody tr td:nth-child(4)::before{
+        content: "Telefono:";
+
+    }
+    #table tbody tr td:nth-child(5)::before{
+        content: "Vehiculo:";
+
+    }
+    #table tbody tr td:nth-child(6)::before{
+        content: "Edificio:";
+
+    }
+    #table tbody tr td:nth-child(7)::before{
+        content: "Departamento:";
+
+    }
+    #table tbody tr td:nth-child(8)::before{
+        content: "Usuario:";
+
+    }
+    #table tbody tr td:nth-child(9)::before{
+        content: "Fecha:";
+
+    }
+
+
+}
 
 
   

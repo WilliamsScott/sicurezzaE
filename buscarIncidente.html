@@ -49,6 +49,8 @@
                                 <th scope="col">Descripcion</th>
                                 <th scope="col">Usuario</th>
                                 <th scope="col">Fecha</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Acción</th>
                             </tr>
                         </thead>
                         <tbody id="tbody">
@@ -60,7 +62,11 @@
                                 <td v-if="i.tipo==5">Otro</td>
                                 <td><button type="button" @click="ver(i.descripcion)" class="btn btn-success btn-sm">Ver</button></td>
                                 <td>{{i.usuario}}</td>
-                                <td>{{formatDate(i.fecha)}}</td>
+                                <td>{{formatDate(i.fecha2)}}</td>
+                                <td v-if="i.estado==1">Solucionado {{formatDate2(i.fecha)}}</td>
+                                <td v-else>No solucionado</td>
+                                <td v-if="i.estado!=1"><button type="button" @click="actualizar(i.id)" class="btn btn-success btn-sm">Solucionar</button></td>
+                                <td v-else>N.A</td>
                             </tr>
                         </tbody>
 

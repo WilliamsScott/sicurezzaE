@@ -18,13 +18,13 @@ var incidente2 = new Vue({
             this.con.connect(function () {
 
                 incidente2.con.query("select * from incidente where fecha between ? and ?", [fecha1, fecha2], function (error, result) {
-                    if(result.length==0){
-                        incidente2.incidentes =[]
+                    if (result.length == 0) {
+                        incidente2.incidentes = []
                         Swal.fire({
                             type: 'error',
                             title: 'Error...',
                             text: 'No se encontraron incidentes',
-    
+
                         })
                     }
                     result.forEach(function () {
@@ -39,12 +39,41 @@ var incidente2 = new Vue({
                 text: descripcion
             })
         },
+        actualizar: function (id) {
+            incidente2.con.query("update incidente set estado = 1, fecha2 = fecha where id=?", [id], function (error, result) {
+                Swal.fire({
+                    type: 'success',
+                    title: 'Listo!',
+                    text: 'Incidente actualizado!',
+                })
+                incidente2.incidentes = []
+            })
+        },
         formatDate: function (fecha) {
             var mes = fecha.getMonth() + 1
             var hora = fecha.getHours()
             var minutos = fecha.getMinutes()
             var segundos = fecha.getSeconds()
-            return fecha.getDate() + "-" + mes + "-" + fecha.getFullYear() + " " + hora + ":" + minutos + ":" + segundos
+            var dia = fecha.getDate()
+            mes = (mes > 9) ? mes : '0' + mes
+            dia = (dia > 9) ? dia : '0' + dia
+            minutos = (minutos > 9) ? minutos : '0' + minutos
+            hora = (hora > 9) ? hora : '0' + hora
+            segundos = (segundos > 9) ? segundos : '0' + segundos
+            return dia + "-" + mes + "-" + fecha.getFullYear() + " " + hora + ":" + minutos + ":" + segundos
+        },
+        formatDate2: function (fecha2) {
+            var mes = fecha2.getMonth() + 1
+            var hora = fecha2.getHours()
+            var minutos = fecha2.getMinutes()
+            var segundos = fecha2.getSeconds()
+            var dia = fecha2.getDate()
+            mes = (mes > 9) ? mes : '0' + mes
+            dia = (dia > 9) ? dia : '0' + dia
+            minutos = (minutos > 9) ? minutos : '0' + minutos
+            hora = (hora > 9) ? hora : '0' + hora
+            segundos = (segundos > 9) ? segundos : '0' + segundos
+            return dia + "-" + mes + "-" + fecha2.getFullYear() + " " + hora + ":" + minutos + ":" + segundos
         },
         paginacion: function () {
             this.con.connect(function () {
