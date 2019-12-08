@@ -34,13 +34,37 @@
 
                                 </select>
                             </div>
+                            <div class="col-sm">
+                                <br>
+                                    <h6>Solucionado</h6>
+                                    <div class="form-check">
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <input class="form-check-input" type="radio" name="gridRadios" id="estado"
+                                                    value="1" checked v-model="selected">
+                                                <label class="form-check-label" for="estado">
+                                                    Sí
+                                                </label>
+                                            </div>
+                                            <div class="col-sm">
+                                                <input class="form-check-input" type="radio" name="gridRadios" id="estado"
+                                                    value="0" v-model="selected">
+                                                <label class="form-check-label" for="estado">
+                                                    No
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                            </div>
                         </div>
+                        
                     </div>
                     <div class="col-sm">
                         <div class="form-group">
                             <label for="descripcion">Descripción</label>
                             <textarea class="form-control" id="descripcion" rows="3"
-                                placeholder="Descripción del incidente" required></textarea>
+                                placeholder="Descripción del incidente" maxlength="150" required></textarea>
                         </div>
                     </div>
                 </div>
