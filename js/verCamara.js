@@ -8,7 +8,6 @@ var camara1 = new Vue({
     data: {
         window: remote.getCurrentWindow(),
         con: remote.getGlobal("con"),
-        texto: "192.168.1.35",
     },
     methods: {
         verCamara: function () {
@@ -36,9 +35,6 @@ var camara1 = new Vue({
         maximizarVentana: function () {
             this.window.maximize()
         },
-        hola:function(){
-            console.log("hola22")
-        }
 
     }
 

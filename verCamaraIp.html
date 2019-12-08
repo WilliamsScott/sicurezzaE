@@ -30,18 +30,17 @@
 <header>
     <div id="header" style="-webkit-user-select: none; -webkit-app-region:drag;">
         <div>
+            
             <ul class="nav justify-content-end" style="background:#29323F; height: 31px;">
-                <button class="botones" @click="minimizarVentana()">__</button>
-                <button class="botones" @click="maximizarVentana()">❐</button>
-                <button class="botones botonCerrar" @click="cerrarVentana()">🗙</button>
-
-
+                <!--Para maximizar-->
+                <!--<button class="botones" onclick="window.resizeTo(screen.width,screen.height)">❐</button> -->
+                <button class="botones botonCerrar" onclick="window.close()">🗙</button>
             </ul>
         </div>
     </div>
 </header>
 <body>
-    <div id="camara2">
+    <div id="camaraIp">
 
         <br>
         <div class="container-fluid col-md-8"
@@ -66,14 +65,13 @@
     <script>
         var img3 = document.getElementById("img3");
         setInterval(function () {
-            img3.src = "http://192.168.1.35/IMAGE.JPG?cidx=" + new Date().getTime() + Math.floor(Math.random() * 10);
+            img3.src = "http://192.168.1.33/IMAGE.JPG?cidx=" + new Date().getTime() + Math.floor(Math.random() * 10);
         }, 1000 / 2);
     </script>
     </script>
     <!--IMPORTAR VUE-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
     <!--IMPORTAR EL INDEX.JS-->
-    <script src="js/verCamara.js"></script>
     <script src="js/sweetalert2.js"></script>
     <!--IMPORTAR EL JQUERY-->
     <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>

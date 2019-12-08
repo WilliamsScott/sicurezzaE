@@ -81,5 +81,498 @@ de fondo o si hay problemas para cargarla */
 
 }
 
+@media (max-width: 1400px){
+    #tableResidente thead{
+        display: none;
+    }
+
+    #tableResidente tbody tr{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1em;
+    }
+
+    #tableResidente tbody tr td{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+    #tableResidente tbody tr td:nth-child(1)::before{
+        content: "RUT:";
+    }
+    #tableResidente tbody tr td:nth-child(2)::before{
+        content: "Nombre:";
+
+    }
+    #tableResidente tbody tr td:nth-child(3)::before{
+        content: "Apellido:";
+
+    }
+    #tableResidente tbody tr td:nth-child(4)::before{
+        content: "Telefono:";
+
+    }
+    #tableResidente tbody tr td:nth-child(5)::before{
+        content: "Edificio:";
+
+    }
+    #tableResidente tbody tr td:nth-child(6)::before{
+        content: "Departamento:";
+
+    }
+    #table tbody tr td:nth-child(7)::before{
+        content: "Eliminar:";
+
+    }
+
+
+}
+
+@media (max-width: 1400px){
+    #tableVehiculo thead{
+        display: none;
+    }
+
+    #tableVehiculo tbody tr{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1em;
+    }
+
+    #tableVehiculo tbody tr td{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    /*#table tbody tr td::before{
+        margin-right: 4em;
+    }*/
+
+    #tableVehiculo tbody tr td:nth-child(1)::before{
+        content: "Patente:";
+    }
+    #tableVehiculo tbody tr td:nth-child(2)::before{
+        content: "Marca:";
+
+    }
+    #tableVehiculo tbody tr td:nth-child(3)::before{
+        content: "Modelo:";
+
+    }
+    #tableVehiculo tbody tr td:nth-child(4)::before{
+        content: "Estacionamiento:";
+
+    }
+    #tableVehiculo tbody tr td:nth-child(5)::before{
+        content: "Dueño:";
+
+    }
+    #tableVehiculo tbody tr td:nth-child(6)::before{
+        content: "Tipo Dueño:";
+
+    }
+}
+
+
+@media (max-width: 1400px){
+    #tableVehiculoEliminar thead{
+        display: none;
+    }
+
+    #tableVehiculoEliminar tbody tr{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1em;
+    }
+
+    #tableVehiculoEliminar tbody tr td{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    /*#table tbody tr td::before{
+        margin-right: 4em;
+    }*/
+
+    #tableVehiculoEliminar tbody tr td:nth-child(1)::before{
+        content: "Patente:";
+    }
+    #tableVehiculoEliminar tbody tr td:nth-child(2)::before{
+        content: "Marca:";
+
+    }
+    #tableVehiculoEliminar tbody tr td:nth-child(3)::before{
+        content: "Modelo:";
+
+    }
+    #tableVehiculoEliminar tbody tr td:nth-child(4)::before{
+        content: "Estacionamiento:";
+
+    }
+    #tableVehiculoEliminar tbody tr td:nth-child(5)::before{
+        content: "Dueño:";
+
+    }
+    #tableVehiculoEliminar tbody tr td:nth-child(6)::before{
+        content: "Eliminar";
+
+    }
+}
+
+@media (max-width: 1400px){
+    #tableUsuario thead{
+        display: none;
+    }
+
+    #tableUsuario tbody tr{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1em;
+    }
+
+    #tableUsuario tbody tr td{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    /*#table tbody tr td::before{
+        margin-right: 4em;
+    }*/
+
+    #tableUsuario tbody tr td:nth-child(1)::before{
+        content: "RUT:";
+    }
+    #tableUsuario tbody tr td:nth-child(2)::before{
+        content: "Nombre:";
+
+    }
+    #tableUsuario tbody tr td:nth-child(3)::before{
+        content: "Apellido:";
+
+    }
+    #tableUsuario tbody tr td:nth-child(4)::before{
+        content: "Telefono:";
+
+    }
+    #tableUsuario tbody tr td:nth-child(5)::before{
+        content: "Correo:";
+
+    }
+    #tableUsuario tbody tr td:nth-child(6)::before{
+        content: "Tipo:";
+
+    }
+    #tableUsuario tbody tr td:nth-child(7)::before{
+        content: "Estado:";
+
+    }
+    #tableUsuario tbody tr td:nth-child(8)::before{
+        content: "Acción:";
+
+    }
+}
+
+@media (max-width: 1400px){
+    #tableEstacionamiento thead{
+        display: none;
+    }
+
+    #tableEstacionamiento tbody tr{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1em;
+    }
+
+    #tableEstacionamiento tbody tr td{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    /*#table tbody tr td::before{
+        margin-right: 4em;
+    }*/
+
+    #tableEstacionamiento tbody tr td:nth-child(1)::before{
+        content: "Número:";
+    }
+    #tableEstacionamiento tbody tr td:nth-child(2)::before{
+        content: "Estado:";
+
+    }
+}
+
+
+@media (max-width: 1400px){
+    #tableAdministracion thead{
+        display: none;
+    }
+
+    #tableAdministracion tbody tr{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1em;
+    }
+
+    #tableAdministracion tbody tr td{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    /*#table tbody tr td::before{
+        margin-right: 4em;
+    }*/
+
+    #tableAdministracion tbody tr td:nth-child(1)::before{
+        content: "RUT:";
+    }
+    #tableAdministracion tbody tr td:nth-child(2)::before{
+        content: "Nombre:";
+
+    }
+    #tableAdministracion tbody tr td:nth-child(3)::before{
+        content: "Apellido:";
+
+    }
+    #tableAdministracion tbody tr td:nth-child(4)::before{
+        content: "Telefono:";
+
+    }
+    #tableAdministracion tbody tr td:nth-child(5)::before{
+        content: "Quitar:";
+
+    }
+}
+
+
+@media (max-width: 1400px){
+    #tableAdministracionAsignar thead{
+        display: none;
+    }
+
+    #tableAdministracionAsignar tbody tr{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1em;
+    }
+
+    #tableAdministracionAsignar tbody tr td{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    /*#table tbody tr td::before{
+        margin-right: 4em;
+    }*/
+
+    #tableAdministracionAsignar tbody tr td:nth-child(1)::before{
+        content: "RUT:";
+    }
+    #tableAdministracionAsignar tbody tr td:nth-child(2)::before{
+        content: "Nombre:";
+
+    }
+    #tableAdministracionAsignar tbody tr td:nth-child(3)::before{
+        content: "Apellido:";
+
+    }
+    #tableAdministracionAsignar tbody tr td:nth-child(4)::before{
+        content: "Telefono:";
+
+    }
+    #tableAdministracionAsignar tbody tr td:nth-child(5)::before{
+        content: "Asignar:";
+
+    }
+}
+
+@media (max-width: 1400px){
+    #tableAdministracionEliminar thead{
+        display: none;
+    }
+
+    #tableAdministracionEliminar tbody tr{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1em;
+    }
+
+    #tableAdministracionEliminar tbody tr td{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    /*#table tbody tr td::before{
+        margin-right: 4em;
+    }*/
+
+    #tableAdministracionEliminar tbody tr td:nth-child(1)::before{
+        content: "RUT:";
+    }
+    #tableAdministracionEliminar tbody tr td:nth-child(2)::before{
+        content: "Nombre:";
+
+    }
+    #tableAdministracionEliminar tbody tr td:nth-child(3)::before{
+        content: "Apellido:";
+
+    }
+    #tableAdministracionEliminar tbody tr td:nth-child(4)::before{
+        content: "Telefono:";
+
+    }
+    #tableAdministracionEliminar tbody tr td:nth-child(5)::before{
+        content: "Departamentos:";
+
+    }
+    #tableAdministracionEliminar tbody tr td:nth-child(6)::before{
+        content: "Eliminar:";
+
+    }
+    
+}
+
+@media (max-width: 1400px){
+    #tableAdministracionEliminar thead{
+        display: none;
+    }
+
+    #tableAdministracionEliminar tbody tr{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1em;
+    }
+
+    #tableAdministracionEliminar tbody tr td{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    /*#table tbody tr td::before{
+        margin-right: 4em;
+    }*/
+
+    #tableAdministracionEliminar tbody tr td:nth-child(1)::before{
+        content: "RUT:";
+    }
+    #tableAdministracionEliminar tbody tr td:nth-child(2)::before{
+        content: "Nombre:";
+
+    }
+    #tableAdministracionEliminar tbody tr td:nth-child(3)::before{
+        content: "Apellido:";
+
+    }
+    #tableAdministracionEliminar tbody tr td:nth-child(4)::before{
+        content: "Telefono:";
+
+    }
+    #tableAdministracionEliminar tbody tr td:nth-child(5)::before{
+        content: "Departamentos:";
+
+    }
+    #tableAdministracionEliminar tbody tr td:nth-child(6)::before{
+        content: "Eliminar:";
+
+    }
+    
+}
+
+@media (max-width: 1400px){
+    #tableEstacionamientoReservar thead{
+        display: none;
+    }
+
+    #tableEstacionamientoReservar tbody tr{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1em;
+    }
+
+    #tableEstacionamientoReservar tbody tr td{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+    #tableEstacionamientoReservar tbody tr td:nth-child(1)::before{
+        content: "Nombre:";
+
+    }
+    #tableEstacionamientoReservar tbody tr td:nth-child(2)::before{
+        content: "Apellido:";
+
+    }
+    #tableEstacionamientoReservar tbody tr td:nth-child(3)::before{
+        content: "Telefono:";
+
+    }
+    #tableEstacionamientoReservar tbody tr td:nth-child(4)::before{
+        content: "Edificio:";
+
+    }
+    #tableEstacionamientoReservar tbody tr td:nth-child(5)::before{
+        content: "Departamento:";
+
+    }
+    #tableEstacionamientoReservar tbody tr td:nth-child(6)::before{
+        content: "Estacionamiento:";
+
+    }
+    
+    #tableEstacionamientoReservar tbody tr td:nth-child(7)::before{
+        content: "Estado:";
+
+    }
+    #tableEstacionamientoReservar tbody tr td:nth-child(8)::before{
+        content: "Reservado por";
+
+    }
+    #tableEstacionamientoReservar tbody tr td:nth-child(9)::before{
+        content: "Acción";
+
+    }
+    
+}
+
+@media (max-width: 1400px){
+    #tableIncidente thead{
+        display: none;
+    }
+
+    #tableIncidente tbody tr{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1em;
+    }
+
+    #tableIncidente tbody tr td{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+    #tableIncidente tbody tr td:nth-child(1)::before{
+        content: "Tipo:";
+
+    }
+    #tableIncidente tbody tr td:nth-child(2)::before{
+        content: "Descripción:";
+
+    }
+    #tableIncidente tbody tr td:nth-child(3)::before{
+        content: "Usuario:";
+
+    }
+    #tableIncidente tbody tr td:nth-child(4)::before{
+        content: "Fecha:";
+
+    }
+    #tableIncidente tbody tr td:nth-child(5)::before{
+        content: "Estado:";
+
+    }
+    #tableEstacionamientoReservar tbody tr td:nth-child(6)::before{
+        content: "Acción:";
+
+    }
+    
+}
+
+
 
   
