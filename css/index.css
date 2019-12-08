@@ -78,7 +78,6 @@ de fondo o si hay problemas para cargarla */
 
     }
 
-
 }
 
 @media (max-width: 1400px){
@@ -119,7 +118,7 @@ de fondo o si hay problemas para cargarla */
         content: "Departamento:";
 
     }
-    #table tbody tr td:nth-child(7)::before{
+    #tableResidente tbody tr td:nth-child(7)::before{
         content: "Eliminar:";
 
     }
