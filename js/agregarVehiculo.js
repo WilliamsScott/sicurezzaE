@@ -34,7 +34,6 @@ var vehiculo2 = new Vue({
                             vehiculo2.residentes = []
                             nombre.value = ""
                             estacionamiento.innerHTML = ""
-                            //var departameno = result[0].departameno
                         } else {
                             vehiculo2.residentes = result
                             vehiculo2.rutR = result[0].rut
@@ -106,6 +105,7 @@ var vehiculo2 = new Vue({
                 })
             }
             else {
+                //VALIDACION CON EXPRESION REGULAR DE LA PATENTE//
                 var expReg = /^([A-Za-z]{2,4}\d{2,4})$/
                 if (expReg.test(patente)) {
                     this.con.connect(function () {

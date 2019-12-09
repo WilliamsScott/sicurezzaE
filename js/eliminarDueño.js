@@ -25,6 +25,7 @@ var dueño6 = new Vue({
                     title: 'Error...',
                     text: 'Revise RUT',
                 })
+                dueño6.dueño = []
             } else {
                 this.con.connect(function () {
                     dueño6.con.query("select dueño.*, count(*) as total from departamento join dueño on departamento.dueño=dueño.rut where rut=?", [rut2], function (error, result) {

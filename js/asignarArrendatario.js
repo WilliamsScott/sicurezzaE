@@ -135,6 +135,7 @@ var arrendatario4 = new Vue({
                 })
             }
         },
+        //CAMBIO DE DEPARTAMENTO EN LOS SELECT
         cambio: function () {
             var departamento = document.getElementById("departamento")
             departamento.innerHTML = ""

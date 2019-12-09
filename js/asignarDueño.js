@@ -40,6 +40,7 @@ var dueño5 = new Vue({
                 })
             })
         },
+        //BUSCAR DEPARTAMENTO//
         buscar: function (e) {
             e.preventDefault()
             form = e.target.parentNode.parentNode.parentNode
@@ -62,6 +63,7 @@ var dueño5 = new Vue({
                 })
             })
         },
+        //BUSCAR DUEÑO NUEVO//
         buscar2: function (e) {
             e.preventDefault()
             rut = document.getElementById("rut").value

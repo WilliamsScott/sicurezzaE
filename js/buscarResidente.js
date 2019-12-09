@@ -11,6 +11,7 @@ var residente3 = new Vue({
         con: remote.getGlobal("con")
     },
     methods: {
+        //BUSCAR CON EL PRIMER IF DE VALIDAR EL RUT SE DEBE UTILIZAR LA VARIABLE QUE SE DECLARE AL VALIDAR PARA REALIZAR LA CONSULTA//
         buscar: function (e) {
             e.preventDefault()
             rut = document.getElementById("rut").value
