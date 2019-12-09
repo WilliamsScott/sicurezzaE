@@ -7,29 +7,38 @@ var incidente2 = new Vue({
     data: {
         window: remote.getCurrentWindow(),
         incidentes: [],
+        f1: "",
+        f2: "",
+        mostrarBoton: false,
+        paginaA: 1,
+        totalPaginacion: "",
         con: remote.getGlobal("con")
     },
     methods: {
         buscar: function (e) {
             e.preventDefault()
-            form = e.target.parentNode.parentNode.parentNode
-            fecha1 = form.fecha1.value
-            fecha2 = form.fecha2.value
+            fecha1 = document.getElementById("fecha1").value
+            fecha2 = document.getElementById("fecha2").value
             this.con.connect(function () {
-
                 incidente2.con.query("select * from incidente where fecha between ? and ?", [fecha1, fecha2], function (error, result) {
                     if (result.length == 0) {
-                        incidente2.incidentes = []
                         Swal.fire({
                             type: 'error',
                             title: 'Error...',
                             text: 'No se encontraron incidentes',
-
+                        })
+                        incidente2.incidentes = []
+                        incidente2.f1 = ""
+                        incidente2.f2 = ""
+                        incidente2.paginacion()
+                    } else {
+                        result.forEach(function () {
+                            incidente2.f1 = fecha1
+                            incidente2.f2 = fecha2
+                            incidente2.paginacion(1)
                         })
                     }
-                    result.forEach(function () {
-                        incidente2.incidentes = result
-                    })
+
                 })
 
             })
@@ -75,15 +84,29 @@ var incidente2 = new Vue({
             segundos = (segundos > 9) ? segundos : '0' + segundos
             return dia + "-" + mes + "-" + fecha2.getFullYear() + " " + hora + ":" + minutos + ":" + segundos
         },
-        paginacion: function () {
+        paginacion: function (actual) {
+            this.paginaA = actual
             this.con.connect(function () {
-                visita2.con.query("SELECT count(*) FROM visita", function (error, result) {
-                    var total = result
-                    visita2.con.query("SELECT * FROM visita limit 0,3")
+                incidente2.con.query("select count(*) as total from incidente where fecha between ? and ?", [incidente2.f1, incidente2.f2], function (error, result) {
+                    var total = result[0].total
+                    total2 = (total / 5).toFixed()
+                    resto = ((total / 5).toFixed(2) - (total / 5).toFixed())
+                    if (resto > 0 && resto < 5) {
+                        incidente2.totalPaginacion = parseInt(total2) + parseInt(1)
+                        console.log(incidente2.totalPaginacion)
+                    } else {
+                        incidente2.totalPaginacion = parseInt(total2)
+                    }
+                })
+                incidente2.con.query("select * from incidente where fecha between ? and ? limit ? , ?", [incidente2.f1, incidente2.f2, (actual - 1) * 5, 5], function (error, result) {
+                    incidente2.incidentes = result
                 })
 
             })
-        }
+        },
+    },
+    mounted: function () {
+        this.paginacion()
     }
 
 

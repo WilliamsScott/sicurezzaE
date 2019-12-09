@@ -60,12 +60,14 @@
                                 <td v-if="i.tipo==3">Corte de algun servicio</td>
                                 <td v-if="i.tipo==4">Accidente</td>
                                 <td v-if="i.tipo==5">Otro</td>
-                                <td><button type="button" @click="ver(i.descripcion)" class="btn btn-success btn-sm">Ver</button></td>
+                                <td><button type="button" @click="ver(i.descripcion)"
+                                        class="btn btn-success btn-sm">Ver</button></td>
                                 <td>{{i.usuario}}</td>
                                 <td>{{formatDate(i.fecha2)}}</td>
                                 <td v-if="i.estado==1">Solucionado {{formatDate2(i.fecha)}}</td>
                                 <td v-else>No solucionado</td>
-                                <td v-if="i.estado!=1"><button type="button" @click="actualizar(i.id)" class="btn btn-success btn-sm">Solucionar</button></td>
+                                <td v-if="i.estado!=1"><button type="button" @click="actualizar(i.id)"
+                                        class="btn btn-success btn-sm">Solucionar</button></td>
                                 <td v-else>N.A</td>
                             </tr>
                         </tbody>
@@ -73,6 +75,25 @@
 
                     </table>
                     <br>
+                    <div class="col">
+                        <div class="row">
+                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+                                <div v-for="j in totalPaginacion"
+                                    v-if="paginaA > j-2 && paginaA<j+2 || j==paginaA || j==1 || j==totalPaginacion">
+
+                                    <span style="margin-left: .3em; font-size: 1.2em; font-weight: bold;"
+                                        v-if="j==totalPaginacion && paginaA<j-2 ">...</span>
+
+                                    <button v-if="!mostrarBoton" type="button" style="margin-left: .3em;"
+                                        @click="paginacion(j)" class="btn btn-secondary">{{j}}</button>
+                                    
+                                    <span style="margin-left: .3em; font-size: 1.2em; font-weight: bold;"
+                                        v-if="j==1 && paginaA>3 ">...</span>
+                                </div>
+                            </div>
+                        </div><br>
+                    </div>
 
                 </div>
 

@@ -40,7 +40,6 @@ var visita2 = new Vue({
                             'Revise Rut',
                             'error'
                         )
-                        console.log("limpiar")
                         visita2.visitasPaginacion = []
                         visita2.rrr = ""
                         visita2.paginacion()
@@ -62,10 +61,7 @@ var visita2 = new Vue({
                                 fechaFinal = visita2.formatDate(f)
                                 console.log(fechaFinal)
                                 visita2.paginacion(1)
-                                //visita2.rut=result.rut
-
-                                //console.log(mysqlTimeStampToDate(result[0].fecha))
-
+                                
                             }
                         })
                     }
