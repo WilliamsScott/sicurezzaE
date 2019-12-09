@@ -34,7 +34,7 @@ var primero = new Vue({
                 })
             } else {
                 this.con.connect(function () {
-                    primero.con.query("select * from usuario where rut=? and clave=aes_encrypt(?,'williams')", [usuario, clave], function (error, result) {
+                    primero.con.query("select * from usuario where rut=? and clave=aes_encrypt(?,'williams')", [x, clave], function (error, result) {
                         if (result.length > 0) {
                             if (result[0].estado == 1) {
                                 if (result[0].tipo == 1) {

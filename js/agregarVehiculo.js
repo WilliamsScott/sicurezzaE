@@ -120,6 +120,7 @@ var vehiculo2 = new Vue({
 
                                 vehiculo2.con.query("insert into vehiculoresidente (patente,marca,modelo,numeroEstacionamiento,residente) values(?,?,?,?,?)", [patente, marca, modelo, estacionamiento, rut2], function (error, result) {
                                     document.getElementById("rut").value = ""
+                                    document.getElementById("nombre").value=""
                                     document.getElementById("patente").value = ""
                                     document.getElementById("marca").value = ""
                                     document.getElementById("modelo").value = ""

@@ -66,7 +66,7 @@ var visita2 = new Vue({
                         })
                     }
                 } else {
-                    visita2.con.query("SELECT visita.rut,visita.nombre,visita.apellido,visita.telefono, visita.usuario,visita.fecha, vehiculovisita.patente, edificio.nombre as edificio, departamento.numero as departamento from visita left join vehiculovisita on visita.id=vehiculovisita.visita join edificio on edificio.id=visita.edificio join departamento on visita.departamento=departamento.id where visita.fecha between ? and ?", [fecha1, fecha2], function (error, result) {
+                    visita2.con.query("SELECT visita.rut,visita.nombre,visita.apellido,visita.telefono, visita.usuario,visita.fecha, vehiculovisita.patente, edificio.nombre as edificio, departamento.numero as departamento from visita left join vehiculovisita on visita.id=vehiculovisita.visita join edificio on edificio.id=visita.edificio join departamento on visita.departamento=departamento.id where visita.fecha between ? and ? order by fecha", [fecha1, fecha2], function (error, result) {
                         if (result.length == 0) {
                             Swal.fire({
                                 type: 'error',
@@ -160,7 +160,7 @@ var visita2 = new Vue({
                     }
                     //visita2.totalPaginacion = parseInt((total / 5).toFixed())
                 })
-                visita2.con.query("SELECT visita.rut,visita.nombre,visita.apellido,visita.telefono, visita.usuario, visita.fecha, vehiculovisita.patente, edificio.nombre as edificio, departamento.numero as departamento from visita left join vehiculovisita on visita.id=vehiculovisita.visita join edificio on edificio.id=visita.edificio join departamento on visita.departamento=departamento.id where visita.fecha between ? and ? limit ? , ?", [visita2.f1, visita2.f2, (actual - 1) * 5, 5], function (error, result) {
+                visita2.con.query("SELECT visita.rut,visita.nombre,visita.apellido,visita.telefono, visita.usuario,visita.fecha, vehiculovisita.patente, edificio.nombre as edificio, departamento.numero as departamento from visita left join vehiculovisita on visita.id=vehiculovisita.visita join edificio on edificio.id=visita.edificio join departamento on visita.departamento=departamento.id where visita.fecha between ? and ? order by fecha limit ? , ?", [visita2.f1, visita2.f2, (actual - 1) * 5, 5], function (error, result) {
 
                     visita2.visitasPaginacion = result
                     console.log(error)
